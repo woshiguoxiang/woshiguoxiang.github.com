@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>guolala&#39;blogs</title>
+  
+  <subtitle>情迷不意乱</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-11-30T12:28:36.743Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>guolala</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2018/11/30/hello-world/"/>
+    <id>http://yoursite.com/2018/11/30/hello-world/</id>
+    <published>2018-11-30T05:56:25.319Z</published>
+    <updated>2018-11-30T12:28:36.743Z</updated>
+    
+    <content type="html"><![CDATA[<p>hello world;</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;hello world;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
