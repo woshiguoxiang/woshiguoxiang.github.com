@@ -112,18 +112,18 @@
 
 
 
-  <meta name="description" content="先来看两个代码，一个可执行一个不可执行。 可执行： &amp;lt;svg&amp;gt;&amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 不可执行： &amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 那么为啥加了的可以执行？ 这就得由html解析流程说起了。 html解析到的时候会变成标签开始状态(Tag open state)">
+  <meta name="description" content="先来看两个代码，一个可执行一个不可执行。 可执行： &amp;lt;svg&amp;gt;&amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 不可执行： &amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 那么为啥加了&amp;lt;svg&amp;gt;的可以执行？ 这就得由html解析流程说起了。 html解析到&amp;lt;svg&amp;gt;的时候会变成">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVG XSS黑魔法">
 <meta property="og:url" content="http://yoursite.com/2018/12/02/SVG-XSS黑魔法/index.html">
 <meta property="og:site_name" content="guolala&#39;s blog">
-<meta property="og:description" content="先来看两个代码，一个可执行一个不可执行。 可执行： &amp;lt;svg&amp;gt;&amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 不可执行： &amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 那么为啥加了的可以执行？ 这就得由html解析流程说起了。 html解析到的时候会变成标签开始状态(Tag open state)">
+<meta property="og:description" content="先来看两个代码，一个可执行一个不可执行。 可执行： &amp;lt;svg&amp;gt;&amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 不可执行： &amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 那么为啥加了&amp;lt;svg&amp;gt;的可以执行？ 这就得由html解析流程说起了。 html解析到&amp;lt;svg&amp;gt;的时候会变成">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.imgur.com/zbuGz8s.png">
-<meta property="og:updated_time" content="2018-12-02T09:08:01.084Z">
+<meta property="og:updated_time" content="2018-12-02T10:51:08.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVG XSS黑魔法">
-<meta name="twitter:description" content="先来看两个代码，一个可执行一个不可执行。 可执行： &amp;lt;svg&amp;gt;&amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 不可执行： &amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 那么为啥加了的可以执行？ 这就得由html解析流程说起了。 html解析到的时候会变成标签开始状态(Tag open state)">
+<meta name="twitter:description" content="先来看两个代码，一个可执行一个不可执行。 可执行： &amp;lt;svg&amp;gt;&amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 不可执行： &amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt; 那么为啥加了&amp;lt;svg&amp;gt;的可以执行？ 这就得由html解析流程说起了。 html解析到&amp;lt;svg&amp;gt;的时候会变成">
 <meta name="twitter:image" content="https://i.imgur.com/zbuGz8s.png">
 
 
@@ -398,7 +398,7 @@
                 
               
 
-              <time title="创建时间：2018-12-02 14:52:12 / 修改时间：17:08:01" itemprop="dateCreated datePublished" datetime="2018-12-02T14:52:12+08:00">2018-12-02</time>
+              <time title="创建时间：2018-12-02 14:52:12 / 修改时间：18:51:08" itemprop="dateCreated datePublished" datetime="2018-12-02T14:52:12+08:00">2018-12-02</time>
             
 
             
@@ -466,13 +466,13 @@
 <pre><code>&lt;svg&gt;&lt;script&gt;alert&amp;#40;1)&lt;/script&gt;
 </code></pre><p>不可执行：</p>
 <pre><code>&lt;script&gt;alert&amp;#40;1)&lt;/script&gt;
-</code></pre><p>那么为啥加了<svg>的可以执行？</svg></p>
+</code></pre><p>那么为啥加了<code>&lt;svg&gt;</code>的可以执行？</p>
 <p>这就得由html解析流程说起了。</p>
-<p>html解析到<svg>的时候会变成标签开始状态(Tag open state)，然后到标签名状态(Tag name state)，等等，最终到数据状态(Data state)，并释放当前标签的token，当解析器处于数据状态(Data state)时，它会继续解析，每当发现一个完整的标签，就会释放出一个token。</svg></p>
+<p>html解析到<code>&lt;svg&gt;</code>的时候会变成标签开始状态(Tag open state)，然后到标签名状态(Tag name state)，等等，最终到数据状态(Data state)，并释放当前标签的token，当解析器处于数据状态(Data state)时，它会继续解析，每当发现一个完整的标签，就会释放出一个token。</p>
 <p>svg属于外部元素。</p>
 <p>外部元素来源于<strong>MathML</strong>和<strong>SVG</strong>命名空间。</p>
 <p>而MathML（数学标记语言）是一种基于XML的标准。</p>
-<p>那么可以猜测<svg>遵循XML和SVG的定义。</svg></p>
+<p>那么可以猜测<code>&lt;svg&gt;</code>遵循XML和SVG的定义。</p>
 <p>在XML中，<code>&amp;#40;</code>会被解析成<code>(</code></p>
 <blockquote>
 <p>在XML中实体会自动转义,除了&lt;![CDATA[和]]&gt;包含的实体</p>

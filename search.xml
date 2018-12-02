@@ -19,7 +19,7 @@
   <entry>
     <title><![CDATA[SVG XSS黑魔法]]></title>
     <url>%2F2018%2F12%2F02%2FSVG-XSS%E9%BB%91%E9%AD%94%E6%B3%95%2F</url>
-    <content type="text"><![CDATA[先来看两个代码，一个可执行一个不可执行。 可执行： &lt;svg&gt;&lt;script&gt;alert&amp;#40;1)&lt;/script&gt; 不可执行： &lt;script&gt;alert&amp;#40;1)&lt;/script&gt; 那么为啥加了的可以执行？ 这就得由html解析流程说起了。 html解析到的时候会变成标签开始状态(Tag open state)，然后到标签名状态(Tag name state)，等等，最终到数据状态(Data state)，并释放当前标签的token，当解析器处于数据状态(Data state)时，它会继续解析，每当发现一个完整的标签，就会释放出一个token。 svg属于外部元素。 外部元素来源于MathML和SVG命名空间。 而MathML（数学标记语言）是一种基于XML的标准。 那么可以猜测遵循XML和SVG的定义。 在XML中，&amp;#40;会被解析成( 在XML中实体会自动转义,除了&lt;![CDATA[和]]&gt;包含的实体 &lt;xml&gt; &lt;name&gt;aaa&lt;/name&gt; &lt;value&gt;aaaaaaa&amp;#40;&lt;/value&gt; &lt;/xml&gt; 当然，SVG标准中也定义了script标签的存在。 所以，这个XSS之所以能够执行是因为遵循了svg及xml的标准]]></content>
+    <content type="text"><![CDATA[先来看两个代码，一个可执行一个不可执行。 可执行： &lt;svg&gt;&lt;script&gt;alert&amp;#40;1)&lt;/script&gt; 不可执行： &lt;script&gt;alert&amp;#40;1)&lt;/script&gt; 那么为啥加了&lt;svg&gt;的可以执行？ 这就得由html解析流程说起了。 html解析到&lt;svg&gt;的时候会变成标签开始状态(Tag open state)，然后到标签名状态(Tag name state)，等等，最终到数据状态(Data state)，并释放当前标签的token，当解析器处于数据状态(Data state)时，它会继续解析，每当发现一个完整的标签，就会释放出一个token。 svg属于外部元素。 外部元素来源于MathML和SVG命名空间。 而MathML（数学标记语言）是一种基于XML的标准。 那么可以猜测&lt;svg&gt;遵循XML和SVG的定义。 在XML中，&amp;#40;会被解析成( 在XML中实体会自动转义,除了&lt;![CDATA[和]]&gt;包含的实体 &lt;xml&gt; &lt;name&gt;aaa&lt;/name&gt; &lt;value&gt;aaaaaaa&amp;#40;&lt;/value&gt; &lt;/xml&gt; 当然，SVG标准中也定义了script标签的存在。 所以，这个XSS之所以能够执行是因为遵循了svg及xml的标准]]></content>
       <categories>
         <category>XSS</category>
       </categories>
