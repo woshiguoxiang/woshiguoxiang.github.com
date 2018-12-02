@@ -139,7 +139,7 @@
 <meta property="og:image" content="https://i.imgur.com/DFzB7L3.png">
 <meta property="og:image" content="https://i.imgur.com/Tpznihz.png">
 <meta property="og:image" content="https://i.imgur.com/fwBEvdb.png">
-<meta property="og:updated_time" content="2018-12-02T09:11:04.433Z">
+<meta property="og:updated_time" content="2018-12-02T09:14:16.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件包含漏洞详解">
 <meta name="twitter:description" content="严格来说，文件包含漏洞是“代码注入”的一种，这种攻击其原理就是注入一段用户能控制的脚本或代码，并让服务端执行。 常见的导致文件包含（文件读取）的函数如下： PHP： include()：使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。  require()：使用此函数，只要程序执行，立即调用此函数包含文件，发生错误时，会输出错误信息并立即终止程序。  require">
@@ -417,7 +417,7 @@
                 
               
 
-              <time title="创建时间：2018-12-02 16:01:44 / 修改时间：17:11:04" itemprop="dateCreated datePublished" datetime="2018-12-02T16:01:44+08:00">2018-12-02</time>
+              <time title="创建时间：2018-12-02 16:01:44 / 修改时间：17:14:16" itemprop="dateCreated datePublished" datetime="2018-12-02T16:01:44+08:00">2018-12-02</time>
             
 
             
@@ -517,11 +517,8 @@
 <p><img src="https://i.imgur.com/wgq7QtT.png" alt=""></p>
 <h3 id="图片上传并包含图片shell"><a href="#图片上传并包含图片shell" class="headerlink" title="图片上传并包含图片shell"></a>图片上传并包含图片shell</h3><p>利用方法和上面的一样，只是这次是本地包含，直接在上传的图片中写入测试代码并访问图片地址即可。</p>
 <h3 id="SSH-log"><a href="#SSH-log" class="headerlink" title="SSH log"></a>SSH log</h3><p><strong>利用条件：</strong>需要知道ssh-log的位置，且可读。默认情况下为 <code>/var/log/auth.log</code></p>
-<pre><code>ubuntu@VM-207-93-ubuntu:~$ ssh &apos;&lt;?php phpinfo(); ?
-</code></pre><blockquote>
-<p>‘@remotehost`</p>
-</blockquote>
-<p>之后会提示输入密码等等，随便输入。</p>
+<pre><code>ubuntu@VM-207-93-ubuntu:~$ ssh &apos;&lt;?php phpinfo(); ?&gt;&apos;@remotehost
+</code></pre><p>之后会提示输入密码等等，随便输入。</p>
 <p>然后在remotehost的ssh-log中即可写入php代码：</p>
 <p><img src="https://i.imgur.com/CSUgdBp.png" alt=""></p>
 <p>之后进行文件包含即可。</p>
