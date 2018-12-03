@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-03T08:19:08.702Z</updated>
+  <updated>2018-12-03T08:30:00.821Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PHP绕过md5</title>
+    <link href="http://yoursite.com/2018/12/03/PHP%E7%BB%95%E8%BF%87md5/"/>
+    <id>http://yoursite.com/2018/12/03/PHP绕过md5/</id>
+    <published>2018-12-03T08:27:27.000Z</published>
+    <updated>2018-12-03T08:30:00.821Z</updated>
+    
+    <content type="html"><![CDATA[<p>测试代码：</p><pre><code>if (isset($_GET[&apos;Username&apos;]) &amp;&amp; isset($_GET[&apos;password&apos;])) {       $logined = true;    $Username = $_GET[&apos;Username&apos;];    $password = $_GET[&apos;password&apos;];    if (!ctype_alpha($Username)) {$logined = false;}    if (!is_numeric($password) ) {$logined = false;}    if (md5($Username) != md5($password)) {$logined = false;}    if ($logined){        echo &quot;successful&quot;;    } else {        echo &quot;login failed!&quot;;    }}</code></pre><p>在做用户登录的时候常常会用到md5加密计算比较密码，md5后相等，就可以成功执行下一步语句，登录成功。但是这样做并不安全，因为 <strong>0e</strong>在比较的时候会将其视作为科学计数法，所以无论<strong>0e</strong>后面是什么，0的多少次方还是0。</p><h2 id="md5开头是0e的字符串"><a href="#md5开头是0e的字符串" class="headerlink" title="md5开头是0e的字符串:"></a>md5开头是0e的字符串:</h2><pre><code>QNKCDZO： 0e830400451993494058024219903391 s878926199a： 0e545993274517709034328855841020 s155964671a： 0e342768416822451524974117254469 s214587387a： 0e848240448830537924465865611904 s214587387a： 0e848240448830537924465865611904 s878926199a： 0e545993274517709034328855841020 s1091221200a： 0e940624217856561557816327384675</code></pre><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>使用全等 <code>===</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;测试代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;if (isset($_GET[&amp;apos;Username&amp;apos;]) &amp;amp;&amp;amp; isset($_GET[&amp;apos;password&amp;apos;])) {
+       $logined = true;
+    
+      
+    
+    </summary>
+    
+      <category term="加密解密" scheme="http://yoursite.com/categories/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>比二分法更OK的盲注多线程</title>
