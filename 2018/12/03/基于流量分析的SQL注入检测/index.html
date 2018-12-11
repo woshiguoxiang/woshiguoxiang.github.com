@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fy0v5m430kj30s40i5q47.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fy313y82wpj30w70pl0v5.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fy314nphr4j30ef07iwen.jpg">
-<meta property="og:updated_time" content="2018-12-11T11:27:53.989Z">
+<meta property="og:updated_time" content="2018-12-11T11:30:18.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于流量分析的SQL注入检测">
 <meta name="twitter:description" content="from scapy.all import * import re import datetime from pyecharts import Geo import pygeoip import pymysql from selenium import webdriver driver = webdriver.Firefox() driver.get(&amp;quot;file:///D:/python">
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-11 19:27:53" itemprop="dateModified" datetime="2018-12-11T19:27:53+08:00">2018-12-11</time>
+                <time title="修改时间：2018-12-11 19:30:18" itemprop="dateModified" datetime="2018-12-11T19:30:18+08:00">2018-12-11</time>
               
             
           </span>
@@ -610,7 +610,7 @@ geo.render(path=&quot;map.html&quot;)
 <p>第一层是数据链路层，第二层是ip层，第三层是tcp层——&gt;包含端口号、http报文,第四层是应用层<br>其中每一层均为上一层的payload成员</p>
 <pre><code># f.name为Raw的字段名称——&gt;load：传输的http请求信息
 fvalue = page.payload.payload.getfieldval(f.name)#请求相关字段的值
-</code></pre><h2 id="总体功能"><a href="#总体功能" class="headerlink" title="总体功能"></a>总体功能</h2><p>嗅探指定网卡和指定过滤规则的流量并传入回调函数test，在回调函数test中进行数据的拆分，并对比特殊字符字典：sql.txt，将可疑流量进一步拆分，获取攻击者的IP、攻击时间、攻击的位置和payload以及提交方式，并记录到danger.log，日志中。在分析到可疑流量的时候将攻击者IP传递到printRecord函数利用GeoIP进行解析IP，进而获取到攻击者所在的城市、国家、经纬度和攻击次数并保存到数据库中，同时利用pyecharts生成Echarts中国地图，并提取数据库中的攻击者信息在地图上标记攻击者所在地点、IP和攻击次数，如果数据更新，则利用selenium模块中的webdriver动态覆盖并刷新地图。</p>
+</code></pre><h2 id="总体功能"><a href="#总体功能" class="headerlink" title="总体功能"></a>总体功能</h2><p>启动代码自动用火狐打开本地检测地图，嗅探指定网卡和指定过滤规则的流量并传入回调函数test，在回调函数test中进行数据的拆分，并对比特殊字符字典：sql.txt，将可疑流量进一步拆分，获取攻击者的IP、攻击时间、攻击的位置和payload以及提交方式，并记录到danger.log，日志中。在分析到可疑流量的时候将攻击者IP传递到printRecord函数利用GeoIP进行解析IP，进而获取到攻击者所在的城市、国家、经纬度和攻击次数并保存到数据库中，同时利用pyecharts生成Echarts中国地图，并提取数据库中的攻击者信息在地图上标记攻击者所在地点、IP和攻击次数，如果数据更新，则利用selenium模块中的webdriver动态覆盖并刷新地图。</p>
 <p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fy0v5m430kj30s40i5q47.jpg" alt=""></p>
 <p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fy313y82wpj30w70pl0v5.jpg" alt=""></p>
 <p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fy314nphr4j30ef07iwen.jpg" alt=""></p>
