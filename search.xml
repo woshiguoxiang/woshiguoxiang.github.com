@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[利用airodump-ng和aircrack-ng进行无线破解]]></title>
+    <url>%2F2018%2F12%2F12%2F%E5%88%A9%E7%94%A8airodump-ng%E5%92%8Caircrack-ng%E8%BF%9B%E8%A1%8C%E6%97%A0%E7%BA%BF%E7%A0%B4%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[WEP（有线等效保密）认证过程： 客户端向接入点发送认证请求 接入点发回一段明文 客户端利用事先共享的密钥加密这段明文（对称），并再次发出认证请求 接入点对数据包进行解密，比较明文，来决定是否接受请求 WEP2（wifi网络安全接入）安全性： WPA2在密钥足够强的情况下是安全的，过短的密钥仍可能被爆破解出 WPA2-PSK指的是WPA2个人版，指的是使用事先约定的密钥进行认证的WPA2 Aircrack-ng抓包及破解WPA2 虚拟机安装无线网卡 配置无线网卡 利用airodump-ng进行抓包 利用crunch生成字典 利用aircrack-ng进行爆破 Aircrack是破解WEP/WPA/WPA2加密的主流工具之一。Aircrack-ng套件包含的工具可用于捕获数据包、握手验证。可用来进行暴力破解和字典攻击。 Aircrack-ng 攻击 主要是拿到握手包，用字典破解握手包。 首先，你得有个无线网卡，然后去自动配置他，操作嘛当然都是在kali虚拟机下进行的。 准备阶段airmon-ng check kill kill掉影响网卡的进程，一般情况下，每次重启或者开机后这些进程都会自己开始。 将无线网卡模式改为monitor模式 iwconfig wlan0mon mode monitor 打开网卡： airmon-ng start wlan0 这时候网卡名为wlan0mon。（mon是monitor的缩写，意思为监控） wifi嗅探查看当前区域的所有wifi airodump-ng wlan0mon BSSID：wifi路由的 Mac地址， Data 当前wifi数据大小，有数据就表明有人正在使用，你就可以把它作为一个选择了。 CH ：渠道，后面的攻击要用到。 ESSID： wifi的 名字。还有，他的排序是按信号的强弱来排序的，越往上信号越强。PWR 是强度，不用记，慢慢的就知道了。 经过观察之后选择一个你想破解或者攻击的wifi，前提是它得有数据显示，Date的那列，所以选择攻击的wifi最好先从Date看起来，选择一个有数据的wifi之后按Ctrl+c 停止检测，复制你选择的Mac地址。 下一步airodump-ng --bssid 0C:4B:54:AE:C1:06 -c 11 -w ~/wlan0/qihua wlan0mon -c 是 渠道 bssid 是路由的Mac地址 -w是放包的目录 可以看到有三个连接。 洪水攻击（重复不断的攻击）aireplay-ng -0 0 -a 0C:4B:54:AE:C1:06 -c CC:2F:71:8C:FA:4B wlan0mon -0表示一直不断的攻击，类似于拒绝服务攻击，占满你的握手请求通道，其他的连接进不来，也可以让当前所有连接断开，-c在这里表示的是client的mac地址。 攻击的时候不要关闭抓包窗口，注意观察抓包窗口。 过一会停掉洪水攻击，静等别人连接，出现WPA handshake : ，就表示成功。如果有连接很快就可以抓到包 抓包信息及爆破 抓到握手包那么就可以用密码字典进行爆破了，爆破的是.cap文件。 aircrack-ng -w password.txt wlan0/qihua-01.cap 接下来就静静等待跑包。 完成！密码51201314]]></content>
+      <categories>
+        <category>无线安全</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[GeoIP]]></title>
     <url>%2F2018%2F12%2F11%2FGeoIP%2F</url>
     <content type="text"><![CDATA[import pygeoip gi = pygeoip.GeoIP(&apos;GeoLiteCity.dat&apos;) def printRecord(tgt): rec = gi.record_by_name(tgt) print(rec) city = rec[&apos;city&apos;] # region = rec[&apos;region_name&apos;] country = rec[&apos;country_name&apos;] long = rec[&apos;longitude&apos;] lat = rec[&apos;latitude&apos;] print(&apos;[*] Target: &apos; + tgt + &apos; Geo-located. &apos;) print(&apos;[+] &apos; + str(city) + &apos;, &apos; + str(country)) print(&apos;[+] Latitude: &apos;+str(lat) + &apos;, Longitude: &apos; + str(long)) tgt = &apos;114.242.146.98&apos; printRecord(tgt) GeoLiteCity.dat在网上可以免费下载。]]></content>
@@ -85,6 +93,9 @@
     <title><![CDATA[常见的漏洞端口]]></title>
     <url>%2F2018%2F12%2F04%2F%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BC%8F%E6%B4%9E%E7%AB%AF%E5%8F%A3%2F</url>
     <content type="text"><![CDATA[21 ftp 主要看是否支持匿名，也可以跑弱口令 22 ssh SSH远程登录协议 23 telnet telnet终端仿真协议 80 web 常见web漏洞以及是否为一些管理后台 389 LDAP（轻量目录访问协议）存在匿名访问 443 openssl 心脏滴血以及一些web漏洞测试 873 rsync 主要看是否支持匿名，也可以跑弱口令 1099 JAVArmi 命令执行 1433 SQl server 1521 Oracle 弱口令 3306 MySQL 能够外联数据库 3389 RDP 远程桌面看看能不能弱口令 5432 PostGreSQL 弱口令爆破 6379 redis 一般无认证，可直接访问 7001，7002 weblogic的console口 8080 Tomcat\Jboss 弱口令，Jboss匿名访问 8080-8090 常见Web端口 9000 fast-cgi对外可以getshell 9043 WebSphere 弱口令爆破 27017 MongoDB 未授权访问]]></content>
+      <categories>
+        <category>信息收集</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[反弹shell的几种姿势]]></title>
