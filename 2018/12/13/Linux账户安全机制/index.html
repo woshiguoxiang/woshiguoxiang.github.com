@@ -119,14 +119,14 @@
 <meta property="og:site_name" content="guolala&#39;s blog">
 <meta property="og:description" content="Linux系统标识与鉴别-安全主体安全主体 用户：身份标识（UserID） 组：身份标识（Group ID）  用户与组基本概念 文件必须有所有者 用户必须属于某个或多个组 用户与组的关系灵活（一对多、多对多等都可以） 根用户拥有所有权限  Linux系统标识与鉴别-帐号信息存储信息存储用户信息/etc/passwd /etc/shadow 组信息/etc/group /etc/gshadow 在">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181107211116303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181107211643794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181107212302747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2018-12-13T02:57:53.857Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fy4xpgsw5dj30fq08mjxj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fy4xpvryghj30ka0aq10y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fy4xq811c0j309l0ad77k.jpg">
+<meta property="og:updated_time" content="2018-12-13T03:01:14.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux账户安全机制">
 <meta name="twitter:description" content="Linux系统标识与鉴别-安全主体安全主体 用户：身份标识（UserID） 组：身份标识（Group ID）  用户与组基本概念 文件必须有所有者 用户必须属于某个或多个组 用户与组的关系灵活（一对多、多对多等都可以） 根用户拥有所有权限  Linux系统标识与鉴别-帐号信息存储信息存储用户信息/etc/passwd /etc/shadow 组信息/etc/group /etc/gshadow 在">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181107211116303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fy4xpgsw5dj30fq08mjxj.jpg">
 
 
 
@@ -400,7 +400,7 @@
                 
               
 
-              <time title="创建时间：2018-12-13 10:43:18 / 修改时间：10:57:53" itemprop="dateCreated datePublished" datetime="2018-12-13T10:43:18+08:00">2018-12-13</time>
+              <time title="创建时间：2018-12-13 10:43:18 / 修改时间：11:01:14" itemprop="dateCreated datePublished" datetime="2018-12-13T10:43:18+08:00">2018-12-13</time>
             
 
             
@@ -479,7 +479,7 @@
 /etc/gshadow
 </code></pre><p>在Linux中系统中，并不认识<strong>帐号名称</strong>，认识的是<strong>帐号ID</strong>，帐号ID保存在<code>/etc/passwd</code>文件中</p>
 <p>在登录Linux主机时，在输入完帐号和密码时，Linux会先查找<code>/etc/passwd</code>文件中是否有这个帐号，如果没有则跳出，如果有的话，他会读取该帐号的user ID和group ID同时该帐号的根目录和shell也读了出来</p>
-<h3 id="etc-passwd中的信息"><a href="#etc-passwd中的信息" class="headerlink" title="/etc/passwd中的信息"></a><code>/etc/passwd</code>中的信息</h3><p><img src="https://img-blog.csdnimg.cn/20181107211116303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p>
+<h3 id="etc-passwd中的信息"><a href="#etc-passwd中的信息" class="headerlink" title="/etc/passwd中的信息"></a><code>/etc/passwd</code>中的信息</h3><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fy4xpgsw5dj30fq08mjxj.jpg" alt=""></p>
 <p>一共有七项，每一项使用：分开，他们代表的意思如下：</p>
 <p>（1）帐号名称：帐号名称由于对应用户ID，这个是系统默认用户root超级管理员，在同一个系统帐号名称是唯一的。</p>
 <p>（2）密码：由于系统中/etc/shadow文件用于存放加密后的口令，所以在这里这一项是“x”来表示，如果用户没有设置口令，则该项为空。</p>
@@ -488,7 +488,7 @@
 <p>（5）描述信息：这个字段几乎没有什么作用，只是用来解释这个帐号的意义。</p>
 <p>（6）用户根目录：就是用户登录系统的起始目录，用户登录系统后将首先进入该目录。root用户默认的是<code>/root</code>，普通用户的是<code>/home</code>/用户名。</p>
 <p>（7）用户登录shell：就是用户登录系统时使用的shell。</p>
-<h3 id="etc-shadow中的信息"><a href="#etc-shadow中的信息" class="headerlink" title="/etc/shadow中的信息"></a><code>/etc/shadow</code>中的信息</h3><p><img src="https://img-blog.csdnimg.cn/20181107211643794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p>
+<h3 id="etc-shadow中的信息"><a href="#etc-shadow中的信息" class="headerlink" title="/etc/shadow中的信息"></a><code>/etc/shadow</code>中的信息</h3><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fy4xpvryghj30ka0aq10y.jpg" alt=""></p>
 <ul>
 <li>由于passwd文件对于系统中的所有用户是可读的，口令比较容易破解，存在较大的安全隐患。</li>
 <li>使用“shadow”文件保存密文的用户口令，“shadow”文件只有管理员用户才可以读取其中的内容。</li>
@@ -508,7 +508,7 @@
 <p>（6）帐号失效期</p>
 <p>（7）帐号取消日期</p>
 <p>（8）保留：最后一个字段是保留的，看以后有没有新功能加入。</p>
-<h3 id="etc-group中的信息"><a href="#etc-group中的信息" class="headerlink" title="/etc/group中的信息"></a><code>/etc/group</code>中的信息</h3><p><img src="https://img-blog.csdnimg.cn/20181107212302747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p>
+<h3 id="etc-group中的信息"><a href="#etc-group中的信息" class="headerlink" title="/etc/group中的信息"></a><code>/etc/group</code>中的信息</h3><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fy4xq811c0j309l0ad77k.jpg" alt=""></p>
 <p>（1）群组名称：就是群组的名称了。</p>
 <p>（2）群组密码：通常不需设定，很少使用群组登录。密码被记录在<code>/etc/gshadow</code>中。</p>
 <p>（3）群组ID：也就是组ID了。</p>
