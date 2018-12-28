@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-12-27T15:24:55.913Z</updated>
+  <updated>2018-12-28T07:25:29.266Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Web渗透入侵思路</title>
+    <link href="http://yoursite.com/2018/12/28/Web%E6%B8%97%E9%80%8F%E5%85%A5%E4%BE%B5%E6%80%9D%E8%B7%AF/"/>
+    <id>http://yoursite.com/2018/12/28/Web渗透入侵思路/</id>
+    <published>2018-12-28T07:22:11.000Z</published>
+    <updated>2018-12-28T07:25:29.266Z</updated>
+    
+    <content type="html"><![CDATA[<p>一：查找注入，注意数据库用户权限和站库是否同服。</p><p>二、查找XSS，最近盲打很流行，不管怎样我们的目的是进入后台。</p><p>三、查找上传，一些能上传的页面，比如申请友链、会员头像、和一些敏感页面等等，注意查看验证方式是否能绕过，注意结合服务器的解析特性，比如典型的IIS6.0、Apache等。</p><p>四、查找编辑器，比较典型的ewebeditor、fckeditor等等。</p><p>五、查找phpmyadmin等管理程序，可以尝试弱口令，或者寻找其漏洞。</p><p>六、百度、谷歌搜索程序公开漏洞。</p><p>七、猜解文件，如知道某文件为admin_login.php,我们可尝试admin_add.php、admin_upload.php文件是否存在，也可以谷歌搜索site:cnseay.com inurl:edit等等，很多时候可以找到一些敏感文件，接着看是否验证权限或能否绕过验证，这像冰风说高级语法。</p><p>八、会员注册、修改、删除、评论等一切需要操作数据库的地方记得加单引号之类查看是否存在insert、update等类型注入。</p><p>九、会员或低权限管理登陆后可抓包分析，尝试修改超级管理员密码，权限提升。</p><p>十、通常有下载功能的站我们可以尝试修改下URL文件名，看能否下载站点敏感文件，如数据库配置文件等，数据库不可外连情况下可以尝试数据库密码登陆后台，也可下载上传、登陆验证等文件进行代码审计。</p><p>十一、备份文件和后门，某些主站子目录存在分站，比如<a href="http://www.cnseay.com/seay/，我们可以尝试www.cnseay.com/seay.rar/zip等压缩文件是否存在，可能就是子站的源码。也有一些站类似这样www.cnseay.com/old/，一般都是以前的老站，通常老站会比较容易拿。还有就是数据库备份、前人的后门等，具体这些目录上的东西就要看你的字典了。" target="_blank" rel="noopener">www.cnseay.com/seay/，我们可以尝试www.cnseay.com/seay.rar/zip等压缩文件是否存在，可能就是子站的源码。也有一些站类似这样www.cnseay.com/old/，一般都是以前的老站，通常老站会比较容易拿。还有就是数据库备份、前人的后门等，具体这些目录上的东西就要看你的字典了。</a></p><p>十二、0day漏洞，不管是别人给你的，还是自己挖的，总之好使就行。</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fymhnhgwkbj30m40pkta2.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;一：查找注入，注意数据库用户权限和站库是否同服。&lt;/p&gt;
+&lt;p&gt;二、查找XSS，最近盲打很流行，不管怎样我们的目的是进入后台。&lt;/p&gt;
+&lt;p&gt;三、查找上传，一些能上传的页面，比如申请友链、会员头像、和一些敏感页面等等，注意查看验证方式是否能绕过，注意结合服务器的解析特性，比
+      
+    
+    </summary>
+    
+      <category term="渗透流程" scheme="http://yoursite.com/categories/%E6%B8%97%E9%80%8F%E6%B5%81%E7%A8%8B/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>后渗透攻击</title>
@@ -480,34 +505,6 @@ grep -Rn &amp;quot;
     </summary>
     
       <category term="shell" scheme="http://yoursite.com/categories/shell/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>命令行下的信息收集</title>
-    <link href="http://yoursite.com/2018/12/05/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E7%9A%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
-    <id>http://yoursite.com/2018/12/05/命令行下的信息收集/</id>
-    <published>2018-12-05T12:16:29.000Z</published>
-    <updated>2018-12-06T09:04:58.734Z</updated>
-    
-    <content type="html"><![CDATA[<p>域用户信息</p><pre><code>whoami /user 查看当前用户的用户名和sidwhoami /groups 查看当前用户所属的用户组whoami /priv 查看当前用户的权限</code></pre><p>用户及用户组信息    </p><pre><code>net group /domain 查看域中的用户组net group &quot;domain admins&quot; /domain 获得域管理员列表net group &quot;domain controllers&quot; /domain 获得域控制器列表net group &quot;domain computers&quot; /domain 获得所有域成员计算机列表net user /domain 查看域中的用户net accounts /domain 获得域密码策略、密码长短等信息。net view /domain 查看所有域或工作组</code></pre><p>离线凭证收集-提取域用户hash</p><p>域用户hash存储在ntds.dit里。他的位置一般在域控上<code>%WINDIR%\ntds\ntds.dit</code></p><p>使用wmic识别安装到系统中的补丁情况</p><pre><code>wmic qfe get description,installedOn</code></pre><p>识别正在运行的服务</p><pre><code>sc query type= service或net start</code></pre><p>识别开机启动的程序，包括路径</p><pre><code>wmic startup list full</code></pre><p>ping探测存活主机</p><pre><code>for /L %I in (100,1,254) DO @ping -w 1 -n 1 10.18.180.%I | findstr &quot;TTL=&quot; &gt;&gt; ping.txt</code></pre><p>查看系统中网卡的IP地址和MAC地址</p><pre><code>wmic nicconfig get ipaddress,macaddress</code></pre><p>查看当前系统是否有屏保保护，延迟是多少</p><pre><code>wmic desktop get screensaversecure,screensavertimeout</code></pre><p>查看系统中开放的共享</p><pre><code>wmic share get name,path或net share</code></pre><p>查看系统中开启的日志</p><pre><code>wmic nteventlog get path,filename,writeable</code></pre><p>清除相关的日志（这里是全部清除）</p><pre><code>wevtutil cl &quot;windows powershell&quot;wevtutil cl &quot;security&quot;wevtutil cl &quot;system&quot;</code></pre><p>查看系统中安装的软件以及版本</p><pre><code>wmic product get name,version</code></pre><p>查看某个进程的详细信息 （路径，命令行参数等）</p><pre><code>wmic process where name=&quot;chrome.exe&quot; list full</code></pre><p>终止一个进程</p><pre><code>wmic process where name=&quot;xshell.exe&quot; call terminatentsd -c q -p 进程的PID</code></pre><p>显示系统中的曾经连接过的无线密码</p><pre><code>netsh wlan show profiles netsh wlan show profiles name=&quot;profiles的名字&quot; key=clear</code></pre><p>查看当前系统是否是VMWARE</p><pre><code>wmic bios list full | find /i &quot;vmware&quot;</code></pre><p>可以用<code>wmic /?</code>查看具体用法</p><ul><li><code>Process</code> -进程信息</li><li><code>Service</code> -服务</li><li><code>Share</code> -共享</li><li><code>DataFile</code> -文件及目录</li><li><code>Volume</code> -磁盘卷列表</li></ul><h2 id="一些收集工具"><a href="#一些收集工具" class="headerlink" title="一些收集工具"></a>一些收集工具</h2><h3 id="setspn-exe"><a href="#setspn-exe" class="headerlink" title="setspn.exe"></a>setspn.exe</h3><p>Setspn是一款管理spn的命令行软件。我们可以用它来查看某台主机或账户的SPN。</p><p>查看账户college的SPN</p><pre><code>Setspn -L college</code></pre><p>查看当前域中的所有SPN</p><pre><code>Setspn -T * -Q */*</code></pre><h3 id="ADFind-exe"><a href="#ADFind-exe" class="headerlink" title="ADFind.exe"></a>ADFind.exe</h3><p>Adfind是一款活动目录查询工具。</p><p><a href="http://www.joeware.net/freetools/tools/adfind/" target="_blank" rel="noopener">http://www.joeware.net/freetools/tools/adfind/</a></p><p>列出域控列表</p><pre><code>Adfind.exe -sc dclist</code></pre><p>查询域中活动的主机，输出主机名和域名</p><pre><code>Adfind.exe -sc computers_active name dnshostname </code></pre><p>获取域内主机信息</p><pre><code>AdFind.exe -b dc=school,dc=com -f &quot;objectcategory=computer&quot;</code></pre><p>查询域中主机的spn</p><pre><code>AdFind.exe -b cn=computers,dc=school,dc=com servicePrincipalName</code></pre><h3 id="Netview-exe"><a href="#Netview-exe" class="headerlink" title="Netview.exe"></a>Netview.exe</h3><p>Netview 能够收集域内主机共享、IP、是否为域控等信息。</p><p><a href="https://github.com/mubix/netview" target="_blank" rel="noopener">https://github.com/mubix/netview</a></p><p>将主机名（或IP地址）列表保存在文件host.txt中，使用<code>netview -f host.txt</code>来信息收集。</p><h3 id="Netsses-exe"><a href="#Netsses-exe" class="headerlink" title="Netsses.exe"></a>Netsses.exe</h3><p>工具能够列举目标主机上的NetBIOS session，通常不依赖于管理员权限（-full参数列出所有会话需要管理权限）。</p><p><a href="http://www.joeware.net/freetools/tools/netsess/index.htm" target="_blank" rel="noopener">http://www.joeware.net/freetools/tools/netsess/index.htm</a></p><p>如果有一台域成员（192.168.1.128）机器<code>net view</code>了本机的共享（192.168.1.130），那么它与本机之间会存在一个netbios会话，可以使用下列命令来查看会话用户：</p><pre><code>netsess-h 192.168.1.130-c\\192.168.1.128</code></pre><p>这里的<code>-h</code>参数指定了服务器的地址，<code>-c</code>参数则指定了客户端的地址</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;域用户信息&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;whoami /user 查看当前用户的用户名和sid
-whoami /groups 查看当前用户所属的用户组
-whoami /priv 查看当前用户的权限
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;用户及用户组信息    &lt;/p&gt;
-&lt;pre
-      
-    
-    </summary>
-    
-      <category term="信息收集" scheme="http://yoursite.com/categories/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/"/>
     
     
   </entry>
