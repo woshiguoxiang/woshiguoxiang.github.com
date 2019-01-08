@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-07T04:01:54.132Z</updated>
+  <updated>2019-01-08T14:43:00.821Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CVE-2017-12615 Tomcat任意文件上传漏洞</title>
+    <link href="http://yoursite.com/2019/01/08/CVE-2017-12615-Tomcat%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/"/>
+    <id>http://yoursite.com/2019/01/08/CVE-2017-12615-Tomcat任意文件上传漏洞/</id>
+    <published>2019-01-08T14:03:07.000Z</published>
+    <updated>2019-01-08T14:43:00.821Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h1><p>这是一个任意文件上传漏洞，但是此处的上传不需要页面有上传功能的界面，而是通过PUT方法来进行上传的。</p><p>在tomcat下的conf文件夹中有一个web.xml，在其中找到default servlet的配置项</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyzj59rg3rj30mm09xq37.jpg" alt=""></p><p>重点是readonly的那一项，因为其他的都是默认的，只有那个是自己添加的。</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyzj66g3z2j30hy01qwe9.jpg" alt=""></p><p>也是在这个web.xml文件中，已经注释的地方说明了默认情况下readonly是true，并且如果是true的话，那么PUT和DELETE方法是被拒绝的，因此如果手动将readonly选项开启为false，那么就能够通过PUT方法上传文件了。</p><h1 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h1><p>我们通过PUT方式上传，发现报错</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyzjzl1t83j30qk0g4q4s.jpg" alt=""></p><p>原来default servlet只能处理静态文件，而处理jsp文件是jspservlet，但是只有defaultservlet有PUT上传逻辑，解决的办法是通过构造特殊的后缀名来进行绕过，从而上传jsp代码。</p><p>经过验证，可以在文件名后面添加斜杠 / 来进行绕过。</p><p><img src="http://ww1.sinaimg.cn/large/007pEd8Wly1fyzk3rnp3gj30r60k1taw.jpg" alt=""></p><p>成功上传，访问.jsp文件即可执行。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;漏洞成因&quot;&gt;&lt;a href=&quot;#漏洞成因&quot; class=&quot;headerlink&quot; title=&quot;漏洞成因&quot;&gt;&lt;/a&gt;漏洞成因&lt;/h1&gt;&lt;p&gt;这是一个任意文件上传漏洞，但是此处的上传不需要页面有上传功能的界面，而是通过PUT方法来进行上传的。&lt;/p&gt;
+&lt;p&gt;在tom
+      
+    
+    </summary>
+    
+      <category term="漏洞利用" scheme="http://yoursite.com/categories/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>windows系统账户隐藏</title>
@@ -475,30 +499,6 @@ debug = 1  # 调试
     </summary>
     
       <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>利用airodump-ng和aircrack-ng进行无线破解</title>
-    <link href="http://yoursite.com/2018/12/12/%E5%88%A9%E7%94%A8airodump-ng%E5%92%8Caircrack-ng%E8%BF%9B%E8%A1%8C%E6%97%A0%E7%BA%BF%E7%A0%B4%E8%A7%A3/"/>
-    <id>http://yoursite.com/2018/12/12/利用airodump-ng和aircrack-ng进行无线破解/</id>
-    <published>2018-12-12T09:12:56.000Z</published>
-    <updated>2018-12-12T12:15:27.593Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="WEP（有线等效保密）认证过程："><a href="#WEP（有线等效保密）认证过程：" class="headerlink" title="WEP（有线等效保密）认证过程："></a>WEP（有线等效保密）认证过程：</h1><ul><li>客户端向接入点发送认证请求</li><li>接入点发回一段明文</li><li>客户端利用事先共享的密钥加密这段明文（对称），并再次发出认证请求</li><li>接入点对数据包进行解密，比较明文，来决定是否接受请求</li></ul><h1 id="WEP2（wifi网络安全接入）安全性："><a href="#WEP2（wifi网络安全接入）安全性：" class="headerlink" title="WEP2（wifi网络安全接入）安全性："></a>WEP2（wifi网络安全接入）安全性：</h1><ul><li>WPA2在密钥足够强的情况下是安全的，过短的密钥仍可能被爆破解出</li><li>WPA2-PSK指的是WPA2个人版，指的是使用事先约定的密钥进行认证的WPA2</li></ul><h1 id="Aircrack-ng抓包及破解WPA2"><a href="#Aircrack-ng抓包及破解WPA2" class="headerlink" title="Aircrack-ng抓包及破解WPA2"></a>Aircrack-ng抓包及破解WPA2</h1><ul><li>虚拟机安装无线网卡</li><li>配置无线网卡</li><li>利用airodump-ng进行抓包</li><li>利用crunch生成字典</li><li>利用aircrack-ng进行爆破</li></ul><p><strong>Aircrack</strong>是破解<code>WEP/WPA/WPA2</code>加密的主流工具之一。<strong>Aircrack-ng</strong>套件包含的工具可用于捕获数据包、握手验证。可用来进行暴力破解和字典攻击。</p><p><strong>Aircrack-ng</strong> 攻击 主要是拿到握手包，用字典破解握手包。</p><p>首先，你得有个无线网卡，然后去自动配置他，操作嘛当然都是在kali虚拟机下进行的。</p><h2 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h2><pre><code>airmon-ng check kill</code></pre><p>kill掉影响网卡的进程，一般情况下，每次重启或者开机后这些进程都会自己开始。</p><p><img src="https://img-blog.csdnimg.cn/20181109163042314.png" alt=""></p><p>将无线网卡模式改为<strong>monitor</strong>模式</p><pre><code>iwconfig wlan0mon mode monitor </code></pre><p><img src="https://img-blog.csdnimg.cn/20181109164030848.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>打开网卡：</p><pre><code>airmon-ng start wlan0</code></pre><p><img src="https://img-blog.csdnimg.cn/20181109164205722.png" alt=""></p><p>这时候网卡名为wlan0mon。（mon是monitor的缩写，意思为监控）</p><h2 id="wifi嗅探"><a href="#wifi嗅探" class="headerlink" title="wifi嗅探"></a>wifi嗅探</h2><p>查看当前区域的所有wifi</p><pre><code>airodump-ng wlan0mon</code></pre><p><img src="https://img-blog.csdnimg.cn/2018110916441831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><ul><li>BSSID：wifi路由的 Mac地址， </li><li>Data 当前wifi数据大小，有数据就表明有人正在使用，你就可以把它作为一个选择了。</li><li>CH ：渠道，后面的攻击要用到。 </li><li>ESSID： wifi的 名字。还有，他的排序是按信号的强弱来排序的，越往上信号越强。PWR 是强度，不用记，慢慢的就知道了。</li></ul><p>经过观察之后选择一个你想破解或者攻击的wifi，前提是它得有数据显示，Date的那列，所以选择攻击的wifi最好先从Date看起来，选择一个有数据的wifi之后按Ctrl+c 停止检测，复制你选择的Mac地址。</p><h2 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h2><pre><code>airodump-ng --bssid 0C:4B:54:AE:C1:06 -c 11 -w ~/wlan0/qihua wlan0mon</code></pre><blockquote><p>-c 是 渠道  bssid 是路由的Mac地址 -w是放包的目录</p></blockquote><p><img src="https://img-blog.csdnimg.cn/20181109172131528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>可以看到有三个连接。</p><h2 id="洪水攻击（重复不断的攻击）"><a href="#洪水攻击（重复不断的攻击）" class="headerlink" title="洪水攻击（重复不断的攻击）"></a>洪水攻击（重复不断的攻击）</h2><pre><code>aireplay-ng -0 0 -a 0C:4B:54:AE:C1:06 -c CC:2F:71:8C:FA:4B wlan0mon</code></pre><p><strong>-0</strong>表示一直不断的攻击，类似于拒绝服务攻击，占满你的握手请求通道，其他的连接进不来，也可以让当前所有连接断开，-c在这里表示的是client的mac地址。</p><p>攻击的时候不要关闭抓包窗口，注意观察抓包窗口。</p><p><img src="https://img-blog.csdnimg.cn/20181109172327525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>过一会停掉洪水攻击，静等别人连接，出现<code>WPA handshake :</code>  ，就表示成功。如果有连接很快就可以抓到包</p><p><img src="https://img-blog.csdnimg.cn/20181109172929110.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><h2 id="抓包信息及爆破"><a href="#抓包信息及爆破" class="headerlink" title="抓包信息及爆破"></a>抓包信息及爆破</h2><p><img src="https://img-blog.csdnimg.cn/20181109173157234.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>抓到握手包那么就可以用密码字典进行爆破了，爆破的是.cap文件。</p><pre><code>aircrack-ng -w password.txt wlan0/qihua-01.cap</code></pre><p>接下来就静静等待跑包。</p><p><img src="https://img-blog.csdnimg.cn/20181109200738468.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pweWd4MTIz,size_16,color_FFFFFF,t_70" alt=""></p><p>完成！密码51201314</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;WEP（有线等效保密）认证过程：&quot;&gt;&lt;a href=&quot;#WEP（有线等效保密）认证过程：&quot; class=&quot;headerlink&quot; title=&quot;WEP（有线等效保密）认证过程：&quot;&gt;&lt;/a&gt;WEP（有线等效保密）认证过程：&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;客户端向接入点发
-      
-    
-    </summary>
-    
-      <category term="无线安全" scheme="http://yoursite.com/categories/%E6%97%A0%E7%BA%BF%E5%AE%89%E5%85%A8/"/>
     
     
   </entry>
